@@ -33,6 +33,7 @@ namespace HRHUB.Authorization
                     identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
                     identity.AddClaim(new Claim("username", context.UserName));
                     context.Validated(identity);
+           
                 }
                 else if(role == "user")
                 {

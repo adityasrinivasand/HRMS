@@ -42,6 +42,7 @@
     <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Leave">
     <Key>

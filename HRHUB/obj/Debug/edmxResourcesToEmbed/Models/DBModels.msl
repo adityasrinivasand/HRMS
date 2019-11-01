@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="HRModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
