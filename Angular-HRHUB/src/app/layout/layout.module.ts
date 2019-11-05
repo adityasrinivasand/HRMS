@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {MatMenuModule} from '@angular/material/menu';
     RouterModule,
     MatGridListModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
   ],
   exports: [
     FooterComponent,

@@ -1,4 +1,54 @@
-:host {
-    padding: 30px
-  }
+.example-card{
+  position: relative;
+  margin: 0 auto;
+  width: 40%;
+  background-color: rgba(99, 96, 96, 0.527);
   
+}
+.btn-primary{
+  position: relative;
+  margin: 1em;
+  left:28%;
+}
+.btn-danger{
+  position: relative;
+  margin: 1em;
+  left:30%;
+}
+.example-container {
+display: flex;
+flex-direction: column;
+padding: 1em;
+}
+
+.example-container > * {
+width: 100%;
+}
+
+.example-right-align {
+text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+display: none;
+}
+
+input.example-right-align {
+-moz-appearance: textfield;
+}
+.forgot{
+  position: relative;
+  left: 55%;
+  color: green;
+}
+.mat-checkbox{
+  position: relative;
+  left: 3%;
+}
+.card-container-center{
+  position: relative;
+  left: 8.5em;
+  padding: 0.75em;
+}
+

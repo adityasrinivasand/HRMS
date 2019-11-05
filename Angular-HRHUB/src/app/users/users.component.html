@@ -1,1 +1,83 @@
-<p>users works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title class="card-container-center">Register New Employee</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+  
+          <div class="example-container">
+
+              <mat-form-field>
+                    <input matInput placeholder="Enter Employee's Name">
+              </mat-form-field>
+
+              <mat-form-field color="accent">
+                    <mat-label>Enter Employee's DOB</mat-label>
+                    <input matInput [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              
+              <mat-form-field>
+                    <input matInput placeholder="Enter Employee's UserName">
+              </mat-form-field>
+                  
+              <mat-form-field color="accent">
+                    <mat-label>Enter Employee's DOJ</mat-label>
+                    <input matInput [matDatepicker]="picker2">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+              </mat-form-field>
+
+              
+
+              <mat-form-field>
+                    <input type ="number" matInput placeholder="Enter Employee's Phone Number">
+              </mat-form-field>
+              <mat-form-field>
+                    <input type="email" matInput placeholder="Enter Employee's Mail ID">
+              </mat-form-field> 
+
+              <mat-form-field>
+                <mat-label>Enter Employee's Blood Type</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let bloods of bloods" [value]="bloods.value">
+                    {{bloods.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              
+              <mat-form-field>
+                <mat-label>Enter Employee's Marital Status</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let marital of marital" [value]="marital.value">
+                    {{marital.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                    <input matInput placeholder="Enter Employee's Nationality">
+              </mat-form-field>
+
+             <mat-form-field>
+                <mat-label>Enter Employee's Gender</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let gender of gender" [value]="gender.value">
+                    {{gender.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+                    <input matInput placeholder="Enter Employee's Department">
+              </mat-form-field>         
+          </div>
+          <mat-card-actions>
+            <button type="submit" class="btn btn-primary" mat-button>Register</button>
+            <button type="reset" class="btn btn-danger" mat-button>Cancel</button>
+          </mat-card-actions>
+    </mat-card-content>
+    
+  </mat-card>
+  
