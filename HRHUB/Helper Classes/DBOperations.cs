@@ -49,5 +49,37 @@ namespace HRHUB.Helper_Classes
                 return emp;
             }
         }
+        public static string Password(PasswordConfirmation pass, string id)
+        {
+            using (HREntities db = new HREntities())
+            {
+                var emp = db.UserInfoes.Where(l => l.UserName == id).FirstOrDefault();
+                if (emp != null)
+                {
+                    if (pass.password == pass.confirmpassword)
+                    {
+                        emp.Password = PWHashing.Hash(pass.password);
+                        return "Successfull";
+                    }
+                    return "Not Successfull";
+                    
+                }
+
+            }
+            return "Not Successfull";
+
+        }
+        public static void AddingUserInfo(string username)
+        {
+            using(HREntities db = new HREntities())
+            {
+                UserInfo user = new UserInfo();
+
+                user.UserName = username;
+                user.Password = PWHashing.Hash("123");
+                db.UserInfoes.Add(user);
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HRHUB.Helper_Classes;
@@ -72,12 +73,12 @@ namespace HRHUB.Controllers
         }
 
         // POST: api/Employees
-        [Authorize(Roles = "admin")]
         [HttpPost]
-        [Route("api/signup")]
+        [Route("api/signup/addEmployee")]
         [ResponseType(typeof(Employee))]
         public IHttpActionResult PostEmployee(Employee employee)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -90,12 +91,33 @@ namespace HRHUB.Controllers
             {
                 return Conflict();
             }
+            employee.IsEmailVerified = false;
+
+            string VerificationCode = Guid.NewGuid().ToString();
+            var link = HttpContext.Current.Request.Url.AbsoluteUri + "/VerifyAccount/" + employee.UserName;
+            VerificationLink.EmailGeneration(employee.Email_ID, VerificationCode, link);
 
             db.Employees.Add(employee);
             db.SaveChanges();
-
-
+            CallStoredProc.RunStoredProc(employee);
+            DBOperations.AddingUserInfo(employee.UserName);
             return Ok("Successfully Added");
+        }
+
+        [HttpPost]
+        [Route("api/signup/addEmployee/VerifyAccount/{id=id}")]
+        public IHttpActionResult VerifyEmployee(string id, PasswordConfirmation password)
+        {
+            string message = DBOperations.Password(password, id);
+            if(message == "Successfull")
+            {
+                return Ok("Verified Successfully");
+            }
+            else
+            {
+                return Ok("Verification Not Successful");
+            }
+            
         }
 
         // DELETE: api/Employees/5
@@ -127,5 +149,6 @@ namespace HRHUB.Controllers
         {
             return db.Employees.Count(e => e.ID == id) > 0;
         }
+
     }
 }

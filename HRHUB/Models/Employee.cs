@@ -21,11 +21,13 @@ namespace HRHUB.Models
             this.Designation_History = new HashSet<Designation_History>();
             this.Leaves = new HashSet<Leave>();
             this.Leave_Tracking = new HashSet<Leave_Tracking>();
+            this.UserInfoes = new HashSet<UserInfo>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
         public System.DateTime DOB { get; set; }
+        public string UserName { get; set; }
         public System.DateTime DOJ { get; set; }
         public long PhoneNumber { get; set; }
         public string Email_ID { get; set; }
@@ -34,7 +36,8 @@ namespace HRHUB.Models
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public string Department { get; set; }
-        public string UserName { get; set; }
+        public Nullable<bool> IsEmailVerified { get; set; }
+        public Nullable<System.Guid> VerificationCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
@@ -44,6 +47,7 @@ namespace HRHUB.Models
         public virtual ICollection<Leave> Leaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leave_Tracking> Leave_Tracking { get; set; }
-        public virtual UserInfo UserInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserInfo> UserInfoes { get; set; }
     }
 }

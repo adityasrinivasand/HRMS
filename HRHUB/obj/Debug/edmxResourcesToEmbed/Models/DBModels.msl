@@ -34,10 +34,10 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="HRModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="DOJ" ColumnName="DOJ" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
@@ -46,6 +46,8 @@
           <ScalarProperty Name="Nationality" ColumnName="Nationality" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+          <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -86,6 +88,7 @@
     <EntitySetMapping Name="UserInfoes">
       <EntityTypeMapping TypeName="HRModel.UserInfo">
         <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -96,5 +99,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
   </EntityContainerMapping>
 </Mapping>

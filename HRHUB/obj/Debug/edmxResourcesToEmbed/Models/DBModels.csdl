@@ -35,9 +35,10 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="PhoneNumber" Type="Int64" Nullable="false" />
     <Property Name="Email_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -46,12 +47,13 @@
     <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsEmailVerified" Type="Boolean" />
+    <Property Name="VerificationCode" Type="Guid" />
     <NavigationProperty Name="Attendances" Relationship="Self.Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
     <NavigationProperty Name="Designation_History" Relationship="Self.Employee_Designation_Employee" FromRole="Employee" ToRole="Designation_History" />
     <NavigationProperty Name="Leaves" Relationship="Self.Leave_Employee" FromRole="Employee" ToRole="Leave" />
     <NavigationProperty Name="Leave_Tracking" Relationship="Self.Leave_Tracking_Employee" FromRole="Employee" ToRole="Leave_Tracking" />
-    <NavigationProperty Name="UserInfo" Relationship="Self.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
-    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfoes" Relationship="Self.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
   </EntityType>
   <EntityType Name="Leave">
     <Key>
@@ -73,7 +75,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Employee_ID" Type="Int32" Nullable="false" />
     <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
     <Property Name="RemainingDays" Type="Int32" Nullable="false" />
@@ -92,8 +94,9 @@
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
-      <PropertyRef Name="Employee_ID" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Employee_ID" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -165,7 +168,7 @@
   </Association>
   <Association Name="UserInfo_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="ID" />
@@ -240,5 +243,9 @@
       <End Role="Leave_Type" EntitySet="Leave_Type" />
       <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
     </AssociationSet>
+    <FunctionImport Name="LeaveEntryForNew">
+      <Parameter Name="DOJ" Mode="In" Type="DateTime" />
+      <Parameter Name="empid" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

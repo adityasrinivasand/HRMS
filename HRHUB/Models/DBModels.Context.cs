@@ -12,6 +12,8 @@ namespace HRHUB.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HREntities : DbContext
     {
@@ -33,5 +35,18 @@ namespace HRHUB.Models
         public virtual DbSet<Leave_Tracking> Leave_Tracking { get; set; }
         public virtual DbSet<Leave_Type> Leave_Type { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
+    
+        public virtual int LeaveEntryForNew(Nullable<System.DateTime> dOJ, Nullable<int> empid)
+        {
+            var dOJParameter = dOJ.HasValue ?
+                new ObjectParameter("DOJ", dOJ) :
+                new ObjectParameter("DOJ", typeof(System.DateTime));
+    
+            var empidParameter = empid.HasValue ?
+                new ObjectParameter("empid", empid) :
+                new ObjectParameter("empid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveEntryForNew", dOJParameter, empidParameter);
+        }
     }
 }

@@ -193,11 +193,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper Classes\CookieGen.cs" />
+    <Compile Include="Helper Classes\CallStoredProc.cs" />
     <Compile Include="Helper Classes\DBOperations.cs" />
     <Compile Include="Helper Classes\LogFile.cs" />
+    <Compile Include="Helper Classes\PasswordConfirmation.cs" />
     <Compile Include="Helper Classes\PWHashing.cs" />
-    <Compile Include="Helper Classes\TicketAuth.cs" />
+    <Compile Include="Helper Classes\VerificationLink.cs" />
     <Compile Include="Models\Attendance.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>

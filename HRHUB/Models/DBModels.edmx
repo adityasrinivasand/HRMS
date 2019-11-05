@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="ID" />
@@ -36,9 +36,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DOJ" Type="date" Nullable="false" />
           <Property Name="PhoneNumber" Type="bigint" Nullable="false" />
           <Property Name="Email_ID" Type="nvarchar(max)" Nullable="false" />
@@ -47,7 +48,8 @@
           <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="IsEmailVerified" Type="bit" />
+          <Property Name="VerificationCode" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Leave">
           <Key>
@@ -67,7 +69,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
           <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
           <Property Name="RemainingDays" Type="int" Nullable="false" />
@@ -82,8 +84,9 @@
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
-            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
@@ -178,7 +181,7 @@
         </Association>
         <Association Name="UserInfo_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="ID" />
@@ -188,6 +191,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="LeaveEntryForNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DOJ" Type="date" Mode="In" />
+          <Parameter Name="empid" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HRModelStoreContainer">
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
@@ -230,7 +237,8 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -269,9 +277,10 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PhoneNumber" Type="Int64" Nullable="false" />
           <Property Name="Email_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -280,12 +289,13 @@
           <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="Boolean" />
+          <Property Name="VerificationCode" Type="Guid" />
           <NavigationProperty Name="Attendances" Relationship="Self.Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="Designation_History" Relationship="Self.Employee_Designation_Employee" FromRole="Employee" ToRole="Designation_History" />
           <NavigationProperty Name="Leaves" Relationship="Self.Leave_Employee" FromRole="Employee" ToRole="Leave" />
           <NavigationProperty Name="Leave_Tracking" Relationship="Self.Leave_Tracking_Employee" FromRole="Employee" ToRole="Leave_Tracking" />
-          <NavigationProperty Name="UserInfo" Relationship="Self.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfoes" Relationship="Self.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="Leave">
           <Key>
@@ -307,7 +317,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="RemainingDays" Type="Int32" Nullable="false" />
@@ -326,8 +336,9 @@
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
-            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -399,7 +410,7 @@
         </Association>
         <Association Name="UserInfo_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="ID" />
@@ -474,6 +485,10 @@
             <End Role="Leave_Type" EntitySet="Leave_Type" />
             <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
           </AssociationSet>
+          <FunctionImport Name="LeaveEntryForNew">
+            <Parameter Name="DOJ" Mode="In" Type="DateTime" />
+            <Parameter Name="empid" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -514,10 +529,10 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="HRModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="DOJ" ColumnName="DOJ" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
@@ -526,6 +541,8 @@
                 <ScalarProperty Name="Nationality" ColumnName="Nationality" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -566,6 +583,7 @@
           <EntitySetMapping Name="UserInfoes">
             <EntityTypeMapping TypeName="HRModel.UserInfo">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -576,6 +594,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

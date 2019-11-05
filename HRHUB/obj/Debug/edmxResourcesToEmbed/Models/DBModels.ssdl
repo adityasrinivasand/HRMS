@@ -31,9 +31,10 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DOJ" Type="date" Nullable="false" />
     <Property Name="PhoneNumber" Type="bigint" Nullable="false" />
     <Property Name="Email_ID" Type="nvarchar(max)" Nullable="false" />
@@ -42,7 +43,8 @@
     <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="IsEmailVerified" Type="bit" />
+    <Property Name="VerificationCode" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Leave">
     <Key>
@@ -62,7 +64,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Employee_ID" Type="int" Nullable="false" />
     <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
     <Property Name="RemainingDays" Type="int" Nullable="false" />
@@ -77,8 +79,9 @@
   </EntityType>
   <EntityType Name="UserInfo">
     <Key>
-      <PropertyRef Name="Employee_ID" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Employee_ID" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
@@ -173,7 +176,7 @@
   </Association>
   <Association Name="UserInfo_Employee">
     <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="ID" />
@@ -183,6 +186,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="LeaveEntryForNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DOJ" Type="date" Mode="In" />
+    <Parameter Name="empid" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="HRModelStoreContainer">
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />

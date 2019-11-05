@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="476d9724647b4d6cb2fda2edbbe75c7e" Name="Diagram1">
+      <Diagram DiagramId="122fefe0d1f7471cb4fdc83ba5389760" Name="Diagram1">
         <EntityTypeShape EntityType="HRModel.Attendance" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Designation" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Designation_History" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Employee" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave_Tracking" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave_Type" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.UserInfo" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Designation" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Designation_History" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Employee" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Leave" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Leave_Tracking" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.Leave_Type" Width="1.5" PointX="3.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.UserInfo" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <AssociationConnector Association="HRModel.Attendance_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="HRModel.Employee_Designation_Designation" ManuallyRouted="false" />
         <AssociationConnector Association="HRModel.Employee_Designation_Employee" ManuallyRouted="false" />
