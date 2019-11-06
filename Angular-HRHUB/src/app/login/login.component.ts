@@ -45,3 +45,6 @@ export class LoginComponent implements OnInit {
         this.postErrorMessage = 'Please Fix the above errors';
       }
 
+    }
+}
+
