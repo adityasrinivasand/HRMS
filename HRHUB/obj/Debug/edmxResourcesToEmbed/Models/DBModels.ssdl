@@ -186,6 +186,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="AddUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empid" Type="bigint" Mode="In" />
+    <Parameter Name="empUserName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="emppass" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="LeaveEntryForNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DOJ" Type="date" Mode="In" />
     <Parameter Name="empid" Type="int" Mode="In" />

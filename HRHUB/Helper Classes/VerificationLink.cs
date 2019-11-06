@@ -13,7 +13,7 @@ namespace HRHUB.Helper_Classes
         {
 
             var fromEmail = new MailAddress("generateemail2019@gmail.com", "HR HUB");
-            var toEmail = new MailAddress(emailID);
+                var toEmail = new MailAddress(emailID);
             var fromEmailPassword = "Psiog@123"; // Replace with actual password
 
             string subject = "";

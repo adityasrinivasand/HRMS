@@ -19,34 +19,28 @@ namespace HRHUB.Authorization
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            var user = DBOperations.LoginAttempt(context.UserName, context.Password);
-            string role = "user";
+            string message = DBOperations.LoginAttempt(context.UserName, context.Password,out UserInfo user);
 
-            if(user.isAdmin == true)
+            if (user != null)
             {
-                role = "admin";
-            }
-            if(user != null)
-            {
-                if (role == "admin")
+                if (user.isAdmin == true)
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
                     identity.AddClaim(new Claim("username", context.UserName));
                     context.Validated(identity);
-           
                 }
-                else if(role == "user")
+                else if (user.isAdmin == false)
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                     identity.AddClaim(new Claim("username", context.UserName));
                     context.Validated(identity);
                 }
-                else
-                {
-                    context.SetError("invalid_grant", "Provided username and password is incorrect");
-                    return;
-                }
             }
+            else
+            {
+                context.SetError(message);              
+            }
+            
         }
     }
 }

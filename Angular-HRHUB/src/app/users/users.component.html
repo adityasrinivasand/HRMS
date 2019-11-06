@@ -2,82 +2,85 @@
     <mat-card-header>
       <mat-card-title class="card-container-center">Register New Employee</mat-card-title>
     </mat-card-header>
+    <div class="example-container">
+              
+        <form #form="ngForm" ngNativeValidate (ngSubmit)="onSubmit(form)">
     <mat-card-content>
-  
-          <div class="example-container">
 
-              <mat-form-field>
-                    <input matInput placeholder="Enter Employee's Name">
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="Name">Employee Name</label>
+                    <input type="text" class="form-control" name="empName" placeholder="Employee Name" [(ngModel)]="user.Name" required #empName ="ngModel" [class.field-error]="form.submitted && empName.invalid">
+                    <div [hidden]="empName.valid || !form.submitted" class="alert alert-danger">Enter Employee Name</div>
+                </div>
 
-              <mat-form-field color="accent">
-                    <mat-label>Enter Employee's DOB</mat-label>
-                    <input matInput [matDatepicker]="picker1">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-              
-              <mat-form-field>
-                    <input matInput placeholder="Enter Employee's UserName">
-              </mat-form-field>
-                  
-              <mat-form-field color="accent">
-                    <mat-label>Enter Employee's DOJ</mat-label>
-                    <input matInput [matDatepicker]="picker2">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="DOB">Employee DOB</label>
+                    <input type="date" class="form-control" name="empDOB" placeholder="Employee DOB" [(ngModel)]="user.DOB" required #empDOB ="ngModel" [class.field-error]="form.submitted && empDOB.invalid">
+                    <div [hidden]="empDOB.valid || !form.submitted" class="alert alert-danger">Enter Employee DOB</div>
+                </div>
 
-              
+                <div class="form-group">
+                    <label for="Gender">Employee Gender</label>
+                    <input type="text" class="form-control" name="empGender" placeholder="Employee Gender" [(ngModel)]="user.Gender" required #empGender ="ngModel" [class.field-error]="form.submitted && empGender.invalid">
+                    <div [hidden]="empGender.valid || !form.submitted" class="alert alert-danger">Enter Employee Gender</div>
+                </div>
 
-              <mat-form-field>
-                    <input type ="number" matInput placeholder="Enter Employee's Phone Number">
-              </mat-form-field>
-              <mat-form-field>
-                    <input type="email" matInput placeholder="Enter Employee's Mail ID">
-              </mat-form-field> 
+                <div class="form-group">
+                    <label for="Blood">Employee Blood Type</label>
+                    <input type="text" class="form-control" name="empBlood" placeholder="Employee Blood Type" [(ngModel)]="user.BloodType" required #empBlood ="ngModel" [class.field-error]="form.submitted && empBlood.invalid">
+                    <div [hidden]="empBlood.valid || !form.submitted" class="alert alert-danger">Enter Employee Blood Type</div>
+                </div>
 
-              <mat-form-field>
-                <mat-label>Enter Employee's Blood Type</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let bloods of bloods" [value]="bloods.value">
-                    {{bloods.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="Marital">Employee Marital Status</label>
+                    <input type="text" class="form-control" name="empMarital" placeholder="Employee Marital Status" [(ngModel)]="user.MaritalStatus" required #empMarital ="ngModel" [class.field-error]="form.submitted && empMarital.invalid">
+                    <div [hidden]="empMarital.valid || !form.submitted" class="alert alert-danger">Enter Employee Marital Status</div>
+                </div>
 
-              
-              <mat-form-field>
-                <mat-label>Enter Employee's Marital Status</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let marital of marital" [value]="marital.value">
-                    {{marital.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="Nationality">Employee Nationality</label>
+                    <input type="text" class="form-control" name="empNationality" placeholder="Employee Nationality" [(ngModel)]="user.Nationality" required #empNationality ="ngModel" [class.field-error]="form.submitted && empNationality.invalid">
+                    <div [hidden]="empNationality.valid || !form.submitted" class="alert alert-danger">Enter Employee Nationality</div>
+                </div>
 
-              <mat-form-field>
-                    <input matInput placeholder="Enter Employee's Nationality">
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="Phone">Employee Phone Number</label>
+                    <input type="number" class="form-control" name="empPhone" placeholder="Employee Phone Number" [(ngModel)]="user.PhoneNumber" required #empPhone ="ngModel" [class.field-error]="form.submitted && empPhone.invalid">
+                    <div [hidden]="empPhone.valid || !form.submitted" class="alert alert-danger">Enter Employee Phone Number</div>
+                </div>
 
-             <mat-form-field>
-                <mat-label>Enter Employee's Gender</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let gender of gender" [value]="gender.value">
-                    {{gender.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                <div class="form-group">
+                    <label for="Email">Employee Email ID</label>
+                    <input type="email" class="form-control" name="empemail" placeholder="Employee Email ID" [(ngModel)]="user.Email_ID" required #empemail ="ngModel" [class.field-error]="form.submitted && empemail.invalid">
+                    <div [hidden]="empemail.valid || !form.submitted" class="alert alert-danger">Enter Employee Email ID</div>
+                </div>
 
-              <mat-form-field>
-                    <input matInput placeholder="Enter Employee's Department">
-              </mat-form-field>         
-          </div>
+                <div class="form-group">
+                    <label for="UserName">Employee User Name</label>
+                    <input type="text" class="form-control" name="empUserName" placeholder="Employee User Name" [(ngModel)]="user.UserName" required #empUserName ="ngModel" [class.field-error]="form.submitted && empUserName.invalid">
+                    <div [hidden]="empUserName.valid || !form.submitted" class="alert alert-danger">Enter Employee User Name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DOJ">Employee DOJ</label>
+                    <input type="date" class="form-control" name="empDOJ" placeholder="Employee DOJ" [(ngModel)]="user.DOJ" required #empDOJ ="ngModel" [class.field-error]="form.submitted && empDOJ.invalid">
+                    <div [hidden]="empDOJ.valid || !form.submitted" class="alert alert-danger">Enter Employee DOJ</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Department">Employee Department</label>
+                    <input type="text" class="form-control" name="empDepartment" placeholder="Employee Department" [(ngModel)]="user.Department" required #empDept ="ngModel" [class.field-error]="form.submitted && empDept.invalid">
+                    <div [hidden]="empDept.valid || !form.submitted" class="alert alert-danger">Enter Employee Department</div>
+                </div>
+
+                <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>
           <mat-card-actions>
             <button type="submit" class="btn btn-primary" mat-button>Register</button>
             <button type="reset" class="btn btn-danger" mat-button>Cancel</button>
           </mat-card-actions>
+        
     </mat-card-content>
-    
-  </mat-card>
+  </form>
+</div>
+</mat-card>
   

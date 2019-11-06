@@ -7,7 +7,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  showHeader = false;
+  showHeader = true;
   showNavbar = false;
   showFooter = false;
 

@@ -3,7 +3,8 @@
   margin: 0 auto;
   width: 40%;
   background-color: rgba(99, 96, 96, 0.527);
-  
+  top: 2.5em;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
 }
 .btn-primary{
   position: relative;
@@ -20,20 +21,16 @@ display: flex;
 flex-direction: column;
 padding: 1em;
 }
-
 .example-container > * {
 width: 100%;
 }
-
 .example-right-align {
 text-align: right;
 }
-
 input.example-right-align::-webkit-outer-spin-button,
 input.example-right-align::-webkit-inner-spin-button {
 display: none;
 }
-
 input.example-right-align {
 -moz-appearance: textfield;
 }
@@ -48,7 +45,7 @@ input.example-right-align {
 }
 .card-container-center{
   position: relative;
-  left: 8.5em;
+  left: 6em;
   padding: 0.75em;
 }
 

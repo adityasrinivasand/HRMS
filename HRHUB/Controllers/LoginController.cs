@@ -50,7 +50,46 @@ namespace HRHUB.Controllers
         }
 
 
-        
+        // GET: api/Employees/5
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/forgot")]
+        [ResponseType(typeof(Employee))]
+        public IHttpActionResult ForgotPassword(ForgotPassword pass)
+        {
+            var employee = DBOperations.IsEmployeeExist(pass.UserName);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                string VerificationCode = Guid.NewGuid().ToString();
+                var link = HttpContext.Current.Request.Url.AbsoluteUri + "/ForgotPassword/" + employee.UserName;
+                VerificationLink.EmailGeneration(employee.Email_ID, VerificationCode, link, "ResetPassword");
+                return Ok(employee);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/forgot/ForgotPassword/{id=id}")]
+        public IHttpActionResult ResetPassword(string id, PasswordConfirmation password)
+        {
+            string message = VerifyPasswords.Password(password);
+            if (message == "Successfull")
+            {
+                DBOperations.SaveChangedPassword(password, id);
+                return Ok("Password Changed Successfully");
+            }
+            else if(message == "Passswords Don't Match")
+            {
+                return Ok("Passswords Don't Match");
+            }
+            else
+            {
+                return Ok("Password Change Not Successful");
+            }
+        }
 
         /*
 

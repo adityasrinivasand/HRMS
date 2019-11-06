@@ -48,5 +48,22 @@ namespace HRHUB.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveEntryForNew", dOJParameter, empidParameter);
         }
+    
+        public virtual int AddUserInfo(Nullable<long> empid, string empUserName, string emppass)
+        {
+            var empidParameter = empid.HasValue ?
+                new ObjectParameter("empid", empid) :
+                new ObjectParameter("empid", typeof(long));
+    
+            var empUserNameParameter = empUserName != null ?
+                new ObjectParameter("empUserName", empUserName) :
+                new ObjectParameter("empUserName", typeof(string));
+    
+            var emppassParameter = emppass != null ?
+                new ObjectParameter("emppass", emppass) :
+                new ObjectParameter("emppass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserInfo", empidParameter, empUserNameParameter, emppassParameter);
+        }
     }
 }

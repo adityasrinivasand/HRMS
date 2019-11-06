@@ -34,52 +34,49 @@ namespace HRHUB.Helper_Classes
                 return a;
             }
         }
-        public static UserInfo LoginAttempt(string username, string password)
+        public static string LoginAttempt(string username, string password,out UserInfo user)
         {
             using (HREntities db = new HREntities())
             {
-                var emp = db.UserInfoes.Where(l => l.UserName == username).FirstOrDefault();
-                if (emp != null)
+                user = db.UserInfoes.Where(l => l.UserName == username).FirstOrDefault();
+                password = PWHashing.Hash(password);
+                if (user != null)
                 {
-                    if (String.Compare(password, emp.Password) == 0)
+                    if (String.Compare(password, user.Password) == 0)
                     {
-                        return emp;
-                    }
-                }
-                return emp;
-            }
-        }
-        public static string Password(PasswordConfirmation pass, string id)
-        {
-            using (HREntities db = new HREntities())
-            {
-                var emp = db.UserInfoes.Where(l => l.UserName == id).FirstOrDefault();
-                if (emp != null)
-                {
-                    if (pass.password == pass.confirmpassword)
-                    {
-                        emp.Password = PWHashing.Hash(pass.password);
                         return "Successfull";
                     }
-                    return "Not Successfull";
-                    
+                    else
+                    {
+                        user = null;
+                        return "Password is Wrong";
+                    }                       
                 }
-
+                else
+                {
+                    user = null;
+                    return "Invalid Credentials";
+                }
+                
             }
-            return "Not Successfull";
-
-        }
-        public static void AddingUserInfo(string username)
+        }   
+        public static Employee IsEmployeeExist(string username)
         {
-            using(HREntities db = new HREntities())
+            using (HREntities db = new HREntities())
             {
-                UserInfo user = new UserInfo();
-
-                user.UserName = username;
-                user.Password = PWHashing.Hash("123");
-                db.UserInfoes.Add(user);
-                db.SaveChanges();
+                return db.Employees.Where(l => l.UserName == username).FirstOrDefault();
             }
         }
+        public static string SaveChangedPassword(PasswordConfirmation password, string username)
+        {
+            using (HREntities db = new HREntities())
+            {
+                var emp=  db.UserInfoes.Where(l => l.UserName == username).FirstOrDefault();
+                emp.Password = password.password;
+                db.SaveChanges();
+                return "Successfully Changed";       
+            }
+        }
+
     }
 }

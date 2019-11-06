@@ -247,5 +247,10 @@
       <Parameter Name="DOJ" Mode="In" Type="DateTime" />
       <Parameter Name="empid" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="AddUserInfo">
+      <Parameter Name="empid" Mode="In" Type="Int64" />
+      <Parameter Name="empUserName" Mode="In" Type="String" />
+      <Parameter Name="emppass" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

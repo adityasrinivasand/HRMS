@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data/data.service';
+import { User } from '../data/user';
+import { NgForm } from '@angular/forms';
 
 
 export interface Blood {
@@ -10,6 +13,10 @@ export interface Marital {
   viewValue: string;
 }
 export interface Gender {
+  value: string;
+  viewValue: string;
+}
+export interface Department {
   value: string;
   viewValue: string;
 }
@@ -36,15 +43,54 @@ export class UsersComponent implements OnInit {
     {value: 'Married', viewValue: 'Married'},
     {value: 'Divocred', viewValue: 'Divocred'},
   ];
-  
+
   gender: Gender[] = [
     {value: 'Male', viewValue: 'Male'},
     {value: 'Female', viewValue: 'Female'},
     {value: 'Others', viewValue: 'Others'},
   ];
-  constructor() { }
+  department: Department[] = [
+    {value: 'BD', viewValue: 'Business Development'},
+    {value: 'BT', viewValue: 'Business Technology'},
+    {value: 'HR', viewValue: 'Human Resources'},
+    {value: 'QA', viewValue: 'Quality Assurance'},
+    {value: 'IT', viewValue: 'IT'},
+  ];
+  constructor(private dataservice: DataService) { }
+
+  user: User = {
+    Name: '',
+    DOB:   new Date() ,
+    UserName: '',
+    DOJ: new Date() ,
+    PhoneNumber: 1234567890,
+    Email_ID: '',
+    BloodType: '',
+    MaritalStatus: '',
+    Nationality: '',
+    Gender: '',
+    Department: '',
+  };
+  postError = false;
+  postErrorMessage = '';
 
   ngOnInit() {
+  }
+  onHttpError(error: any) {
+    console.log('error:', error);
+    this.postError = true;
+    this.postErrorMessage = error.error.status;
+  }
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+    if (form.valid) {
+      console.log(' in onSubmit:', form.valid);
+      this.dataservice.postRegisterForm(this.user).subscribe (
+        result => console.log('success', result),
+        error => this.onHttpError(error)
+      );
+    }
+
   }
 
 }

@@ -100,5 +100,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
+    <FunctionImportMapping FunctionImportName="AddUserInfo" FunctionName="HRModel.Store.AddUserInfo" />
   </EntityContainerMapping>
 </Mapping>

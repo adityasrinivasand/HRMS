@@ -188,6 +188,7 @@
     <Compile Include="Authorization\AuthorizeAttribute.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeavesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,8 +196,10 @@
     </Compile>
     <Compile Include="Helper Classes\CallStoredProc.cs" />
     <Compile Include="Helper Classes\DBOperations.cs" />
+    <Compile Include="Helper Classes\ForgotPassword.cs" />
     <Compile Include="Helper Classes\LogFile.cs" />
-    <Compile Include="Helper Classes\PasswordConfirmation.cs" />
+    <Compile Include="Helper Classes\VerifyPasswords.cs" />
+    <Compile Include="Utilites\PasswordConfirmation.cs" />
     <Compile Include="Helper Classes\PWHashing.cs" />
     <Compile Include="Helper Classes\VerificationLink.cs" />
     <Compile Include="Models\Attendance.cs">

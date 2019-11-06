@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="ID" />
@@ -191,6 +191,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empid" Type="bigint" Mode="In" />
+          <Parameter Name="empUserName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="emppass" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="LeaveEntryForNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DOJ" Type="date" Mode="In" />
           <Parameter Name="empid" Type="int" Mode="In" />
@@ -237,8 +242,7 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -489,6 +493,11 @@
             <Parameter Name="DOJ" Mode="In" Type="DateTime" />
             <Parameter Name="empid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AddUserInfo">
+            <Parameter Name="empid" Mode="In" Type="Int64" />
+            <Parameter Name="empUserName" Mode="In" Type="String" />
+            <Parameter Name="emppass" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -595,6 +604,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
+          <FunctionImportMapping FunctionImportName="AddUserInfo" FunctionName="HRModel.Store.AddUserInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

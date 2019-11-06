@@ -24,18 +24,7 @@ namespace HRHUB.Controllers
             return db.Employees;
         }
 
-        // GET: api/Employees/5
-        [ResponseType(typeof(Employee))]
-        public IHttpActionResult GetEmployee(int id)
-        {
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(employee);
-        }
+        
 
         // PUT: api/Employees/5
         [ResponseType(typeof(void))]
@@ -99,8 +88,7 @@ namespace HRHUB.Controllers
 
             db.Employees.Add(employee);
             db.SaveChanges();
-            CallStoredProc.RunStoredProc(employee);
-            DBOperations.AddingUserInfo(employee.UserName);
+            CallStoredProc.RunLeaveEntryForNew(employee);
             return Ok("Successfully Added");
         }
 
@@ -108,16 +96,16 @@ namespace HRHUB.Controllers
         [Route("api/signup/addEmployee/VerifyAccount/{id=id}")]
         public IHttpActionResult VerifyEmployee(string id, PasswordConfirmation password)
         {
-            string message = DBOperations.Password(password, id);
+            string message = VerifyPasswords.Password(password);
             if(message == "Successfull")
             {
-                return Ok("Verified Successfully");
+                CallStoredProc.RunAddUserInfo(password,id);
+                return Ok("Verified Successfully");     
             }
             else
             {
                 return Ok("Verification Not Successful");
-            }
-            
+            }           
         }
 
         // DELETE: api/Employees/5
