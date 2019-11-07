@@ -61,11 +61,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Submit_Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Response_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Response_Date" Type="DateTime" Precision="0" />
     <Property Name="Leave_StartDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Leave_EndDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
     <Property Name="Employee_ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />

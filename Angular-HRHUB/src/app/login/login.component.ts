@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       if (form.valid) {
         console.log(' in onSubmit:', form.valid);
         this.dataservice.postLoginForm(this.employeeLogin).subscribe (
-          result => localStorage.setItem('success', result.access_token),
+          result => console.log('success', result),
           error => this.onHttpError(error)
         );
         

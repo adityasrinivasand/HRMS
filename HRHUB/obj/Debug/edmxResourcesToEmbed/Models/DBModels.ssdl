@@ -50,13 +50,13 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Submit_Date" Type="date" Nullable="false" />
-    <Property Name="Response_Date" Type="date" Nullable="false" />
+    <Property Name="Response_Date" Type="date" />
     <Property Name="Leave_StartDate" Type="date" Nullable="false" />
     <Property Name="Leave_EndDate" Type="date" Nullable="false" />
     <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" />
     <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
     <Property Name="Employee_ID" Type="int" Nullable="false" />
   </EntityType>

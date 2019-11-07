@@ -55,13 +55,13 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Submit_Date" Type="date" Nullable="false" />
-          <Property Name="Response_Date" Type="date" Nullable="false" />
+          <Property Name="Response_Date" Type="date" />
           <Property Name="Leave_StartDate" Type="date" Nullable="false" />
           <Property Name="Leave_EndDate" Type="date" Nullable="false" />
           <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" />
           <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -307,11 +307,11 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Submit_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Response_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Response_Date" Type="DateTime" Precision="0" />
           <Property Name="Leave_StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Leave_EndDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />

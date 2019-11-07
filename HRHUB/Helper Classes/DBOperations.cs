@@ -77,6 +77,31 @@ namespace HRHUB.Helper_Classes
                 return "Successfully Changed";       
             }
         }
+        public static string CheckLeaveexist(Leave leave)
+        {
+            using (HREntities db = new HREntities())
+            {
+                var emp = db.Employees.Where(l => l.ID == leave.Employee_ID).FirstOrDefault();
+                var result = from logger in db.Leave_Tracking
+                             join employee in db.Employees on logger.Employee_ID equals employee.ID
+                             select new
+                             {
+                                 username = employee.UserName,
+                                 leavetype = logger.Leave_Type_ID,
+                                 remaining = logger.RemainingDays
 
+                             };
+
+                if (emp != null)
+                {
+                    
+                    return "Employee";
+                }
+                else
+                {
+                    return "Employee Not Found";
+                }
+            }
+        }
     }
 }

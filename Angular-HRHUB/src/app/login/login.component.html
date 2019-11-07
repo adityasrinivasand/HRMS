@@ -22,7 +22,7 @@
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input responsive" name="RememberMe" id="rememberMe" [(ngModel)]="employeeLogin.rememberme">
         <label class="form-check-label" for="rememberMe">Remember Me</label>
-        <a href="" class="forgot" >Forgot Password?</a>
+        <a  routerLink="/forgotpassword" class="forgot" >Forgot Password?</a>
       </div>
 
       <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>

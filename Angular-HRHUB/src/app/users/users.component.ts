@@ -3,7 +3,6 @@ import { DataService } from '../data/data.service';
 import { User } from '../data/user';
 import { NgForm } from '@angular/forms';
 
-
 export interface Blood {
   value: string;
   viewValue: string;

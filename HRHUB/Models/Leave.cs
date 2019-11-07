@@ -16,7 +16,7 @@ namespace HRHUB.Models
     {
         public int ID { get; set; }
         public System.DateTime Submit_Date { get; set; }
-        public System.DateTime Response_Date { get; set; }
+        public Nullable<System.DateTime> Response_Date { get; set; }
         public System.DateTime Leave_StartDate { get; set; }
         public System.DateTime Leave_EndDate { get; set; }
         public string Reason { get; set; }

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using HRHUB.Helper_Classes;
 using HRHUB.Models;
 
 namespace HRHUB.Controllers
@@ -18,7 +19,7 @@ namespace HRHUB.Controllers
 
         // POST: api/Leaves
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("api/leave")]
         [ResponseType(typeof(Leave))]
         public IHttpActionResult PostLeave(Leave leave)
@@ -28,7 +29,7 @@ namespace HRHUB.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Leaves.Add(leave);
+            var message = DBOperations.CheckLeaveexist(leave);
 
             try
             {
