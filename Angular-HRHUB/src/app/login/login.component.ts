@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           result => console.log('success', result),
           error => this.onHttpError(error)
         );
-        
+
       } else {
         this.postError = true;
         this.postErrorMessage = 'Please Fix the above errors';

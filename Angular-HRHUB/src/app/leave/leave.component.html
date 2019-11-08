@@ -1,8 +1,92 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Leave Application</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    
+    <div class="container">
+           
+                       <form class="well form-horizontal">
+                          <fieldset>
+                             <div class="form-group ">
+                                <label class="col-md-4 control-label">Leave Type</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Sick Leave</option>
+                                        <option>Causal Leave</option>
+                                        <option>Privileged Leave</option>
+                                    </select>
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                <label class="col-md-4 control-label">From Date</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="addressLine1" name="addressLine1" placeholder="Address Line 1" class="form-control" required="true" value="" type="date"></div>
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                <label class="col-md-4 control-label">To Date</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="addressLine2" name="addressLine2" placeholder="Address Line 2" class="form-control" required="true" value="" type="date"></div>
+                                </div>
+                             </div>
+
+                             <div class="form-group">
+                              <label class="col-md-4 control-label">From Session</label>
+                              <div class="col-md-8 inputGroupContainer">
+                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>Session 1</option>
+                                      <option>Session 2</option>
+                                  </select>
+                                  </div>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <label class="col-md-4 control-label">To Session</label>
+                              <div class="col-md-8 inputGroupContainer">
+                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>Session 1</option>
+                                      <option>Session 2</option>
+                                  </select>
+                                  </div>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <label class="col-md-4 control-label">Apply To</label>
+                              <div class="col-md-8 inputGroupContainer">
+                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                  <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>Session 1</option>
+                                      <option>Session 2</option>
+                                  </select>
+                                  </div>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <label class="col-md-4 control-label">No Of days</label>
+                              <div class="col-md-8 inputGroupContainer">
+                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="addressLine1" name="addressLine1" placeholder="0" class="form-control" required="true" value="" type="text" readonly></div>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <label class="col-md-4 control-label">Balance </label>
+                              <div class="col-md-8 inputGroupContainer">
+                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="addressLine1" name="addressLine1" placeholder="0" class="form-control" required="true" value="" type="text" readonly></div>
+                              </div>
+                           </div>
+                           
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary" >Apply</button>
+                        <button type="reset" class="btn btn-danger" >Cancel</button>
+                       </form>
+        </div>
+
+

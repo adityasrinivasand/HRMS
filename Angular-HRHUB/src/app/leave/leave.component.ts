@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data/data.service';
+import { LeaveType } from '../data/leaveType';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-leave',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaveComponent implements OnInit {
 
-  constructor() { }
+  arrLeaveType: string [];
+  errorMessage = '';
+  constructor(private dataservice: DataService, private httpService: HttpClient) { }
 
   ngOnInit() {
+
   }
 
+  
 }
+

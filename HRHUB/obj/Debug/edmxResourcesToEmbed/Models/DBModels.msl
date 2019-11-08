@@ -54,6 +54,9 @@
     <EntitySetMapping Name="Leaves">
       <EntityTypeMapping TypeName="HRModel.Leave">
         <MappingFragment StoreEntitySet="Leave">
+          <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
+          <ScalarProperty Name="To_Session" ColumnName="To_Session" />
+          <ScalarProperty Name="From_Session" ColumnName="From_Session" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
           <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />

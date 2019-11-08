@@ -17,7 +17,7 @@ namespace HRHUB.Models
         public int ID { get; set; }
         public int Employee_ID { get; set; }
         public int Leave_Type_ID { get; set; }
-        public int RemainingDays { get; set; }
+        public double RemainingDays { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Leave_Type Leave_Type { get; set; }

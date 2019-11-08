@@ -79,8 +79,10 @@ namespace HRHUB.Helper_Classes
         }
         public static string CheckLeaveexist(Leave leave)
         {
+            var leaveTaken = 0.0;
             using (HREntities db = new HREntities())
             {
+                int a =1;
                 var emp = db.Employees.Where(l => l.ID == leave.Employee_ID).FirstOrDefault();
                 var result = from logger in db.Leave_Tracking
                              join employee in db.Employees on logger.Employee_ID equals employee.ID
@@ -88,18 +90,37 @@ namespace HRHUB.Helper_Classes
                              {
                                  username = employee.UserName,
                                  leavetype = logger.Leave_Type_ID,
-                                 remaining = logger.RemainingDays
+                                 remaining = logger.RemainingDays,
+                                 empid = employee.ID
 
                              };
-
-                if (emp != null)
+                foreach (var obj in result)
                 {
-                    
-                    return "Employee";
+                    if(emp.UserName == obj.username)
+                    {
+                        var noOfDays = (leave.Leave_EndDate - leave.Leave_StartDate).TotalDays;  
+                        if(obj.leavetype == leave.Leave_Type_ID)
+                        {
+                            leaveTaken = DaysCalculation.CalculateDays(leave);
+                            if( leaveTaken < obj.remaining)
+                            {
+                                db.Leaves.Add(leave);
+                                var leaveTrack = db.Leave_Tracking.Where(l => (l.Employee_ID == obj.empid) &&(l.Leave_Type_ID == obj.leavetype)).FirstOrDefault();
+                                leaveTrack.RemainingDays = (obj.remaining - leaveTaken);
+                                a = 0;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if ( a == 0)
+                {
+                    db.SaveChanges();
+                    return "Leave Applied Successfully";
                 }
                 else
                 {
-                    return "Employee Not Found";
+                    return "Leave not Applied";
                 }
             }
         }

@@ -223,12 +223,14 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeavesController.cs" />
+    <Compile Include="Controllers\Leave_TypeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper Classes\CallStoredProc.cs" />
+    <Compile Include="Helper Classes\DaysCalculation.cs" />
     <Compile Include="Helper Classes\DBOperations.cs" />
     <Compile Include="Helper Classes\ForgotPassword.cs" />
     <Compile Include="Helper Classes\LogFile.cs" />

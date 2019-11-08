@@ -64,6 +64,9 @@
           <Property Name="Status" Type="nvarchar(max)" />
           <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
+          <Property Name="From_Session" Type="int" Nullable="false" />
+          <Property Name="To_Session" Type="int" Nullable="false" />
+          <Property Name="Apply_To" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Leave_Tracking">
           <Key>
@@ -72,7 +75,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
           <Property Name="Leave_Type_ID" Type="int" Nullable="false" />
-          <Property Name="RemainingDays" Type="int" Nullable="false" />
+          <Property Name="RemainingDays" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Leave_Type">
           <Key>
@@ -316,6 +319,9 @@
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />
           <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Leave_Type" FromRole="Leave" ToRole="Leave_Type" />
+          <Property Name="From_Session" Type="Int32" Nullable="false" />
+          <Property Name="To_Session" Type="Int32" Nullable="false" />
+          <Property Name="Apply_To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Leave_Tracking">
           <Key>
@@ -324,7 +330,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="RemainingDays" Type="Int32" Nullable="false" />
+          <Property Name="RemainingDays" Type="Double" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.Leave_Tracking_Employee" FromRole="Leave_Tracking" ToRole="Employee" />
           <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Tracking_Leave_Type" FromRole="Leave_Tracking" ToRole="Leave_Type" />
         </EntityType>
@@ -558,6 +564,9 @@
           <EntitySetMapping Name="Leaves">
             <EntityTypeMapping TypeName="HRModel.Leave">
               <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
+                <ScalarProperty Name="To_Session" ColumnName="To_Session" />
+                <ScalarProperty Name="From_Session" ColumnName="From_Session" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
                 <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />

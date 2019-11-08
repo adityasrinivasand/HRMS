@@ -28,26 +28,17 @@ namespace HRHUB.Controllers
             {
                 return BadRequest(ModelState);
             }
+            string message = " ";
+            message = DBOperations.CheckLeaveexist(leave);
 
-            var message = DBOperations.CheckLeaveexist(leave);
-
-            try
+            if(message == "Leave Applied Successfully")
             {
-                db.SaveChanges();
+                return Ok("Leave Applied Successfully");
             }
-            catch (DbUpdateException)
+            else
             {
-                if (LeaveExists(leave.ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return Ok("Leave Not Applied Successfully");
             }
-
-            return CreatedAtRoute("DefaultApi", new { id = leave.ID }, leave);
         }
 
         /*

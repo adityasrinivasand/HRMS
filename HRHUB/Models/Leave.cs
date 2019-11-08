@@ -23,6 +23,9 @@ namespace HRHUB.Models
         public string Status { get; set; }
         public int Leave_Type_ID { get; set; }
         public int Employee_ID { get; set; }
+        public int From_Session { get; set; }
+        public int To_Session { get; set; }
+        public string Apply_To { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Leave_Type Leave_Type { get; set; }
