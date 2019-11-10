@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   showHeader = true;
   showNavbar = false;
   showFooter = false;
+  showWelcomeCard = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
         this.showHeader = this.activatedRoute.firstChild.snapshot.data.showHeader !== false;
         this.showNavbar = this.activatedRoute.firstChild.snapshot.data.showNavbar !== false;
         this.showFooter = this.activatedRoute.firstChild.snapshot.data.showFooter !== false;
+        this.showWelcomeCard = this.activatedRoute.firstChild.snapshot.data.showWelcomeCard !== false;
       }
     });
   }

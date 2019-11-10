@@ -1,4 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<mat-toolbar>
+  <mat-toolbar-row>
+    <img href="/dashboard" class="hrlogo"src="../../../assets/hr logo.png">&nbsp;
+    <h1>HR HUB </h1>
+    
+    <span class="menu-spacer"></span>
+    <div>
+         
+      <a mat-button [routerLink]="'/feeds'"> Feeds </a> &nbsp;
+
+      <a mat-button [routerLink]="'/timesheet-account'"> Time Sheet </a>&nbsp;
+
+      <a mat-button  [matMenuTriggerFor]="directoryMenu"> Directory </a>&nbsp;
+        <mat-menu #directoryMenu="matMenu">
+            <button mat-menu-item [routerLink]="'/contacts'" >See All Employee</button>
+            <button mat-menu-item [routerLink]="'/users/1'" >Add new Employee</button>
+            <button mat-menu-item>Update Employee Details</button>
+            <button mat-menu-item>Delete Employee</button>
+        </mat-menu>  
+        
+      <a mat-button [matMenuTriggerFor]="leaveMenu"> Leave</a> &nbsp;&nbsp;
+      <mat-menu #leaveMenu = "matMenu">
+          <button mat-menu-item [routerLink]="'/leave/:id'" >Apply Leave</button>
+          <button mat-menu-item>Review Leave</button>
+          <button mat-menu-item>Track Leave</button>
+      </mat-menu> 
+   
+    </div>
+    <div class="searchform">
+    <mat-form-field appearance="">
+        <mat-label>Search</mat-label>
+        <input matInput>
+        <i class="fa fa-search"></i>
+    </mat-form-field>
+  </div>
+    
+    <span class="logoutSpacer"></span>
+    <div>
+    <mat-icon [matMenuTriggerFor]="personMenu" matSuffix>person</mat-icon>
+    <mat-menu #personMenu = "matMenu">
+        <button mat-menu-item [routerLink]="'/leave'" >Account Settings</button>
+        <button mat-menu-item>Update Profile</button>
+        <button mat-menu-item [routerLink]="'/login'" >LogOut</button>
+    </mat-menu> 
+  </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+
+
+<!----<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#"><img class="hrlogo"src="../../../assets/hr logo.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -55,3 +106,4 @@
     </div>
 </nav>
 
+---->

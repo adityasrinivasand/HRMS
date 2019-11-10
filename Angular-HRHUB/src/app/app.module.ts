@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatSelectModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,7 @@ import { LeaveComponent } from './leave/leave.component';
 import { LeaveRoutingModule } from './leave/leave-routing.module';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,6 +47,9 @@ import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-rou
     NgbModule,
     LeaveRoutingModule,
     ForgotpasswordRoutingModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

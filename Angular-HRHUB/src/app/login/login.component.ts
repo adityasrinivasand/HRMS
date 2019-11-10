@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       if (form.valid) {
         console.log(' in onSubmit:', form.valid);
         this.dataservice.postLoginForm(this.employeeLogin).subscribe (
-          result => console.log('success', result),
+          result => this.router.navigate(['/user/:id']),
           error => this.onHttpError(error)
         );
 

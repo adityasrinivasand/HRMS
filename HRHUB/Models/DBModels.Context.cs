@@ -36,19 +36,6 @@ namespace HRHUB.Models
         public virtual DbSet<Leave_Type> Leave_Type { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
     
-        public virtual int LeaveEntryForNew(Nullable<System.DateTime> dOJ, Nullable<int> empid)
-        {
-            var dOJParameter = dOJ.HasValue ?
-                new ObjectParameter("DOJ", dOJ) :
-                new ObjectParameter("DOJ", typeof(System.DateTime));
-    
-            var empidParameter = empid.HasValue ?
-                new ObjectParameter("empid", empid) :
-                new ObjectParameter("empid", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveEntryForNew", dOJParameter, empidParameter);
-        }
-    
         public virtual int AddUserInfo(Nullable<long> empid, string empUserName, string emppass)
         {
             var empidParameter = empid.HasValue ?
@@ -64,6 +51,19 @@ namespace HRHUB.Models
                 new ObjectParameter("emppass", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUserInfo", empidParameter, empUserNameParameter, emppassParameter);
+        }
+    
+        public virtual int LeaveEntryForNew(Nullable<System.DateTime> dOJ, Nullable<int> empid)
+        {
+            var dOJParameter = dOJ.HasValue ?
+                new ObjectParameter("DOJ", dOJ) :
+                new ObjectParameter("DOJ", typeof(System.DateTime));
+    
+            var empidParameter = empid.HasValue ?
+                new ObjectParameter("empid", empid) :
+                new ObjectParameter("empid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("LeaveEntryForNew", dOJParameter, empidParameter);
         }
     }
 }

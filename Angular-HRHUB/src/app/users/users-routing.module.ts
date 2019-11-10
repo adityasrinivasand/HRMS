@@ -4,9 +4,9 @@ import {UsersComponent} from './users.component';
 
 const routes: Routes = [
   {
-    path: 'users',
+    path: 'users/1',
     component: UsersComponent,
-    data: { showHeader: false, showNavbar: true }
+    data: { showHeader: false, showNavbar: true, showWelcomeCard: true }
   }
 ];
 

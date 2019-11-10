@@ -40,11 +40,11 @@
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DOJ" Type="date" Nullable="false" />
           <Property Name="PhoneNumber" Type="bigint" Nullable="false" />
           <Property Name="Email_ID" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BloodType" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MaritalStatus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DOJ" Type="date" Nullable="false" />
           <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
@@ -89,7 +89,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
@@ -288,11 +288,11 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PhoneNumber" Type="Int64" Nullable="false" />
           <Property Name="Email_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BloodType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaritalStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -317,11 +317,11 @@
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />
-          <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Leave_Type" FromRole="Leave" ToRole="Leave_Type" />
           <Property Name="From_Session" Type="Int32" Nullable="false" />
           <Property Name="To_Session" Type="Int32" Nullable="false" />
-          <Property Name="Apply_To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apply_To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />
+          <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Leave_Type" FromRole="Leave" ToRole="Leave_Type" />
         </EntityType>
         <EntityType Name="Leave_Tracking">
           <Key>
@@ -348,7 +348,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Employee_ID" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -495,14 +495,14 @@
             <End Role="Leave_Type" EntitySet="Leave_Type" />
             <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
           </AssociationSet>
-          <FunctionImport Name="LeaveEntryForNew">
-            <Parameter Name="DOJ" Mode="In" Type="DateTime" />
-            <Parameter Name="empid" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="AddUserInfo">
             <Parameter Name="empid" Mode="In" Type="Int64" />
             <Parameter Name="empUserName" Mode="In" Type="String" />
             <Parameter Name="emppass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveEntryForNew">
+            <Parameter Name="DOJ" Mode="In" Type="DateTime" />
+            <Parameter Name="empid" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -548,11 +548,11 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
                 <ScalarProperty Name="BloodType" ColumnName="BloodType" />
                 <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
                 <ScalarProperty Name="Nationality" ColumnName="Nationality" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
@@ -564,9 +564,6 @@
           <EntitySetMapping Name="Leaves">
             <EntityTypeMapping TypeName="HRModel.Leave">
               <MappingFragment StoreEntitySet="Leave">
-                <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
-                <ScalarProperty Name="To_Session" ColumnName="To_Session" />
-                <ScalarProperty Name="From_Session" ColumnName="From_Session" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
                 <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />
@@ -576,6 +573,9 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
                 <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="From_Session" ColumnName="From_Session" />
+                <ScalarProperty Name="To_Session" ColumnName="To_Session" />
+                <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -612,8 +612,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
           <FunctionImportMapping FunctionImportName="AddUserInfo" FunctionName="HRModel.Store.AddUserInfo" />
+          <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

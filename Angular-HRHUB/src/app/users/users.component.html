@@ -1,77 +1,124 @@
-<mat-card class="example-card">
+<mat-card class="user-card">
     <mat-card-header>
       <mat-card-title class="card-container-center">Register New Employee</mat-card-title>
     </mat-card-header>
-    <div class="example-container">
+    <div class="user-container">
               
         <form #form="ngForm" ngNativeValidate (ngSubmit)="onSubmit(form)">
-    <mat-card-content>
+        <mat-card-content>
 
-                <div class="form-group">
-                    <label for="Name">Employee Name</label>
-                    <input type="text" class="form-control" name="empName" placeholder="Employee Name" [(ngModel)]="user.Name" required #empName ="ngModel" [class.field-error]="form.submitted && empName.invalid">
+<table class="table">
+    <tbody>
+
+        <tr>
+            <th scope="row"></th>
+            <td>
+                <div class="form-group form-inline">
+                    <label for="Name" class="mb-2 mr-sm-5">Employee Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="form-control mb-2 mr-sm-3" name="empName" placeholder="Employee Name" [(ngModel)]="user.Name" required #empName ="ngModel" [class.field-error]="form.submitted && empName.invalid">
                     <div [hidden]="empName.valid || !form.submitted" class="alert alert-danger">Enter Employee Name</div>
                 </div>
-
-                <div class="form-group">
-                    <label for="DOB">Employee DOB</label>
-                    <input type="date" class="form-control" name="empDOB" placeholder="Employee DOB" [(ngModel)]="user.DOB" required #empDOB ="ngModel" [class.field-error]="form.submitted && empDOB.invalid">
+            </td>
+            <td>
+                <div class="form-group form-inline">
+                    <label for="DOB"  class="mb-2 mr-sm-5">Employee DOB:</label>&nbsp;&nbsp;&nbsp;
+                    <input type="date" class="form-control  mb-2 mr-sm-3" name="empDOB" placeholder="Employee DOB" [(ngModel)]="user.DOB" required #empDOB ="ngModel" [class.field-error]="form.submitted && empDOB.invalid">
                     <div [hidden]="empDOB.valid || !form.submitted" class="alert alert-danger">Enter Employee DOB</div>
                 </div>
+            </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="Gender">Employee Gender</label>
-                    <input type="text" class="form-control" name="empGender" placeholder="Employee Gender" [(ngModel)]="user.Gender" required #empGender ="ngModel" [class.field-error]="form.submitted && empGender.invalid">
-                    <div [hidden]="empGender.valid || !form.submitted" class="alert alert-danger">Enter Employee Gender</div>
-                </div>
+        <tr>
+                <th scope="row"></th>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="Gender" class="mb-2 mr-sm-5">Employee Gender:</label>&nbsp;&nbsp;
+                            <input type="text" class="form-control mb-2 mr-sm-3" name="empGender" placeholder="Employee Gender" [(ngModel)]="user.Gender" required #empGender ="ngModel" [class.field-error]="form.submitted && empGender.invalid">
+                            <div [hidden]="empGender.valid || !form.submitted" class="alert alert-danger">Enter Employee Gender</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="Blood" class="mb-2 mr-sm-3">Employee Blood Type:</label>
+                            <input type="text" class="form-control  mb-2 mr-sm-3" name="empBlood" placeholder="Employee Blood Type" [(ngModel)]="user.BloodType" required #empBlood ="ngModel" [class.field-error]="form.submitted && empBlood.invalid">
+                            <div [hidden]="empBlood.valid || !form.submitted" class="alert alert-danger">Enter Employee Blood Type</div>
+                    </div>
+                </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="Blood">Employee Blood Type</label>
-                    <input type="text" class="form-control" name="empBlood" placeholder="Employee Blood Type" [(ngModel)]="user.BloodType" required #empBlood ="ngModel" [class.field-error]="form.submitted && empBlood.invalid">
-                    <div [hidden]="empBlood.valid || !form.submitted" class="alert alert-danger">Enter Employee Blood Type</div>
-                </div>
+        <tr>
+                <th scope="row"></th>
+                <td>
+                    <div class="form-group form-inline">
+                        <label for="Marital" class="mb-2 mr-sm-2">Employee Marital Status:</label>&nbsp;&nbsp;
+                        <input type="text" class="form-control  mb-2 mr-sm-3" name="empMarital" placeholder="Employee Marital Status" [(ngModel)]="user.MaritalStatus" required #empMarital ="ngModel" [class.field-error]="form.submitted && empMarital.invalid">
+                        <div [hidden]="empMarital.valid || !form.submitted" class="alert alert-danger">Enter Employee Marital Status</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group form-inline">
+                        <label for="Nationality" class="mb-2 mr-sm-3">Employee Nationality:</label>
+                        <input type="text" class="form-control mb-2 mr-sm-3" name="empNationality" placeholder="Employee Nationality" [(ngModel)]="user.Nationality" required #empNationality ="ngModel" [class.field-error]="form.submitted && empNationality.invalid">
+                        <div [hidden]="empNationality.valid || !form.submitted" class="alert alert-danger">Enter Employee Nationality</div>
+                    </div>
+                </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="Marital">Employee Marital Status</label>
-                    <input type="text" class="form-control" name="empMarital" placeholder="Employee Marital Status" [(ngModel)]="user.MaritalStatus" required #empMarital ="ngModel" [class.field-error]="form.submitted && empMarital.invalid">
-                    <div [hidden]="empMarital.valid || !form.submitted" class="alert alert-danger">Enter Employee Marital Status</div>
-                </div>
+        <tr>
+                <th scope="row"></th>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="Phone" class="mb-2 mr-sm-2">Employee Phone Number:</label>
+                            <input type="number" class="form-control mb-2 mr-sm-3" name="empPhone" placeholder="Employee Phone Number" [(ngModel)]="user.PhoneNumber" required #empPhone ="ngModel" [class.field-error]="form.submitted && empPhone.invalid">
+                            <div [hidden]="empPhone.valid || !form.submitted" class="alert alert-danger">Enter Employee Phone Number</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="Email" class="mb-2 mr-sm-4">Employee Email ID:</label>&nbsp;&nbsp;
+                            <input type="email" class="form-control mb-2 mr-sm-3" name="empemail" placeholder="Employee Email ID" [(ngModel)]="user.Email_ID" required #empemail ="ngModel" [class.field-error]="form.submitted && empemail.invalid">
+                            <div [hidden]="empemail.valid || !form.submitted" class="alert alert-danger">Enter Employee Email ID</div>
+                    </div>
+                </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="Nationality">Employee Nationality</label>
-                    <input type="text" class="form-control" name="empNationality" placeholder="Employee Nationality" [(ngModel)]="user.Nationality" required #empNationality ="ngModel" [class.field-error]="form.submitted && empNationality.invalid">
-                    <div [hidden]="empNationality.valid || !form.submitted" class="alert alert-danger">Enter Employee Nationality</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="Phone">Employee Phone Number</label>
-                    <input type="number" class="form-control" name="empPhone" placeholder="Employee Phone Number" [(ngModel)]="user.PhoneNumber" required #empPhone ="ngModel" [class.field-error]="form.submitted && empPhone.invalid">
-                    <div [hidden]="empPhone.valid || !form.submitted" class="alert alert-danger">Enter Employee Phone Number</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="Email">Employee Email ID</label>
-                    <input type="email" class="form-control" name="empemail" placeholder="Employee Email ID" [(ngModel)]="user.Email_ID" required #empemail ="ngModel" [class.field-error]="form.submitted && empemail.invalid">
-                    <div [hidden]="empemail.valid || !form.submitted" class="alert alert-danger">Enter Employee Email ID</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="UserName">Employee User Name</label>
-                    <input type="text" class="form-control" name="empUserName" placeholder="Employee User Name" [(ngModel)]="user.UserName" required #empUserName ="ngModel" [class.field-error]="form.submitted && empUserName.invalid">
+        <tr>
+                <th scope="row"></th>
+                <td>
+                    <div class="form-group form-inline">
+                        <label for="UserName" class="mb-2 mr-sm-4">Employee User Name:</label>&nbsp;&nbsp;
+                    <input type="text" class="form-control mb-2 mr-sm-3" name="empUserName" placeholder="Employee User Name" [(ngModel)]="user.UserName" required #empUserName ="ngModel" [class.field-error]="form.submitted && empUserName.invalid">
                     <div [hidden]="empUserName.valid || !form.submitted" class="alert alert-danger">Enter Employee User Name</div>
-                </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="DOJ" class="mb-2 mr-sm-5">Employee DOJ:</label>&nbsp;&nbsp;
+                            <input type="date" class="form-control mb-2 mr-sm-3" name="empDOJ" placeholder="Employee DOJ" [(ngModel)]="user.DOJ" required #empDOJ ="ngModel" [class.field-error]="form.submitted && empDOJ.invalid">
+                            <div [hidden]="empDOJ.valid || !form.submitted" class="alert alert-danger">Enter Employee DOJ</div>
+                    </div>
+                </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="DOJ">Employee DOJ</label>
-                    <input type="date" class="form-control" name="empDOJ" placeholder="Employee DOJ" [(ngModel)]="user.DOJ" required #empDOJ ="ngModel" [class.field-error]="form.submitted && empDOJ.invalid">
-                    <div [hidden]="empDOJ.valid || !form.submitted" class="alert alert-danger">Enter Employee DOJ</div>
-                </div>
+        <tr>
+                <th scope="row"></th>
+                <td>
+                    <div class="form-group form-inline">
+                            <label for="Department" class="mb-2 mr-sm-4">Employee Department:</label>
+                            <input type="text" class="form-control mb-2 mr-sm-3" name="empDepartment" placeholder="Employee Department" [(ngModel)]="user.Department" required #empDept ="ngModel" [class.field-error]="form.submitted && empDept.invalid">
+                            <div [hidden]="empDept.valid || !form.submitted" class="alert alert-danger">Enter Employee Department</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group form-inline">
+                            
+                    </div>
+                </td>
+        </tr>
 
-                <div class="form-group">
-                    <label for="Department">Employee Department</label>
-                    <input type="text" class="form-control" name="empDepartment" placeholder="Employee Department" [(ngModel)]="user.Department" required #empDept ="ngModel" [class.field-error]="form.submitted && empDept.invalid">
-                    <div [hidden]="empDept.valid || !form.submitted" class="alert alert-danger">Enter Employee Department</div>
-                </div>
+    </tbody>
+</table>
+
 
                 <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>
           <mat-card-actions>

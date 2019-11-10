@@ -1,5 +1,24 @@
 .hrlogo{
+    margin-left: 0.25em;
     position: relative;
-    height: 2.5em;
-    
+    height: 2.5em;  
+    cursor: pointer; 
+}
+.menu-spacer{
+    margin-left: 15em;
+}
+a{
+    cursor: pointer;
+}
+.mat-form-field{
+    padding: 0 20px;    
+}
+.mat-icon{
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    margin-left: 2em;
+    cursor: pointer; 
+}
+.logoutSpacer{
+    margin-right: 18.2em;
 }

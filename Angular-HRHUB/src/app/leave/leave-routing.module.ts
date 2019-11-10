@@ -5,9 +5,9 @@ import { LeaveComponent } from './leave.component';
 
 const routes: Routes = [
   {
-    path: 'leave',
+    path: 'leave/:id',
     component: LeaveComponent,
-    data: { showHeader: false, showNavbar: true }
+    data: { showHeader: false, showNavbar: true, showWelcomeCard: true }
   }
 ];
 

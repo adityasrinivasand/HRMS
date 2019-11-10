@@ -20,10 +20,11 @@ namespace HRHUB.Controllers
         // POST: api/Leaves
         [HttpPost]
         //[Authorize]
-        [Route("api/leave")]
+        [Route("api/leave/{id=id}")]
         [ResponseType(typeof(Leave))]
-        public IHttpActionResult PostLeave(Leave leave)
+        public IHttpActionResult PostLeave(int id,Leave leave)
         {
+            leave.Employee_ID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -39,6 +40,14 @@ namespace HRHUB.Controllers
             {
                 return Ok("Leave Not Applied Successfully");
             }
+        }
+
+        [HttpGet]
+        [Route("api/leave/{id=id}")]
+        public IHttpActionResult GetBalanceLeave(int id,string leaveType)
+        {
+            var balance = DBOperations.BalanceDays(id, leaveType);
+            return Ok(balance);
         }
 
         /*

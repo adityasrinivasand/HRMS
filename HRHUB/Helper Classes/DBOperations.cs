@@ -98,7 +98,6 @@ namespace HRHUB.Helper_Classes
                 {
                     if(emp.UserName == obj.username)
                     {
-                        var noOfDays = (leave.Leave_EndDate - leave.Leave_StartDate).TotalDays;  
                         if(obj.leavetype == leave.Leave_Type_ID)
                         {
                             leaveTaken = DaysCalculation.CalculateDays(leave);
@@ -115,13 +114,52 @@ namespace HRHUB.Helper_Classes
                 }
                 if ( a == 0)
                 {
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        LogFile.WriteLog(ex);
+                    }
+                    
                     return "Leave Applied Successfully";
                 }
                 else
                 {
                     return "Leave not Applied";
                 }
+            }
+        }
+        public static double BalanceDays(int id, string leaveType)
+        {
+            using (HREntities db = new HREntities())
+            {
+                double a = 1;
+                var emp = db.Employees.Where(l => l.ID == id).FirstOrDefault();
+                var result = from logger in db.Leave_Tracking
+                             join employee in db.Employees on logger.Employee_ID equals employee.ID
+                             select new
+                             {
+                                 username = employee.UserName,
+                                 leavetype = logger.Leave_Type_ID,
+                                 remaining = logger.RemainingDays,
+                                 empid = employee.ID
+
+                             };
+                var leaveTypeID = db.Leave_Type.Where(l => l.LeaveType == leaveType).FirstOrDefault();
+                foreach (var obj in result)
+                {
+                    if (emp.UserName == obj.username)
+                    {
+                        if (obj.leavetype == leaveTypeID.ID)
+                        {
+                            a= obj.remaining;
+                            break;
+                        }
+                    }
+                }
+                return a;
             }
         }
     }

@@ -235,9 +235,6 @@
     <Compile Include="Helper Classes\ForgotPassword.cs" />
     <Compile Include="Helper Classes\LogFile.cs" />
     <Compile Include="Helper Classes\VerifyPasswords.cs" />
-    <Compile Include="Utilites\PasswordConfirmation.cs" />
-    <Compile Include="Helper Classes\PWHashing.cs" />
-    <Compile Include="Helper Classes\VerificationLink.cs" />
     <Compile Include="Models\Attendance.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
@@ -277,6 +274,9 @@
     <Compile Include="Models\UserInfo.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilites\PasswordConfirmation.cs" />
+    <Compile Include="Helper Classes\PWHashing.cs" />
+    <Compile Include="Helper Classes\VerificationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

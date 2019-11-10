@@ -4,89 +4,178 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
     
-    <div class="container">
-           
-                       <form class="well form-horizontal">
-                          <fieldset>
-                             <div class="form-group ">
-                                <label class="col-md-4 control-label">Leave Type</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Sick Leave</option>
-                                        <option>Causal Leave</option>
-                                        <option>Privileged Leave</option>
-                                    </select>
+<mat-card class="leave-card">
+   <mat-card-header>
+         <mat-card-title class="card-container-center">Leave Application</mat-card-title>
+   </mat-card-header>
+   <div class = "leave-container" >
+      <form [formGroup]="leaveForm" ngNativeValidate
+      (ngSubmit)="save()">
+         <mat-card-content>
+
+            <table class="table">
+               <tbody>
+
+                  <tr>
+                     <th scope="row"></th>
+                     <td>
+                        <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('leaveType').touched ||
+                        leaveForm.get('leaveType').dirty) &&
+                        leaveForm.get('leaveType').errors)}">
+                           <label class="mb-2 mr-sm-5">Leave Type</label>
+                              <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                       <select class="form-control" formControlName="leaveType" (onchange)="updateBalance()">
+                                          <option >Sick Leave</option>
+                                          <option>Casual Leave</option>
+                                          <option>Privileged Leave</option>
+                                       </select>
                                     </div>
-                                </div>
-                             </div>
-                             <div class="form-group">
-                                <label class="col-md-4 control-label">From Date</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="addressLine1" name="addressLine1" placeholder="Address Line 1" class="form-control" required="true" value="" type="date"></div>
-                                </div>
-                             </div>
-                             <div class="form-group">
-                                <label class="col-md-4 control-label">To Date</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                   <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span><input id="addressLine2" name="addressLine2" placeholder="Address Line 2" class="form-control" required="true" value="" type="date"></div>
-                                </div>
-                             </div>
-
-                             <div class="form-group">
-                              <label class="col-md-4 control-label">From Session</label>
-                              <div class="col-md-8 inputGroupContainer">
-                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>Session 1</option>
-                                      <option>Session 2</option>
-                                  </select>
-                                  </div>
+                                       <span class="help-block" *ngIf="((leaveForm.get('leaveType').touched || leaveForm.get('leaveType').dirty) &&  leaveForm.get('leaveType').errors)">
+                                             <span *ngIf="leaveForm.get('leaveType').errors['required']">
+                                                Leave Type is required
+                                             </span>
+                                          </span>
+                                    
                               </div>
-                           </div>
+                        </div>
+                     </td>
+                     <td>
 
-                           <div class="form-group">
-                              <label class="col-md-4 control-label">To Session</label>
-                              <div class="col-md-8 inputGroupContainer">
-                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>Session 1</option>
-                                      <option>Session 2</option>
-                                  </select>
-                                  </div>
+                     </td>
+                  </tr>
+
+                  <tr>
+                        <th scope="row"></th>
+                        <td>
+                              <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('fromDate').touched ||
+                              leaveForm.get('fromDate').dirty) &&
+                              leaveForm.get('fromDate').errors)}">
+                                    <label for="fromDate"  class="mb-2 mr-sm-5">From Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="date" class="form-control  mb-2 mr-sm-3" name="fromDate" placeholder="From Date" formControlName="fromDate">
+                             
+                              <span class="help-block" *ngIf="((leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty) &&  leaveForm.get('fromDate').errors)">
+                                    <span *ngIf="leaveForm.get('fromDate').errors['required']">
+                                       From Date is required
+                                    </span>
+                                 </span>
                               </div>
-                           </div>
+                        </td>
+                        <td>
+                              <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('fromSession').touched ||
+                              leaveForm.get('fromSession').dirty) &&
+                              leaveForm.get('fromSession').errors)}">
+                                    <label for ="fromSession" class="mb-2 mr-sm-5">From Session:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                       <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <select class="form-control" formControlName="fromSession">
+                                            <option>Session 1</option>
+                                            <option>Session 2</option>
+                                        </select>
+                                        </div>
+                                        <span class="help-block" *ngIf="((leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty) &&  leaveForm.get('fromSession').errors)">
+                                             <span *ngIf="leaveForm.get('fromSession').errors['required']">
+                                                From Session is required
+                                             </span>
+                                          </span>
+                                    </div>
+                                 </div>
+                        </td>
+                     </tr>
 
-                           <div class="form-group">
-                              <label class="col-md-4 control-label">Apply To</label>
-                              <div class="col-md-8 inputGroupContainer">
-                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                  <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>Session 1</option>
-                                      <option>Session 2</option>
-                                  </select>
-                                  </div>
-                              </div>
-                           </div>
+                     <tr>
+                           <th scope="row"></th>
+                           <td>
+                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('toDate').touched ||
+                                 leaveForm.get('toDate').dirty) &&
+                                 leaveForm.get('toDate').errors)}">
+                                       <label for="toDate"  class="mb-2 mr-sm-5">To Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <input type="date" class="form-control  mb-2 mr-sm-3" name="toDate" placeholder="To Date" formControlName="toDate">
+                                       
+                                  <span class="help-block" *ngIf="((leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty) &&  leaveForm.get('toDate').errors)">
+                                             <span *ngIf="leaveForm.get('toDate').errors['required']">
+                                                To Date is required
+                                             </span>
+                                          </span>      
+                                 </div>
+                           </td>
+                           <td>
+                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('toSession').touched ||
+                                 leaveForm.get('toSession').dirty) &&
+                                 leaveForm.get('toSession').errors)}">
+                                       <label for ="toSession" class="mb-2 mr-sm-5">To Session:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <div class="col-md-8 inputGroupContainer">
+                                          <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                           <select class="form-control" id="exampleFormControlSelect1" formControlName="toSession">
+                                               <option>Session 1</option>
+                                               <option>Session 2</option>
+                                           </select>
+                                           </div>
+                                           <span class="help-block" *ngIf="((leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty) &&  leaveForm.get('toSession').errors)">
+                                                <span *ngIf="leaveForm.get('toSession').errors['required']">
+                                                   To Session is required
+                                                </span>
+                                             </span> 
+                                       </div>
+                                    </div>
+                           </td>
+                     </tr>
 
-                           <div class="form-group">
-                              <label class="col-md-4 control-label">No Of days</label>
-                              <div class="col-md-8 inputGroupContainer">
-                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="addressLine1" name="addressLine1" placeholder="0" class="form-control" required="true" value="" type="text" readonly></div>
-                              </div>
-                           </div>
+                     <tr>
+                           <th scope="row"></th>
+                           <td>
+                                 <div class="form-group form-inline">
+                                       <label for="balance"  class="mb-2 mr-sm-5">Balance:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="balance" placeholder="Balance" readonly>
+                                 </div>
+                           </td>
+                           <td>
+                                 <div class="form-group form-inline">
+                                       <label for="remaining"  class="mb-2 mr-sm-5">Remaining Days:</label>
+                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="remaining" placeholder="Remaining Days" readonly>
+                                 </div>
+                           </td>
+                     </tr>
 
-                           <div class="form-group">
-                              <label class="col-md-4 control-label">Balance </label>
-                              <div class="col-md-8 inputGroupContainer">
-                                 <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="addressLine1" name="addressLine1" placeholder="0" class="form-control" required="true" value="" type="text" readonly></div>
-                              </div>
-                           </div>
-                           
-                        </fieldset>
-                        <button type="submit" class="btn btn-primary" >Apply</button>
-                        <button type="reset" class="btn btn-danger" >Cancel</button>
-                       </form>
-        </div>
+                     <tr>
+                           <th scope="row"></th>
+                           <td colspan="2">
+                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('reason').touched ||
+                                 leaveForm.get('reason').dirty) &&
+                                 leaveForm.get('reason').errors)}">
+                                       <label for="Reason"  class="mb-2 mr-sm-5">Reason:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <textarea class="form-control mb-2 mr-sm-3" formControlName="reason" rows="3"></textarea>
+                                       <span class="help-block" *ngIf="((leaveForm.get('reason').touched || leaveForm.get('reason').dirty) &&  leaveForm.get('reason').errors)">
+                                          <span *ngIf="leaveForm.get('reason').errors['required']">
+                                             Reason is required
+                                          </span>
+                                       </span>
+                                 </div>
+                           </td>
+                     </tr>
 
-
+                     <tr>
+                           <th scope="row"></th>
+                           <td colspan="2">
+                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('applyTo').touched ||
+                                 leaveForm.get('applyTo').dirty) &&
+                                 leaveForm.get('applyTo').errors)}">
+                                       <label for="applyTo"  class="mb-2 mr-sm-5">Apply To:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="applyTo" placeholder="Apply To" formControlName="applyTo">
+                                       <span class="help-block" *ngIf="((leaveForm.get('applyTo').touched || leaveForm.get('applyTo').dirty) &&  leaveForm.get('applyTo').errors)">
+                                             <span *ngIf="leaveForm.get('applyTo').errors['required']">
+                                                Apply To is required
+                                             </span>
+                                          </span>
+                                 </div>
+                           </td>
+                     </tr>
+               </tbody>
+            </table>
+            
+         </mat-card-content>
+         <button type="submit" class="btn btn-primary">Submit</button>
+         <button type="reset" class="btn btn-danger">Cancel</button>
+      </form>
+   </div>
+</mat-card>  

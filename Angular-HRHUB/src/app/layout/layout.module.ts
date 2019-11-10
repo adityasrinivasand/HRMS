@@ -9,6 +9,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule, MatCardModule } from '@angular/material';
+import {A11yModule} from '@angular/cdk/a11y';
+import { WelcomecardComponent } from './welcomecard/welcomecard.component';
+
+
 
 
 
@@ -21,17 +28,24 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatMenuModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    A11yModule,
+    MatCardModule
 
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    WelcomecardComponent
   ],
   declarations: [
     FooterComponent,
     HeaderComponent,
-    NavbarComponent
+    NavbarComponent,
+    WelcomecardComponent
   ]
 })
 export class LayoutModule { }

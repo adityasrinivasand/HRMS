@@ -6,17 +6,21 @@ import { map, filter } from 'rxjs/operators';
 
 import { User } from './user';
 import { LeaveType } from './leaveType';
+import { environment } from 'src/environments/environment';
+
+import { Leave } from './leave';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl = environment.baseUrl;
+  constructor(private http: HttpClient, ) { }
 
   public postLoginForm(login: Login): Observable<any> {
     console.log('inside post loginform');
-    let body = `username=${login.userName}&password=${login.password}&grant_type=${login.grantType}`;
+    const body = `username=${login.userName}&password=${login.password}&grant_type=${login.grantType}`;
     return this.http.post('https://localhost:44357/token', body);
 
      // return of(login);
@@ -26,7 +30,10 @@ export class DataService {
     return this.http.post('https://localhost:44357/api/signup/addEmployee', user);
   }
 
-  
+  public postLeaveForm(leave: Leave): Observable<any> {
+    console.log('inside post leave form');
+    return this.http.post( this.baseUrl + 'api/leave/1', leave);
+  }
 
 
 }

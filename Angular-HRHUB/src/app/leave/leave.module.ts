@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // tslint:disable-next-line: max-line-length
-import { MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatCardModule, MatProgressSpinnerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+
   ]
 })
 export class LeaveModule { }

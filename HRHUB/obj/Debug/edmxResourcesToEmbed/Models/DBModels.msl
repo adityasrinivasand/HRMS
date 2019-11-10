@@ -38,11 +38,11 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
           <ScalarProperty Name="BloodType" ColumnName="BloodType" />
           <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
           <ScalarProperty Name="Nationality" ColumnName="Nationality" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Department" ColumnName="Department" />
@@ -54,9 +54,6 @@
     <EntitySetMapping Name="Leaves">
       <EntityTypeMapping TypeName="HRModel.Leave">
         <MappingFragment StoreEntitySet="Leave">
-          <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
-          <ScalarProperty Name="To_Session" ColumnName="To_Session" />
-          <ScalarProperty Name="From_Session" ColumnName="From_Session" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
           <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />
@@ -66,6 +63,9 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
           <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="From_Session" ColumnName="From_Session" />
+          <ScalarProperty Name="To_Session" ColumnName="To_Session" />
+          <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -102,7 +102,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
     <FunctionImportMapping FunctionImportName="AddUserInfo" FunctionName="HRModel.Store.AddUserInfo" />
+    <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
   </EntityContainerMapping>
 </Mapping>
