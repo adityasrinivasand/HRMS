@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule, MatCardModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,7 @@ import { LeaveRoutingModule } from './leave/leave-routing.module';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -49,7 +50,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ForgotpasswordRoutingModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

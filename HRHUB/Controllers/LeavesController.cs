@@ -24,7 +24,8 @@ namespace HRHUB.Controllers
         [ResponseType(typeof(Leave))]
         public IHttpActionResult PostLeave(int id,Leave leave)
         {
-            leave.Employee_ID = id;
+            // leave.Employee_ID = id;
+            leave.Submit_Date = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -43,8 +44,8 @@ namespace HRHUB.Controllers
         }
 
         [HttpGet]
-        [Route("api/leave/{id=id}")]
-        public IHttpActionResult GetBalanceLeave(int id,string leaveType)
+        [Route("api/leave/{id}/{leavetype}")]
+        public IHttpActionResult GetBalanceLeave(int id,int leaveType)
         {
             var balance = DBOperations.BalanceDays(id, leaveType);
             return Ok(balance);

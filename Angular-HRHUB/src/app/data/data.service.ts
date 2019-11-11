@@ -32,6 +32,7 @@ export class DataService {
 
   public postLeaveForm(leave: Leave): Observable<any> {
     console.log('inside post leave form');
+    console.log(leave);
     return this.http.post( this.baseUrl + 'api/leave/1', leave);
   }
 

@@ -106,6 +106,7 @@ namespace HRHUB.Helper_Classes
                                 db.Leaves.Add(leave);
                                 var leaveTrack = db.Leave_Tracking.Where(l => (l.Employee_ID == obj.empid) &&(l.Leave_Type_ID == obj.leavetype)).FirstOrDefault();
                                 leaveTrack.RemainingDays = (obj.remaining - leaveTaken);
+                                leave.Status = "Applied";
                                 a = 0;
                                 break;
                             }
@@ -131,7 +132,7 @@ namespace HRHUB.Helper_Classes
                 }
             }
         }
-        public static double BalanceDays(int id, string leaveType)
+        public static double BalanceDays(int id, int leaveTypeID)
         {
             using (HREntities db = new HREntities())
             {
@@ -147,12 +148,11 @@ namespace HRHUB.Helper_Classes
                                  empid = employee.ID
 
                              };
-                var leaveTypeID = db.Leave_Type.Where(l => l.LeaveType == leaveType).FirstOrDefault();
                 foreach (var obj in result)
                 {
                     if (emp.UserName == obj.username)
                     {
-                        if (obj.leavetype == leaveTypeID.ID)
+                        if (obj.leavetype == leaveTypeID)
                         {
                             a= obj.remaining;
                             break;

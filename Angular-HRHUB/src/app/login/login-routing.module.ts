@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: { showHeader: true, showNavbar: false }
+    data: { showHeader: true, showNavbar: false, showWelcomeCard: false }
   }
 ];
 

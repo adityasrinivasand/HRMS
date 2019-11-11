@@ -7,7 +7,14 @@ import { formatDate } from '@angular/common';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import {ActivatedRoute} from '@angular/router';
 
-
+interface LeaveType {
+  key: string;
+  value: number;
+}
+interface SessionType {
+  key: string;
+  value: number;
+}
 
 
 @Component({
@@ -21,17 +28,31 @@ export class LeaveComponent implements OnInit {
 
   leaveForm: FormGroup;
   leave: Leave = new Leave();
-
+  options: FormGroup;
 
   errorMessage = '';
-
-  leaveTypelist: string[] = ['Sick Leave', 'Casual Leave', 'Privileged Leave'];
+  empId = '';
+  balance = 0;
+  value = '';
+  leaveTypelist: Array<LeaveType> = [
+    { key: 'Sick Leave', value: 1 },
+    { key: 'Casual Leave', value: 2 },
+    { key: 'Privileged Leave', value: 3 }
+  ];
+  sessionlist: Array<SessionType> = [
+    { key: 'Session 1', value: 1 },
+    { key: 'Session 2', value: 2 },
+  ];
 
 
 
   // tslint:disable-next-line:max-line-length
   constructor(private dataservice: DataService, private httpService: HttpClient, private form: FormBuilder, private route: ActivatedRoute) {
-    this.route.paramMap.subscribe( params => {const empId = params.get('id'); });
+    this.route.paramMap.subscribe( params => { this.empId = params.get('id');  });
+    this.options = form.group({
+      hideRequired: false,
+      floatLabel: 'auto',
+    });
   }
 
   ngOnInit() {
@@ -43,37 +64,63 @@ this.leaveForm = this.form.group({
   toSession: ['', Validators.required],
   applyTo: ['', Validators.required],
   reason: ['', Validators.required],
-  noOfDays: {value: 'n/a' , disabled: true},
-  balance: {value: 'n/a' , disabled: true}
+  remaining: {value: '0' , disabled: true},
+  days: {value: '0' , disabled: true}
 });
 
 this.leaveForm.get('leaveType').valueChanges.subscribe(
-  value => {
-    console.log(value);
-  }
+  value => { this.balanceDays(value);
+}
+  
 );
 
-  }
 
+}
+
+
+balanceDays(value) {
+  console.log(this.empId);
+  console.log(value);
+  this.httpService.get<any>('https://localhost:44357/api/leave/' + this.empId + '/' + value.value).subscribe(data => {
+    this.leaveForm.patchValue({
+      remaining: data,
+      });
+  });
+}
+calculateDays() {
+console.log(this.leaveForm.get('toDate').value);
+}
 save() {
-    console.log(JSON.stringify(this.leaveForm));
+
+    this.updateLeaveValues();
     // tslint:disable-next-line:prefer-const
-    /*
-    this.dataservice.postLeaveForm(this.leaveForm).subscribe (
+
+    this.dataservice.postLeaveForm(this.leave).subscribe (
         result => console.log('success', result),
         error => console.log('error', (error))
       );
-*/
+
   }
 
   updateBalance() {
     console.log('i have ');
     console.log(this.leaveForm.get('leaveType').value);
   }
-
-
-
+  updateLeaveValues() {
+    this.leave.Employee_ID = +this.empId;
+    this.leave.Leave_Type_ID = this.leaveForm.get('leaveType').value.value;
+    this.leave.Leave_StartDate = this.leaveForm.get('fromDate').value;
+    this.leave.Leave_EndDate = this.leaveForm.get('toDate').value;
+    this.leave.From_Session = this.leaveForm.get('fromSession').value.value;
+    this.leave.To_Session = this.leaveForm.get('toSession').value.value;
+    this.leave.Reason = this.leaveForm.get('reason').value;
+    this.leave.Apply_To = this.leaveForm.get('applyTo').value;
   }
+
+
+
+
+}
 
 
 

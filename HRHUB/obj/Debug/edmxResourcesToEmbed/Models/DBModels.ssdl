@@ -35,11 +35,11 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DOB" Type="date" Nullable="false" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DOJ" Type="date" Nullable="false" />
     <Property Name="PhoneNumber" Type="bigint" Nullable="false" />
     <Property Name="Email_ID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BloodType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MaritalStatus" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DOJ" Type="date" Nullable="false" />
     <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
@@ -84,7 +84,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Employee_ID" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />

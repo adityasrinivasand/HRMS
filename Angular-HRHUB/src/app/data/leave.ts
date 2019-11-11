@@ -1,11 +1,12 @@
 export class Leave {
+    Employee_ID: number;
     Leave_Type_ID: number;
     Submit_Date: Date;
     Leave_StartDate: Date;
     Leave_EndDate: Date;
     Reason: Date;
     Status: Date;
-    FromSession: number;
-    ToSession: number;
-    ApplyTo: string;
+    From_Session: number;
+    To_Session: number;
+    Apply_To: string;
 }

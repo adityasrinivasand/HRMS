@@ -19,26 +19,21 @@
                   <tr>
                      <th scope="row"></th>
                      <td>
-                        <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('leaveType').touched ||
-                        leaveForm.get('leaveType').dirty) &&
-                        leaveForm.get('leaveType').errors)}">
-                           <label class="mb-2 mr-sm-5">Leave Type</label>
-                              <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                       <select class="form-control" formControlName="leaveType" (onchange)="updateBalance()">
-                                          <option >Sick Leave</option>
-                                          <option>Casual Leave</option>
-                                          <option>Privileged Leave</option>
-                                       </select>
-                                    </div>
-                                       <span class="help-block" *ngIf="((leaveForm.get('leaveType').touched || leaveForm.get('leaveType').dirty) &&  leaveForm.get('leaveType').errors)">
-                                             <span *ngIf="leaveForm.get('leaveType').errors['required']">
-                                                Leave Type is required
-                                             </span>
-                                          </span>
-                                    
-                              </div>
-                        </div>
+                           <mat-form-field appearance="outline"
+                           [hideRequiredMarker]="options.value.hideRequired"
+                           [floatLabel]="options.value.floatLabel">
+                         <mat-select required formControlName="leaveType" [ngClass]="{'has-error': ((leaveForm.get('leaveType').touched ||
+                         leaveForm.get('leaveType').dirty) &&
+                         leaveForm.get('leaveType').errors)}">
+                              <mat-option *ngFor="let state of leaveTypelist" [value]="state">{{ state.key }}</mat-option>
+                         </mat-select>
+                         <mat-label>Leave Type</mat-label>
+                       </mat-form-field>
+                       <span class="help-block" *ngIf="((leaveForm.get('leaveType').touched || leaveForm.get('leaveType').dirty) &&  leaveForm.get('leaveType').errors)">
+                           <span *ngIf="leaveForm.get('leaveType').errors['required']">
+                              Leave Type is required
+                           </span>
+                        </span>
                      </td>
                      <td>
 
@@ -48,134 +43,128 @@
                   <tr>
                         <th scope="row"></th>
                         <td>
-                              <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('fromDate').touched ||
-                              leaveForm.get('fromDate').dirty) &&
-                              leaveForm.get('fromDate').errors)}">
-                                    <label for="fromDate"  class="mb-2 mr-sm-5">From Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="date" class="form-control  mb-2 mr-sm-3" name="fromDate" placeholder="From Date" formControlName="fromDate">
-                             
+                              <mat-form-field appearance="outline" >
+                                    <input matInput [matDatepicker]="picker" placeholder="From Date"  formControlName="fromDate"[ngClass]="{'has-error': ((leaveForm.get('fromDate').touched ||
+                                    leaveForm.get('fromDate').dirty) &&
+                                    leaveForm.get('fromDate').errors)}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
                               <span class="help-block" *ngIf="((leaveForm.get('fromDate').touched || leaveForm.get('fromDate').dirty) &&  leaveForm.get('fromDate').errors)">
                                     <span *ngIf="leaveForm.get('fromDate').errors['required']">
                                        From Date is required
                                     </span>
                                  </span>
-                              </div>
                         </td>
                         <td>
-                              <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('fromSession').touched ||
+                              <mat-form-field appearance="outline" [ngClass]="{'has-error': ((leaveForm.get('fromSession').touched ||
                               leaveForm.get('fromSession').dirty) &&
-                              leaveForm.get('fromSession').errors)}">
-                                    <label for ="fromSession" class="mb-2 mr-sm-5">From Session:</label>
-                                    <div class="col-md-8 inputGroupContainer">
-                                       <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <select class="form-control" formControlName="fromSession">
-                                            <option>Session 1</option>
-                                            <option>Session 2</option>
-                                        </select>
-                                        </div>
-                                        <span class="help-block" *ngIf="((leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty) &&  leaveForm.get('fromSession').errors)">
-                                             <span *ngIf="leaveForm.get('fromSession').errors['required']">
-                                                From Session is required
-                                             </span>
-                                          </span>
-                                    </div>
-                                 </div>
+                              leaveForm.get('fromSession').errors)}" >
+                                    <mat-label>From Session</mat-label>
+                                    <mat-select formControlName="fromSession">
+                                      <mat-option *ngFor="let food of sessionlist" [value]="food.value">
+                                        {{food.key}}
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                              <span class="help-block" *ngIf="((leaveForm.get('fromSession').touched || leaveForm.get('fromSession').dirty) &&  leaveForm.get('fromSession').errors)">
+                                    <span *ngIf="leaveForm.get('fromSession').errors['required']">
+                                       From Session is required
+                                    </span>
+                              </span>
                         </td>
                      </tr>
 
                      <tr>
                            <th scope="row"></th>
                            <td>
-                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('toDate').touched ||
-                                 leaveForm.get('toDate').dirty) &&
-                                 leaveForm.get('toDate').errors)}">
-                                       <label for="toDate"  class="mb-2 mr-sm-5">To Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <input type="date" class="form-control  mb-2 mr-sm-3" name="toDate" placeholder="To Date" formControlName="toDate">
-                                       
-                                  <span class="help-block" *ngIf="((leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty) &&  leaveForm.get('toDate').errors)">
-                                             <span *ngIf="leaveForm.get('toDate').errors['required']">
-                                                To Date is required
-                                             </span>
-                                          </span>      
-                                 </div>
+                                 <mat-form-field appearance="outline" >
+                                       <input matInput [matDatepicker]="pickerTo" placeholder="To Date"  formControlName="toDate"[ngClass]="{'has-error': ((leaveForm.get('toDate').touched ||
+                                       leaveForm.get('toDate').dirty) &&
+                                       leaveForm.get('toDate').errors)}">
+                                       <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                       <mat-datepicker #pickerTo></mat-datepicker>
+                                 </mat-form-field>
+                                 <span class="help-block" *ngIf="((leaveForm.get('toDate').touched || leaveForm.get('toDate').dirty) &&  leaveForm.get('toDate').errors)">
+                                       <span *ngIf="leaveForm.get('toDate').errors['required']">
+                                          To Date is required
+                                       </span>
+                                 </span>
                            </td>
                            <td>
-                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('toSession').touched ||
-                                 leaveForm.get('toSession').dirty) &&
-                                 leaveForm.get('toSession').errors)}">
-                                       <label for ="toSession" class="mb-2 mr-sm-5">To Session:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <div class="col-md-8 inputGroupContainer">
-                                          <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                           <select class="form-control" id="exampleFormControlSelect1" formControlName="toSession">
-                                               <option>Session 1</option>
-                                               <option>Session 2</option>
-                                           </select>
-                                           </div>
-                                           <span class="help-block" *ngIf="((leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty) &&  leaveForm.get('toSession').errors)">
-                                                <span *ngIf="leaveForm.get('toSession').errors['required']">
-                                                   To Session is required
-                                                </span>
-                                             </span> 
-                                       </div>
-                                    </div>
+                                 <mat-form-field appearance="outline" [ngClass]="{'has-error': ((leaveForm.get('toSession').touched ||
+                              leaveForm.get('toSession').dirty) &&
+                              leaveForm.get('toSession').errors)}">
+                                    <mat-label>To Session</mat-label>
+                                    <mat-select formControlName="toSession">
+                                      <mat-option *ngFor="let food of sessionlist" [value]="food.value">
+                                        {{food.key}}
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                              <span class="help-block" *ngIf="((leaveForm.get('toSession').touched || leaveForm.get('toSession').dirty) &&  leaveForm.get('toSession').errors)">
+                                    <span *ngIf="leaveForm.get('toSession').errors['required']">
+                                       To Session is required
+                                    </span>
+                              </span>
                            </td>
                      </tr>
 
                      <tr>
                            <th scope="row"></th>
                            <td>
-                                 <div class="form-group form-inline">
-                                       <label for="balance"  class="mb-2 mr-sm-5">Balance:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="balance" placeholder="Balance" readonly>
-                                 </div>
+                                 <mat-form-field appearance="outline">
+                                       <mat-label>Days</mat-label>
+                                       <input matInput placeholder="Days" formControlName="days">
+                                 </mat-form-field>
                            </td>
                            <td>
-                                 <div class="form-group form-inline">
-                                       <label for="remaining"  class="mb-2 mr-sm-5">Remaining Days:</label>
-                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="remaining" placeholder="Remaining Days" readonly>
-                                 </div>
+                                 <mat-form-field appearance="outline">
+                                       <mat-label>Remaining Days</mat-label>
+                                       <input matInput formControlName="remaining" placeholder="Remaining Days">
+                                 </mat-form-field>
                            </td>
                      </tr>
 
                      <tr>
                            <th scope="row"></th>
                            <td colspan="2">
-                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('reason').touched ||
+                                 <mat-form-field appearance="outline" [ngClass]="{'has-error': ((leaveForm.get('reason').touched ||
                                  leaveForm.get('reason').dirty) &&
                                  leaveForm.get('reason').errors)}">
-                                       <label for="Reason"  class="mb-2 mr-sm-5">Reason:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <textarea class="form-control mb-2 mr-sm-3" formControlName="reason" rows="3"></textarea>
-                                       <span class="help-block" *ngIf="((leaveForm.get('reason').touched || leaveForm.get('reason').dirty) &&  leaveForm.get('reason').errors)">
-                                          <span *ngIf="leaveForm.get('reason').errors['required']">
-                                             Reason is required
-                                          </span>
+                                       <mat-label>Reason</mat-label>
+                                       <textarea matInput placeholder="Reason" formControlName="reason"></textarea>
+                                 </mat-form-field>
+                                 <span class="help-block" *ngIf="((leaveForm.get('reason').touched || leaveForm.get('reason').dirty) &&  leaveForm.get('reason').errors)">
+                                       <span *ngIf="leaveForm.get('reason').errors['required']">
+                                          Reason is required
                                        </span>
-                                 </div>
+                                 </span>
                            </td>
                      </tr>
 
                      <tr>
                            <th scope="row"></th>
                            <td colspan="2">
-                                 <div class="form-group form-inline" [ngClass]="{'has-error': ((leaveForm.get('applyTo').touched ||
+                                 <mat-form-field appearance="outline" [ngClass]="{'has-error': ((leaveForm.get('applyTo').touched ||
                                  leaveForm.get('applyTo').dirty) &&
                                  leaveForm.get('applyTo').errors)}">
-                                       <label for="applyTo"  class="mb-2 mr-sm-5">Apply To:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <input type="text" class="form-control  mb-2 mr-sm-3" name="applyTo" placeholder="Apply To" formControlName="applyTo">
-                                       <span class="help-block" *ngIf="((leaveForm.get('applyTo').touched || leaveForm.get('applyTo').dirty) &&  leaveForm.get('applyTo').errors)">
-                                             <span *ngIf="leaveForm.get('applyTo').errors['required']">
-                                                Apply To is required
-                                             </span>
-                                          </span>
-                                 </div>
+                                 <mat-label>Apply To</mat-label>
+                                       <input matInput placeholder="Apply To" formControlName="applyTo">
+                                 </mat-form-field>
+                                 <span class="help-block" *ngIf="((leaveForm.get('applyTo').touched || leaveForm.get('applyTo').dirty) &&  leaveForm.get('applyTo').errors)">
+                                       <span *ngIf="leaveForm.get('applyTo').errors['required']">
+                                          Apply To is required
+                                       </span>
+                                 </span>
                            </td>
                      </tr>
                </tbody>
             </table>
             
          </mat-card-content>
-         <button type="submit" class="btn btn-primary">Submit</button>
-         <button type="reset" class="btn btn-danger">Cancel</button>
+         <button mat-raised-button color="primary" type="submit">Submit</button>
+         <button mat-raised-button color="warn" type="reset">Cancel</button>
       </form>
    </div>
 </mat-card>  

@@ -8,7 +8,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, {static: true}) trigger: MatMenuTrigger;
 
   someMethod() {
     this.trigger.openMenu();
