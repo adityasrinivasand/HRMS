@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl, NumberValueAccessor } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, NumberValueAccessor } from '@angular/forms';
 import { Leave } from '../data/leave';
-import { formatDate } from '@angular/common';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+
 import {ActivatedRoute} from '@angular/router';
+import * as publicHolidays from '../data/publicholidays.json';
 
 interface LeaveType {
   key: string;
@@ -67,11 +67,11 @@ this.leaveForm = this.form.group({
   remaining: {value: '0' , disabled: true},
   days: {value: '0' , disabled: true}
 });
-
+console.log(publicHolidays);
 this.leaveForm.get('leaveType').valueChanges.subscribe(
   value => { this.balanceDays(value);
 }
-  
+
 );
 
 
