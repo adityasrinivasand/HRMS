@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+
+    flex: 0.2;
+}
+.content {
+    position: fixed;
+    top: 4.5em ;
+}
+.example-card {
+    position: sticky;
+    max-width: 400px;
+    margin-left: 1.5em;
+    margin-top: 0.75em;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+    max-height: 600px;
+}
+.example-header-image {
+    background-image: url('https://carlisletheacarlisletheatre.org/images/person-png-cartoon-7.jpg');
+    background-size: cover;
+}
+.button{
+    justify-content: center;
+}
+.personimage{
+    width: 75%;
+}

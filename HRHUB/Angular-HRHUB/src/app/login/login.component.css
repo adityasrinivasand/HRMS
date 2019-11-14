@@ -1,0 +1,57 @@
+.login-card{
+    position: relative;
+    margin: 0 auto;
+    width: 25%;
+    background-color: rgba(99, 96, 96, 0.527);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+    flex: 0.5;
+    display: block;
+    margin-left:15em;
+    
+}
+.btn-primary{
+    position: relative;
+    margin: 1em;
+    left:28%;
+}
+.btn-danger{
+    position: relative;
+    margin: 1em;
+    left:30%;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container > * {
+  width: 100%;
+}
+
+.login-right-align {
+  text-align: right;
+}
+
+input.login-right-align::-webkit-outer-spin-button,
+input.login-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.login-right-align {
+  -moz-appearance: textfield;
+}
+.forgot{
+    position: relative;
+    left: 55%;
+    color: green;
+}
+.mat-checkbox{
+    position: relative;
+    left: 3%;
+}
+.card-container-center{
+    position: relative;
+    left: 10.5em;
+}
+
+  

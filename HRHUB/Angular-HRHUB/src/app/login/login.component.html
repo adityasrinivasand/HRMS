@@ -1,0 +1,64 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title class="card-container-center">Login</mat-card-title>
+  </mat-card-header>
+  <div class = "leave-container" >
+    <form [formGroup]="loginForm" ngNativeValidate (ngSubmit)="onSubmit()">
+      <mat-card-content>
+
+        <table class="table">
+          <tbody>
+            <tr>
+
+              <mat-form-field appearance="outline" [color]="warn" [ngClass]="{'has-error': ((loginForm.get('userName').touched || loginForm.get('userName').dirty) && loginForm.get('userName').errors)}">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="Enter User Name" formControlName="userName">
+                <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+              </mat-form-field>
+              <span class="help-block" *ngIf="((loginForm.get('userName').touched || loginForm.get('userName').dirty) &&  loginForm.get('userName').errors)">
+                <span *ngIf="loginForm.get('userName').errors['required']">
+                   User Name is required
+                 </span>
+              </span>
+
+            </tr>
+
+            <tr>
+
+              <mat-form-field appearance="outline" [color]="warn" [ngClass]="{'has-error': ((loginForm.get('password').touched || loginForm.get('password').dirty) && loginForm.get('password').errors)}">
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Enter Password" formControlName="password">
+                  <mat-icon matPrefix>security</mat-icon>
+                </mat-form-field>
+                <span class="help-block" *ngIf="((loginForm.get('password').touched || loginForm.get('password').dirty) &&  loginForm.get('password').errors)">
+                  <span *ngIf="loginForm.get('password').errors['required']">
+                     Password is required
+                   </span>
+                </span>
+  
+            </tr>
+
+            <tr>
+              <mat-checkbox [color]="primary">Check me!</mat-checkbox>
+            </tr>
+
+          </tbody>
+
+
+        </table>
+        <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>
+      
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button type="submit" color="primary">Primary</button>
+          <button mat-raised-button type="cancel" color="accent">Accent</button>
+      </mat-card-actions>
+    </form>
+  </div>
+
+</mat-card>
+
