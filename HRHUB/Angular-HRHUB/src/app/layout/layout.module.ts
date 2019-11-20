@@ -11,7 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule, MatCardModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 import {A11yModule} from '@angular/cdk/a11y';
 import { WelcomecardComponent } from './welcomecard/welcomecard.component';
 
@@ -32,7 +32,8 @@ import { WelcomecardComponent } from './welcomecard/welcomecard.component';
     MatFormFieldModule,
     MatInputModule,
     A11yModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
 
   ],
   exports: [

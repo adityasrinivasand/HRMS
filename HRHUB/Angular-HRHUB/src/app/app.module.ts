@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,8 +22,15 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { AuthGuardService as AuthGuard} from '../app/auth/auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component' ;
+import { ContactsComponent } from './contacts/contacts.component';
+import { ContactsRoutingModule } from './contacts/contacts-routing.module';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
+import { AuthService } from './auth/auth.service';
+import { JwtHelperService, JwtModule, JwtModuleOptions, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.module'
 
 
 
@@ -33,6 +40,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LeaveComponent,
     ForgotpasswordComponent,
     PageNotFoundComponent,
+    ContactsComponent,
+    TimesheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +66,24 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule
+    MatButtonModule,
+    ContactsRoutingModule,
+    MatTableModule,
+    TimesheetRoutingModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    AuthService,
+    { 
+      provide: JWT_OPTIONS, useValue: JWT_OPTIONS 
+    },
+    JwtHelperService,
+    
+  ]
 })
 export class AppModule { }

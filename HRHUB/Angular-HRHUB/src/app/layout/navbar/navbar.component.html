@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <mat-toolbar-row>
     <img href="/dashboard" class="hrlogo"src="../../../assets/hr logo.png">&nbsp;
     <h1>HR HUB </h1>
@@ -8,7 +8,7 @@
          
       <a mat-button [routerLink]="'/feeds'"> Feeds </a> &nbsp;
 
-      <a mat-button [routerLink]="'/timesheet-account'"> Time Sheet </a>&nbsp;
+      <a mat-button [routerLink]="'/timesheet'"> Time Sheet </a>&nbsp;
 
       <a mat-button  [matMenuTriggerFor]="directoryMenu"> Directory </a>&nbsp;
         <mat-menu #directoryMenu="matMenu">
@@ -26,15 +26,10 @@
       </mat-menu> 
    
     </div>
-    <div class="searchform">
-    <mat-form-field appearance="">
-        <mat-label>Search</mat-label>
-        <input matInput>
-        <i class="fa fa-search"></i>
-    </mat-form-field>
-  </div>
+    
     
     <span class="logoutSpacer"></span>
+    <button (click)="changeTheme()" mat-raised-button color="primary"></button>
     <div>
     <mat-icon [matMenuTriggerFor]="personMenu" matSuffix>person</mat-icon>
     <mat-menu #personMenu = "matMenu">

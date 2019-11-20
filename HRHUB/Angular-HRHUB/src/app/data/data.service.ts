@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { Login } from './login';
 import { Observable, of } from 'rxjs';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-
 import { User } from './user';
 import { LeaveType } from './leaveType';
 import { environment } from 'src/environments/environment';
-
 import { Leave } from './leave';
-import { FormGroup } from '@angular/forms';
+
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +34,7 @@ export class DataService {
     console.log(leave);
     return this.http.post( this.baseUrl + 'api/leave/1', leave);
   }
- 
-  GetForAdmin(){
-     return  this.http.get(this.baseUrl+'/api/GetForAdmin');
-    }
+
+  
 
 }

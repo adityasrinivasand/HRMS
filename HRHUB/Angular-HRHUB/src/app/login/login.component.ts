@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   employeeLogin: Login = new Login();
-  
   postError = false;
   postErrorMessage = '';
     ngOnInit() {
@@ -43,6 +42,7 @@ export class LoginComponent implements OnInit {
           result => {
             localStorage.setItem('token', result);
             this.setValues(result);
+            this.router.navigate(['/contacts']);
             
           },
           error=>this.onHttpError(error));

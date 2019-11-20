@@ -162,5 +162,21 @@ namespace HRHUB.Helper_Classes
                 return a;
             }
         }
+        public static IEnumerable<Employee> GetEmployees()
+        {
+            using (HREntities db = new HREntities())
+            {
+
+                return db.Employees.ToList();
+            }
+        }
+        public static int GetEmployeeID(string userName)
+        {
+            using (HREntities db = new HREntities())
+            {
+                var v = db.UserInfoes.Where(u => u.UserName == userName).FirstOrDefault();
+                return v.Employee_ID;
+            }
+        }
     }
 }

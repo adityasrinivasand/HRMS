@@ -27,14 +27,14 @@ namespace HRHUB.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<UserInfo> UserInfoes { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
         public virtual DbSet<Designation_History> Designation_History { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Leave> Leaves { get; set; }
         public virtual DbSet<Leave_Tracking> Leave_Tracking { get; set; }
         public virtual DbSet<Leave_Type> Leave_Type { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
     
         public virtual int AddUserInfo(Nullable<long> empid, string empUserName, string emppass)
         {

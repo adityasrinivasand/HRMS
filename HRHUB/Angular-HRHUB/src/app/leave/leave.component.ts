@@ -78,8 +78,7 @@ this.leaveForm.get('leaveType').valueChanges.subscribe(
 
 
 balanceDays(value) {
-  console.log(this.empId);
-  console.log(value);
+  this.empId = localStorage.getItem('isUserName');
   this.httpService.get<any>('https://localhost:44357/api/leave/' + this.empId + '/' + value.value).subscribe(data => {
     this.leaveForm.patchValue({
       remaining: data,
@@ -106,7 +105,8 @@ save() {
     console.log(this.leaveForm.get('leaveType').value);
   }
   updateLeaveValues() {
-    this.leave.Employee_ID = +this.empId;
+    this.leave.Employee_ID = +localStorage.getItem('isUserName');
+    console.log(this.leave.Employee_ID);
     this.leave.Leave_Type_ID = this.leaveForm.get('leaveType').value.value;
     this.leave.Leave_StartDate = this.leaveForm.get('fromDate').value;
     this.leave.Leave_EndDate = this.leaveForm.get('toDate').value;
@@ -116,7 +116,7 @@ save() {
     this.leave.Apply_To = this.leaveForm.get('applyTo').value;
   }
 
-
+  
 
 
 }

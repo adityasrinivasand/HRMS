@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="ID" />
@@ -245,42 +245,10 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CheckIn" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="CheckOut" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="Designation">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Designation_History" Relationship="Self.Employee_Designation_Designation" FromRole="Designation" ToRole="Designation_History" />
-        </EntityType>
-        <EntityType Name="Designation_History">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Designation_ID" Type="Int32" Nullable="false" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Designation" Relationship="Self.Employee_Designation_Designation" FromRole="Designation_History" ToRole="Designation" />
-          <NavigationProperty Name="Employee" Relationship="Self.Employee_Designation_Employee" FromRole="Designation_History" ToRole="Employee" />
-        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="ID" />
@@ -299,200 +267,50 @@
           <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsEmailVerified" Type="Boolean" />
           <Property Name="VerificationCode" Type="Guid" />
-          <NavigationProperty Name="Attendances" Relationship="Self.Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
-          <NavigationProperty Name="Designation_History" Relationship="Self.Employee_Designation_Employee" FromRole="Employee" ToRole="Designation_History" />
-          <NavigationProperty Name="Leaves" Relationship="Self.Leave_Employee" FromRole="Employee" ToRole="Leave" />
-          <NavigationProperty Name="Leave_Tracking" Relationship="Self.Leave_Tracking_Employee" FromRole="Employee" ToRole="Leave_Tracking" />
-          <NavigationProperty Name="UserInfoes" Relationship="Self.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfoes" Relationship="HRModel.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
+          <NavigationProperty Name="Attendances" Relationship="HRModel.Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
+          <NavigationProperty Name="Designation_History" Relationship="HRModel.Employee_Designation_Employee" FromRole="Employee" ToRole="Designation_History" />
+          <NavigationProperty Name="Leaves" Relationship="HRModel.Leave_Employee" FromRole="Employee" ToRole="Leave" />
+          <NavigationProperty Name="Leave_Tracking" Relationship="HRModel.Leave_Tracking_Employee" FromRole="Employee" ToRole="Leave_Tracking" />
         </EntityType>
-        <EntityType Name="Leave">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Submit_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Response_Date" Type="DateTime" Precision="0" />
-          <Property Name="Leave_StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Leave_EndDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <Property Name="From_Session" Type="Int32" Nullable="false" />
-          <Property Name="To_Session" Type="Int32" Nullable="false" />
-          <Property Name="Apply_To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.Leave_Employee" FromRole="Leave" ToRole="Employee" />
-          <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Leave_Type" FromRole="Leave" ToRole="Leave_Type" />
-        </EntityType>
-        <EntityType Name="Leave_Tracking">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="RemainingDays" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.Leave_Tracking_Employee" FromRole="Leave_Tracking" ToRole="Employee" />
-          <NavigationProperty Name="Leave_Type" Relationship="Self.Leave_Tracking_Leave_Type" FromRole="Leave_Tracking" ToRole="Leave_Type" />
-        </EntityType>
-        <EntityType Name="Leave_Type">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="LeaveType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MaxLeave" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Leaves" Relationship="Self.Leave_Leave_Type" FromRole="Leave_Type" ToRole="Leave" />
-          <NavigationProperty Name="Leave_Tracking" Relationship="Self.Leave_Tracking_Leave_Type" FromRole="Leave_Type" ToRole="Leave_Tracking" />
-        </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ResetCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isAdmin" Type="Boolean" />
-          <Property Name="Captcha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employee" Relationship="Self.UserInfo_Employee" FromRole="UserInfo" ToRole="Employee" />
-        </EntityType>
-        <Association Name="Attendance_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Employee_Designation_Designation">
-          <End Role="Designation" Type="Self.Designation" Multiplicity="1" />
-          <End Role="Designation_History" Type="Self.Designation_History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Designation">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Designation_History">
-              <PropertyRef Name="Designation_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Employee_Designation_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Designation_History" Type="Self.Designation_History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Designation_History">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Leave_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Leave" Type="Self.Leave" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Leave">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Leave_Tracking_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Leave_Tracking" Type="Self.Leave_Tracking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Leave_Tracking">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserInfo_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserInfo">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Leave_Leave_Type">
-          <End Role="Leave_Type" Type="Self.Leave_Type" Multiplicity="1" />
-          <End Role="Leave" Type="Self.Leave" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Leave_Type">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Leave">
-              <PropertyRef Name="Leave_Type_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Leave_Tracking_Leave_Type">
-          <End Role="Leave_Type" Type="Self.Leave_Type" Multiplicity="1" />
-          <End Role="Leave_Tracking" Type="Self.Leave_Tracking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Leave_Type">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Leave_Tracking">
-              <PropertyRef Name="Leave_Type_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="HREntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="Designations" EntityType="Self.Designation" />
-          <EntitySet Name="Designation_History" EntityType="Self.Designation_History" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Leaves" EntityType="Self.Leave" />
-          <EntitySet Name="Leave_Tracking" EntityType="Self.Leave_Tracking" />
-          <EntitySet Name="Leave_Type" EntityType="Self.Leave_Type" />
-          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
-          <AssociationSet Name="Attendance_Employee" Association="Self.Attendance_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
-          <AssociationSet Name="Employee_Designation_Designation" Association="Self.Employee_Designation_Designation">
-            <End Role="Designation" EntitySet="Designations" />
-            <End Role="Designation_History" EntitySet="Designation_History" />
-          </AssociationSet>
-          <AssociationSet Name="Employee_Designation_Employee" Association="Self.Employee_Designation_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Designation_History" EntitySet="Designation_History" />
-          </AssociationSet>
-          <AssociationSet Name="Leave_Employee" Association="Self.Leave_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Leave" EntitySet="Leaves" />
-          </AssociationSet>
-          <AssociationSet Name="Leave_Tracking_Employee" Association="Self.Leave_Tracking_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
-          </AssociationSet>
-          <AssociationSet Name="UserInfo_Employee" Association="Self.UserInfo_Employee">
+          <EntitySet Name="UserInfoes" EntityType="HRModel.UserInfo" />
+          <AssociationSet Name="UserInfo_Employee" Association="HRModel.UserInfo_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
           </AssociationSet>
-          <AssociationSet Name="Leave_Leave_Type" Association="Self.Leave_Leave_Type">
+          <EntitySet Name="Attendances" EntityType="HRModel.Attendance" />
+          <AssociationSet Name="Attendance_Employee" Association="HRModel.Attendance_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <EntitySet Name="Designations" EntityType="HRModel.Designation" />
+          <EntitySet Name="Designation_History" EntityType="HRModel.Designation_History" />
+          <AssociationSet Name="Employee_Designation_Designation" Association="HRModel.Employee_Designation_Designation">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="Designation_History" EntitySet="Designation_History" />
+          </AssociationSet>
+          <AssociationSet Name="Employee_Designation_Employee" Association="HRModel.Employee_Designation_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Designation_History" EntitySet="Designation_History" />
+          </AssociationSet>
+          <EntitySet Name="Leaves" EntityType="HRModel.Leave" />
+          <AssociationSet Name="Leave_Employee" Association="HRModel.Leave_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Leave" EntitySet="Leaves" />
+          </AssociationSet>
+          <EntitySet Name="Leave_Tracking" EntityType="HRModel.Leave_Tracking" />
+          <AssociationSet Name="Leave_Tracking_Employee" Association="HRModel.Leave_Tracking_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
+          </AssociationSet>
+          <EntitySet Name="Leave_Type" EntityType="HRModel.Leave_Type" />
+          <AssociationSet Name="Leave_Leave_Type" Association="HRModel.Leave_Leave_Type">
             <End Role="Leave_Type" EntitySet="Leave_Type" />
             <End Role="Leave" EntitySet="Leaves" />
           </AssociationSet>
-          <AssociationSet Name="Leave_Tracking_Leave_Type" Association="Self.Leave_Tracking_Leave_Type">
+          <AssociationSet Name="Leave_Tracking_Leave_Type" Association="HRModel.Leave_Tracking_Leave_Type">
             <End Role="Leave_Type" EntitySet="Leave_Type" />
             <End Role="Leave_Tracking" EntitySet="Leave_Tracking" />
           </AssociationSet>
@@ -506,42 +324,193 @@
             <Parameter Name="empid" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResetCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="Captcha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="HRModel.UserInfo_Employee" FromRole="UserInfo" ToRole="Employee" />
+        </EntityType>
+        <Association Name="UserInfo_Employee">
+          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HRModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CheckIn" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CheckOut" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="HRModel.Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
+        </EntityType>
+        <Association Name="Attendance_Employee">
+          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HRModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Designation_History" Relationship="HRModel.Employee_Designation_Designation" FromRole="Designation" ToRole="Designation_History" />
+        </EntityType>
+        <EntityType Name="Designation_History">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Designation_ID" Type="Int32" Nullable="false" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Designation" Relationship="HRModel.Employee_Designation_Designation" FromRole="Designation_History" ToRole="Designation" />
+          <NavigationProperty Name="Employee" Relationship="HRModel.Employee_Designation_Employee" FromRole="Designation_History" ToRole="Employee" />
+        </EntityType>
+        <Association Name="Employee_Designation_Designation">
+          <End Type="HRModel.Designation" Role="Designation" Multiplicity="1" />
+          <End Type="HRModel.Designation_History" Role="Designation_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Designation_History">
+              <PropertyRef Name="Designation_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Employee_Designation_Employee">
+          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HRModel.Designation_History" Role="Designation_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Designation_History">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Submit_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Response_Date" Type="DateTime" Precision="0" />
+          <Property Name="Leave_StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Leave_EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="From_Session" Type="Int32" Nullable="false" />
+          <Property Name="To_Session" Type="Int32" Nullable="false" />
+          <Property Name="Apply_To" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="HRModel.Leave_Employee" FromRole="Leave" ToRole="Employee" />
+          <NavigationProperty Name="Leave_Type" Relationship="HRModel.Leave_Leave_Type" FromRole="Leave" ToRole="Leave_Type" />
+        </EntityType>
+        <Association Name="Leave_Employee">
+          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HRModel.Leave" Role="Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Leave_Tracking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="Leave_Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="RemainingDays" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="HRModel.Leave_Tracking_Employee" FromRole="Leave_Tracking" ToRole="Employee" />
+          <NavigationProperty Name="Leave_Type" Relationship="HRModel.Leave_Tracking_Leave_Type" FromRole="Leave_Tracking" ToRole="Leave_Type" />
+        </EntityType>
+        <Association Name="Leave_Tracking_Employee">
+          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HRModel.Leave_Tracking" Role="Leave_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leave_Tracking">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Leave_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="LeaveType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaxLeave" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Leaves" Relationship="HRModel.Leave_Leave_Type" FromRole="Leave_Type" ToRole="Leave" />
+          <NavigationProperty Name="Leave_Tracking" Relationship="HRModel.Leave_Tracking_Leave_Type" FromRole="Leave_Type" ToRole="Leave_Tracking" />
+        </EntityType>
+        <Association Name="Leave_Leave_Type">
+          <End Type="HRModel.Leave_Type" Role="Leave_Type" Multiplicity="1" />
+          <End Type="HRModel.Leave" Role="Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leave_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="Leave_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Leave_Tracking_Leave_Type">
+          <End Type="HRModel.Leave_Type" Role="Leave_Type" Multiplicity="1" />
+          <End Type="HRModel.Leave_Tracking" Role="Leave_Tracking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leave_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leave_Tracking">
+              <PropertyRef Name="Leave_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HRModelStoreContainer" CdmEntityContainer="HREntities">
-          <EntitySetMapping Name="Attendances">
-            <EntityTypeMapping TypeName="HRModel.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
-                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Designations">
-            <EntityTypeMapping TypeName="HRModel.Designation">
-              <MappingFragment StoreEntitySet="Designation">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Designation_History">
-            <EntityTypeMapping TypeName="HRModel.Designation_History">
-              <MappingFragment StoreEntitySet="Designation_History">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Designation_ID" ColumnName="Designation_ID" />
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="HRModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
@@ -562,54 +531,84 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="HRModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Captcha" ColumnName="Captcha" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="HRModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="HRModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designation_History">
+            <EntityTypeMapping TypeName="HRModel.Designation_History">
+              <MappingFragment StoreEntitySet="Designation_History">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Designation_ID" ColumnName="Designation_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Leaves">
             <EntityTypeMapping TypeName="HRModel.Leave">
               <MappingFragment StoreEntitySet="Leave">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
-                <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />
-                <ScalarProperty Name="Leave_StartDate" ColumnName="Leave_StartDate" />
-                <ScalarProperty Name="Leave_EndDate" ColumnName="Leave_EndDate" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="From_Session" ColumnName="From_Session" />
-                <ScalarProperty Name="To_Session" ColumnName="To_Session" />
                 <ScalarProperty Name="Apply_To" ColumnName="Apply_To" />
+                <ScalarProperty Name="To_Session" ColumnName="To_Session" />
+                <ScalarProperty Name="From_Session" ColumnName="From_Session" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Leave_EndDate" ColumnName="Leave_EndDate" />
+                <ScalarProperty Name="Leave_StartDate" ColumnName="Leave_StartDate" />
+                <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />
+                <ScalarProperty Name="Submit_Date" ColumnName="Submit_Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Leave_Tracking">
             <EntityTypeMapping TypeName="HRModel.Leave_Tracking">
               <MappingFragment StoreEntitySet="Leave_Tracking">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
                 <ScalarProperty Name="RemainingDays" ColumnName="RemainingDays" />
+                <ScalarProperty Name="Leave_Type_ID" ColumnName="Leave_Type_ID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Leave_Type">
             <EntityTypeMapping TypeName="HRModel.Leave_Type">
               <MappingFragment StoreEntitySet="Leave_Type">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
                 <ScalarProperty Name="MaxLeave" ColumnName="MaxLeave" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInfoes">
-            <EntityTypeMapping TypeName="HRModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
-                <ScalarProperty Name="Captcha" ColumnName="Captcha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

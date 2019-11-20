@@ -19,12 +19,42 @@ namespace HRHUB.Controllers
         private HREntities db = new HREntities();
 
         // GET: api/Employees
-        public IQueryable<Employee> GetEmployees()
+        [HttpGet]
+        [Route("api/GetEmployees")]
+        public IHttpActionResult GetEmployees()
         {
-            return db.Employees;
+            var listOfEmployees = db.Employees.Select(r => new
+            {
+                ID = r.ID,
+                Name = r.Name,
+                DOB = r.DOB,
+                UserName=r.UserName,
+                DOJ=r.DOJ,
+                PhoneNumber=r.PhoneNumber,
+                Email_ID=r.Email_ID,
+                BloodType=r.BloodType,
+                MaritalStatus=r.MaritalStatus,
+                Nationality=r.Nationality,
+                Gender=r.Gender,
+                Department=r.Department
+            });
+
+            return Ok(listOfEmployees.ToList());
         }
 
-        
+        [ResponseType(typeof(Employee))]
+        [Route("api/GetEmployee")]
+        public IHttpActionResult GetEmployee(long id)
+        {
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
+        }
+
+
 
         // PUT: api/Employees/5
         [ResponseType(typeof(void))]

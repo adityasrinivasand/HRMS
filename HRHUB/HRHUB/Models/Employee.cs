@@ -17,11 +17,11 @@ namespace HRHUB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
+            this.UserInfoes = new HashSet<UserInfo>();
             this.Attendances = new HashSet<Attendance>();
             this.Designation_History = new HashSet<Designation_History>();
             this.Leaves = new HashSet<Leave>();
             this.Leave_Tracking = new HashSet<Leave_Tracking>();
-            this.UserInfoes = new HashSet<UserInfo>();
         }
     
         public int ID { get; set; }
@@ -40,6 +40,8 @@ namespace HRHUB.Models
         public Nullable<System.Guid> VerificationCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserInfo> UserInfoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Designation_History> Designation_History { get; set; }
@@ -47,7 +49,5 @@ namespace HRHUB.Models
         public virtual ICollection<Leave> Leaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Leave_Tracking> Leave_Tracking { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInfo> UserInfoes { get; set; }
     }
 }

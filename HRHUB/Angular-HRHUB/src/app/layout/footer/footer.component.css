@@ -1,13 +1,6 @@
 :host {
-  position: relative;
-  top: 12em;
   background-color: rgba(99, 96, 96, 0.527);
   width: 100%;
-}
-.hrlogo{
-  position: relative;
-  height: 3.5em;
-  margin-right: 2em;
 }
 .socialpng{
   padding: 1em;

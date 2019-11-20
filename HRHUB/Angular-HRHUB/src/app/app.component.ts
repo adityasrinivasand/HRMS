@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
         this.showWelcomeCard = this.activatedRoute.firstChild.snapshot.data.showWelcomeCard !== false;
       }
     });
+    
   }
 
 }

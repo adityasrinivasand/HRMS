@@ -22,9 +22,10 @@ namespace HRHUB.Controllers
         //[Authorize]
         [Route("api/leave/{id=id}")]
         [ResponseType(typeof(Leave))]
-        public IHttpActionResult PostLeave(int id,Leave leave)
+        public IHttpActionResult PostLeave(string id, Leave leave)
         {
-            // leave.Employee_ID = id;
+            //leave.Employee_ID = DBOperations.GetEmployeeID(id);
+
             leave.Submit_Date = DateTime.Now;
             if (!ModelState.IsValid)
             {
@@ -45,9 +46,10 @@ namespace HRHUB.Controllers
 
         [HttpGet]
         [Route("api/leave/{id}/{leavetype}")]
-        public IHttpActionResult GetBalanceLeave(int id,int leaveType)
+        public IHttpActionResult GetBalanceLeave(string id,int leaveType)
         {
-            var balance = DBOperations.BalanceDays(id, leaveType);
+            var empId = DBOperations.GetEmployeeID(id);
+            var balance = DBOperations.BalanceDays(empId, leaveType);
             return Ok(balance);
         }
 

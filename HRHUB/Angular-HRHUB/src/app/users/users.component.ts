@@ -76,10 +76,6 @@ export class UsersComponent implements OnInit {
   postErrorMessage = '';
 
   ngOnInit() {
-    this.dataservice.GetForAdmin().subscribe((data: any) => {
-      console.log(data);
-
-    });
   }
   onHttpError(error: any) {
     console.log('error:', error);

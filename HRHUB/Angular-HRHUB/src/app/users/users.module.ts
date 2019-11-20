@@ -16,8 +16,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http'; 
-import {AuthGuardService} from '../auth/auth-guard.service';
+
 import { AuthService } from '../auth/auth.service';
+import { MatButtonModule } from '@angular/material';
 
 
 @NgModule({
@@ -36,10 +37,10 @@ import { AuthService } from '../auth/auth.service';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule
 
   ],
-  providers: [AuthService,AuthGuardService],
   declarations: [UsersComponent]
 })
 export class UsersModule { }

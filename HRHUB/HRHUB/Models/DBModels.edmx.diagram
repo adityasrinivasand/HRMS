@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd298aa0c690407b9e92309b20ce7d8c" Name="Diagram1">
-        <EntityTypeShape EntityType="HRModel.Attendance" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Designation" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Designation_History" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Employee" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave_Tracking" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.Leave_Type" Width="1.5" PointX="3.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRModel.UserInfo" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
-        <AssociationConnector Association="HRModel.Attendance_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Employee_Designation_Designation" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Employee_Designation_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Leave_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Leave_Tracking_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.UserInfo_Employee" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Leave_Leave_Type" ManuallyRouted="false" />
-        <AssociationConnector Association="HRModel.Leave_Tracking_Leave_Type" ManuallyRouted="false" />
+      <Diagram DiagramId="182c99f1d2a647d3b3417b51933132a3" Name="Diagram1">
+        <EntityTypeShape EntityType="HRModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRModel.UserInfo" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="HRModel.UserInfo_Employee" />
+        <EntityTypeShape EntityType="HRModel.Attendance" Width="1.5" PointX="3" PointY="5.625" />
+        <AssociationConnector Association="HRModel.Attendance_Employee" />
+        <EntityTypeShape EntityType="HRModel.Designation" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HRModel.Designation_History" Width="1.5" PointX="7.625" PointY="1.75" />
+        <AssociationConnector Association="HRModel.Employee_Designation_Designation" />
+        <AssociationConnector Association="HRModel.Employee_Designation_Employee" />
+        <EntityTypeShape EntityType="HRModel.Leave" Width="1.5" PointX="3" PointY="9.25" />
+        <AssociationConnector Association="HRModel.Leave_Employee" />
+        <EntityTypeShape EntityType="HRModel.Leave_Tracking" Width="1.5" PointX="3" PointY="14.125" />
+        <AssociationConnector Association="HRModel.Leave_Tracking_Employee" />
+        <EntityTypeShape EntityType="HRModel.Leave_Type" Width="1.5" PointX="5.375" PointY="4.875" />
+        <AssociationConnector Association="HRModel.Leave_Leave_Type" />
+        <AssociationConnector Association="HRModel.Leave_Tracking_Leave_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
