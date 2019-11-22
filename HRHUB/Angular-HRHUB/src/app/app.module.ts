@@ -11,15 +11,13 @@ import { LoginModule } from './login/login.module';
 import { UsersModule } from './users/users.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule, MatFormField, MatFormFieldControl} from '@angular/material/form-field';
 import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveComponent } from './leave/leave.component';
 import { LeaveRoutingModule } from './leave/leave-routing.module';
-import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
-import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component' ;
@@ -30,18 +28,18 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { AuthService } from './auth/auth.service';
 import { JwtHelperService, JwtModule, JwtModuleOptions, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TimesheetComponent } from './timesheet/timesheet.component';
-import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.module'
-
-
+import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.module';
+import { CookieService } from 'ngx-cookie-service';
+import { SetpasswordComponent } from './setpassword/setpassword.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeaveComponent,
-    ForgotpasswordComponent,
     PageNotFoundComponent,
     ContactsComponent,
     TimesheetComponent,
+    SetpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +58,7 @@ import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.modul
     HttpClientModule,
     NgbModule,
     LeaveRoutingModule,
-    ForgotpasswordRoutingModule,
+
     MatCardModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -83,6 +81,7 @@ import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.modul
       provide: JWT_OPTIONS, useValue: JWT_OPTIONS 
     },
     JwtHelperService,
+    CookieService 
     
   ]
 })

@@ -31,7 +31,7 @@
 
               <mat-form-field appearance="outline" [color]="warn" [ngClass]="{'has-error': ((loginForm.get('password').touched || loginForm.get('password').dirty) && loginForm.get('password').errors)}">
                   <mat-label>Password</mat-label>
-                  <input matInput placeholder="Enter Password" formControlName="password">
+                  <input  type="password" matInput placeholder="Enter Password" formControlName="password">
                   <mat-icon matPrefix>security</mat-icon>
                 </mat-form-field>
                 <span class="help-block" *ngIf="((loginForm.get('password').touched || loginForm.get('password').dirty) &&  loginForm.get('password').errors)">
@@ -43,7 +43,7 @@
             </tr>
 
             <tr>
-              <mat-checkbox [color]="primary">Check me!</mat-checkbox>
+              <mat-checkbox [color]="primary">Remember Me</mat-checkbox>
             </tr>
 
           </tbody>

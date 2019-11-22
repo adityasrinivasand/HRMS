@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,9 +19,14 @@ export class NavbarComponent implements OnInit {
     this.trigger.openMenu();
   }
 
-  constructor() { }
+  constructor(private router: Router,private cookieService: CookieService) { }
 
   ngOnInit() {
+  }
+  logout(){
+    localStorage.clear();
+    this.cookieService.delete('Token');
+    this.router.navigate['/login'];
   }
 
 }

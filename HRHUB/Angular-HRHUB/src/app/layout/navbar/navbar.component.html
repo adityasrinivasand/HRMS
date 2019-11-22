@@ -35,7 +35,7 @@
     <mat-menu #personMenu = "matMenu">
         <button mat-menu-item [routerLink]="'/leave'" >Account Settings</button>
         <button mat-menu-item>Update Profile</button>
-        <button mat-menu-item [routerLink]="'/login'" >LogOut</button>
+        <button mat-menu-item (click)="logout()" >LogOut</button>
     </mat-menu> 
   </div>
   </mat-toolbar-row>

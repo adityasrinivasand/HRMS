@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, NumberValueAccessor } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, NumberValueAccessor, FormControl } from '@angular/forms';
 import { Leave } from '../data/leave';
-
 import {ActivatedRoute} from '@angular/router';
-import * as publicHolidays from '../data/publicholidays.json';
+
 
 interface LeaveType {
   key: string;
@@ -16,6 +15,7 @@ interface SessionType {
   value: number;
 }
 
+declare var require: any;
 
 @Component({
   selector: 'app-leave',
@@ -29,11 +29,16 @@ export class LeaveComponent implements OnInit {
   leaveForm: FormGroup;
   leave: Leave = new Leave();
   options: FormGroup;
-
+ 
+  varFromDate: any = null;
+  varToDate: any= null;
+  varFromSession: any= null;
+  varToSession: any= null;
   errorMessage = '';
   empId = '';
   balance = 0;
   value = '';
+  diff = 0;
   leaveTypelist: Array<LeaveType> = [
     { key: 'Sick Leave', value: 1 },
     { key: 'Casual Leave', value: 2 },
@@ -44,6 +49,8 @@ export class LeaveComponent implements OnInit {
     { key: 'Session 2', value: 2 },
   ];
 
+   moment = require('moment-business-days');
+  
 
 
   // tslint:disable-next-line:max-line-length
@@ -58,10 +65,10 @@ export class LeaveComponent implements OnInit {
   ngOnInit() {
 this.leaveForm = this.form.group({
   leaveType: ['', Validators.required],
-  fromDate: ['', Validators.required],
-  toDate: ['', Validators.required],
-  fromSession: ['', Validators.required],
-  toSession: ['', Validators.required],
+  fromDate: [null, Validators.required],
+  toDate: [null, Validators.required],
+  fromSession: [null, Validators.required],
+  toSession: [null, Validators.required],
   applyTo: ['', Validators.required],
   reason: ['', Validators.required],
   remaining: {value: '0' , disabled: true},
@@ -72,7 +79,17 @@ this.leaveForm.get('leaveType').valueChanges.subscribe(
   value => { this.balanceDays(value);
 }
 );
+this.doMonitoring();
+this.publicholidays();
 
+this.leaveForm.get('fromDate').valueChanges.subscribe(
+  value => { this.varFromDate = value;});
+this.leaveForm.get('toDate').valueChanges.subscribe(
+  value => { this.varToDate = value;});
+this.leaveForm.get('fromSession').valueChanges.subscribe(
+  value => { this.varFromSession = value;});
+this.leaveForm.get('toSession').valueChanges.subscribe(
+  value => { this.varToSession = value;});
 
 }
 
@@ -115,9 +132,44 @@ save() {
     this.leave.Reason = this.leaveForm.get('reason').value;
     this.leave.Apply_To = this.leaveForm.get('applyTo').value;
   }
+ 
+  publicholidays(){
+    var gandhiJayanthi = '02-10';
+    var newYear ='01-01';
+    var republicDay ='26-01';
+    var tamilNewYear ='14-04';
+    var mayDay ='01-05';
+    var independanceDay ='15-08';
+    var christmas ='25-12';
+    this.moment.updateLocale('us', {
+      holidays: [gandhiJayanthi, newYear,republicDay,tamilNewYear,mayDay,independanceDay,christmas],
+      holidayFormat: 'DD-MM'
+    });
+    console.log(this.moment('02-10-2019', 'DD-MM-YYYY').isBusinessDay() );
 
-  
+  }
 
+  doMonitoring() {
+    setTimeout(() => {
+     if(((this.varFromDate) &&(this.varFromSession) && (this.varToDate)&& (this.varToSession))  != null)
+     {this.daysCalculation();}
+     //better to have one if here for exiting loop!
+     this.doMonitoring();
+    }, 1000);
+  }
+  daysCalculation(){
+   
+    this.diff = this.moment(this.leaveForm.get('toDate').value, 'MM-DD-YYYY').businessDiff(this.moment(this.leaveForm.get('fromDate').value,'MM-DD-YYYY'));
+    // var diff = this.moment('05-15-2017', 'MM-DD-YYYY').businessDiff(this.moment('05-08-2017','MM-DD-YYYY'));
+    if(this.varFromSession == this.varToSession){
+      this.diff += 0.5;
+    }else if (this.varFromSession != this.varToSession){
+      this.diff += 1;
+    }
+    this.leaveForm.patchValue({
+      days: this.diff
+    });
+  }
 
 }
 

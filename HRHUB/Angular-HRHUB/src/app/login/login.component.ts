@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Login } from '../data/login';
 import { DataService } from '../data/data.service';
 import jwt_decode from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -13,8 +14,8 @@ import jwt_decode from 'jwt-decode';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-
-  constructor(private router: Router, private dataservice: DataService, private form: FormBuilder) { }
+  cookieValue = 'UNKNOWN';
+  constructor(private router: Router, private dataservice: DataService, private form: FormBuilder, private cookieService: CookieService) { }
 
   loginForm: FormGroup;
   employeeLogin: Login = new Login();
@@ -43,6 +44,9 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', result);
             this.setValues(result);
             this.router.navigate(['/contacts']);
+            this.cookieService.set( 'Token', result );
+            this.cookieValue = this.cookieService.get('Token');
+            
             
           },
           error=>this.onHttpError(error));

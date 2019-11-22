@@ -6,7 +6,7 @@ import { LoginComponent } from './login.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule, MatButtonModule } from '@angular/material';
@@ -27,7 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatButtonModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
   ],
   declarations: [LoginComponent]
 })

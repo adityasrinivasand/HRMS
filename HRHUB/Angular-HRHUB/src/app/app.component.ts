@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
   showFooter = false;
   showWelcomeCard = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -23,7 +24,14 @@ export class AppComponent implements OnInit {
         this.showWelcomeCard = this.activatedRoute.firstChild.snapshot.data.showWelcomeCard !== false;
       }
     });
-    
+    const value: string = this.cookieService.get('Token');
+    console.log("hi",value);
+    if(value != null){
+      console.log("heyyy");
+      this.router.navigate['/contacts'];
+    }else if(value == null){
+      this.router.navigate['/login'];
+    }
   }
 
 }
