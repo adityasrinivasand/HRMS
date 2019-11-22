@@ -12,18 +12,32 @@ namespace HRHUB.Helper_Classes
     {
         public static void RunLeaveEntryForNew(Employee employee)
         {
-            using (HREntities db = new HREntities())
+            try
             {
-                var result = db.LeaveEntryForNew(employee.DOJ, employee.ID);
+                using (HREntities db = new HREntities())
+                {
+                    var result = db.LeaveEntryForNew(employee.DOJ, employee.ID);
+                }
             }
+            catch(Exception ex)
+            {
+                LogFile.WriteLog(ex);
+            }          
         }
         public static void RunAddUserInfo(PasswordConfirmation password, string id)
         {
-            using (HREntities db = new HREntities())
+            try
             {
-                var employee = db.Employees.Where(l => l.UserName == id).FirstOrDefault();
-                var result = db.AddUserInfo(employee.ID, employee.UserName, password.password);
+                using (HREntities db = new HREntities())
+                {
+                    var employee = db.Employees.Where(l => l.UserName == id).FirstOrDefault();
+                    var result = db.AddUserInfo(employee.ID, employee.UserName, password.password);
+                }
             }
+            catch(Exception ex)
+            {
+                LogFile.WriteLog(ex);
+            }         
         }
     }
 }

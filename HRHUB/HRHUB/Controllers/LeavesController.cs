@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HRHUB.Helper_Classes;
@@ -24,135 +18,49 @@ namespace HRHUB.Controllers
         [ResponseType(typeof(Leave))]
         public IHttpActionResult PostLeave(string id, Leave leave)
         {
-            //leave.Employee_ID = DBOperations.GetEmployeeID(id);
+            try
+            {
+                leave.Employee_ID = DBOperations.GetEmployeeID(id);
+                leave.Submit_Date = DateTime.Now;
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                string message = " ";
+                message = DBOperations.CheckLeaveexist(leave);
 
-            leave.Submit_Date = DateTime.Now;
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
+                if (message == "Leave Applied Successfully")
+                {
+                    return Ok("Leave Applied Successfully");
+                }
+                else
+                {
+                    return Ok("Leave Not Applied Successfully");
+                }
             }
-            string message = " ";
-            message = DBOperations.CheckLeaveexist(leave);
-
-            if(message == "Leave Applied Successfully")
+            catch(Exception ex)
             {
-                return Ok("Leave Applied Successfully");
-            }
-            else
-            {
-                return Ok("Leave Not Applied Successfully");
-            }
+                LogFile.WriteLog(ex);
+                return BadRequest();
+            }     
         }
-
         [HttpGet]
-        [Route("api/leave/{id}/{leavetype}")]
+        [Route("api/leave/{id}/{leaveType}")]
         public IHttpActionResult GetBalanceLeave(string id,int leaveType)
         {
-            var empId = DBOperations.GetEmployeeID(id);
-            var balance = DBOperations.BalanceDays(empId, leaveType);
-            return Ok(balance);
-        }
-
-        /*
-        // GET: api/Leaves
-        public IQueryable<Leave> GetLeaves()
-        {
-            return db.Leaves;
-        }
-
-        // GET: api/Leaves/5
-        [ResponseType(typeof(Leave))]
-        public IHttpActionResult GetLeave(int id)
-        {
-            Leave leave = db.Leaves.Find(id);
-            if (leave == null)
+            try
             {
-                return NotFound();
+                var empId = DBOperations.GetEmployeeID(id);
+                var balance = DBOperations.BalanceDays(empId, leaveType);
+                return Ok(balance);
             }
-
-            return Ok(leave);
-        }
-
-        // PUT: api/Leaves/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutLeave(int id, Leave leave)
-        {
-            if (!ModelState.IsValid)
+            catch(Exception ex)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != leave.ID)
-            {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
-
-            db.Entry(leave).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LeaveExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            
         }
-
-        // POST: api/Leaves
-        [ResponseType(typeof(Leave))]
-        public IHttpActionResult PostLeave(Leave leave)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Leaves.Add(leave);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (LeaveExists(leave.ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = leave.ID }, leave);
-        }
-
-        // DELETE: api/Leaves/5
-        [ResponseType(typeof(Leave))]
-        public IHttpActionResult DeleteLeave(int id)
-        {
-            Leave leave = db.Leaves.Find(id);
-            if (leave == null)
-            {
-                return NotFound();
-            }
-
-            db.Leaves.Remove(leave);
-            db.SaveChanges();
-
-            return Ok(leave);
-        }*/
 
         protected override void Dispose(bool disposing)
         {

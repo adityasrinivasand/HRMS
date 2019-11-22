@@ -18,32 +18,39 @@ namespace HRHUB.Controllers
         [Route("token")]
         public IHttpActionResult GetToken(Login login)
         {
-            if(DBOperations.LoginAttempt(login.userName, login.password, out UserInfo user) == "Successfull")
+            try
             {
-                var roles = "user";
-                if(user.isAdmin == true)
+                if (DBOperations.LoginAttempt(login.userName, login.password, out UserInfo user) == "Successfull")
                 {
-                    roles = "admin";
+                    var roles = "user";
+                    if (user.isAdmin == true)
+                    {
+                        roles = "admin";
+                    }
+                    IAuthContainerModel model = GetJWTContainerModel(user.UserName, roles);
+                    IAuthService authService = new JWTService(model.SecretKey);
+
+                    string token = authService.GenerateToken(model);
+
+                    if (!authService.IsTokenValid(token))
+                        throw new UnauthorizedAccessException();
+                    else
+                    {
+                        List<Claim> claims = authService.GetTokenClaims(token).ToList();
+
+                    }
+                    return Ok(token);
                 }
-                IAuthContainerModel model = GetJWTContainerModel(user.UserName, roles);
-                IAuthService authService = new JWTService(model.SecretKey);
-
-                string token = authService.GenerateToken(model);
-
-                if (!authService.IsTokenValid(token))
-                    throw new UnauthorizedAccessException();
                 else
                 {
-                    List<Claim> claims = authService.GetTokenClaims(token).ToList();
-
+                    return BadRequest("Invalid Credentials");
                 }
-                return Ok(token);
             }
-            else
+            catch(Exception ex)
             {
-                return BadRequest("Invalid Credentials");
-            }
-            
+                LogFile.WriteLog(ex);
+                return BadRequest();
+            }       
         }
 
         [NonAction]

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -22,29 +21,9 @@ namespace HRHUB.Controllers
         // GET: api/Attendances
         public IHttpActionResult GetAttendances()
         {
-            var listOfAttendances = db.Attendances.Select(r => new
+            try
             {
-                ID = r.ID,
-                Employee_ID = r.Employee_ID,
-                Date = r.Date,
-                CheckIn = r.CheckIn.ToString(),
-                CheckOut = r.CheckOut.ToString(),
-                Status = r.Status
-            });
-
-            return Ok(listOfAttendances.ToList());
-        }
-
-        [HttpGet]
-        [Route("api/Attendances/{id=id}")]
-        // GET: api/Attendances/5
-        [ResponseType(typeof(Attendance))]
-        public IHttpActionResult GetAttendance(string id)
-        {
-            var empId = DBOperations.GetEmployeeID(id);
-            if (empId != null)
-            {
-                var listOfAttendances = db.Attendances.Where(x => x.Employee_ID == empId).Select(r => new
+                var listOfAttendances = db.Attendances.Select(r => new
                 {
                     ID = r.ID,
                     Employee_ID = r.Employee_ID,
@@ -53,97 +32,48 @@ namespace HRHUB.Controllers
                     CheckOut = r.CheckOut.ToString(),
                     Status = r.Status
                 });
+
                 return Ok(listOfAttendances.ToList());
             }
-            else
+            catch(Exception ex)
             {
-                return BadRequest("Not Found");
-            }
-
-
-        }
-
-        // PUT: api/Attendances/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutAttendance(int id, Attendance attendance)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != attendance.ID)
-            {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
-
-            db.Entry(attendance).State = EntityState.Modified;
-
+        }
+        [HttpGet]
+        [Route("api/Attendances/{id=id}")]
+        // GET: api/Attendances/5
+        [ResponseType(typeof(Attendance))]
+        public IHttpActionResult GetAttendance(string id)
+        {
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AttendanceExists(id))
+                var empId = DBOperations.GetEmployeeID(id);
+                if (empId != null)
                 {
-                    return NotFound();
+                    var listOfAttendances = db.Attendances.Where(x => x.Employee_ID == empId).Select(r => new
+                    {
+                        ID = r.ID,
+                        Employee_ID = r.Employee_ID,
+                        Date = r.Date,
+                        CheckIn = r.CheckIn.ToString(),
+                        CheckOut = r.CheckOut.ToString(),
+                        Status = r.Status
+                    });
+                    return Ok(listOfAttendances.ToList());
                 }
                 else
                 {
-                    throw;
+                    return BadRequest("Not Found");
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Attendances
-        [ResponseType(typeof(Attendance))]
-        public IHttpActionResult PostAttendance(Attendance attendance)
-        {
-            if (!ModelState.IsValid)
+            catch(Exception ex)
             {
-                return BadRequest(ModelState);
+                LogFile.WriteLog(ex);
+                return BadRequest();
             }
-
-            db.Attendances.Add(attendance);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (AttendanceExists(attendance.ID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = attendance.ID }, attendance);
-        }
-
-        // DELETE: api/Attendances/5
-        [ResponseType(typeof(Attendance))]
-        public IHttpActionResult DeleteAttendance(int id)
-        {
-            Attendance attendance = db.Attendances.Find(id);
-            if (attendance == null)
-            {
-                return NotFound();
-            }
-
-            db.Attendances.Remove(attendance);
-            db.SaveChanges();
-
-            return Ok(attendance);
-        }
-
+        } 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
