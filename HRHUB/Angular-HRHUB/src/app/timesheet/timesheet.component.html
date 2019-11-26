@@ -11,41 +11,41 @@
    </mat-card-header>
    <div class = "attendance-container" >
          <mat-card-content>
-                <div class="example-container mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <div class="example-container mat-elevation-z8" >
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" class="mat-typography">
 
-                        <!-- Position Column -->
+                        <!-- ID Column -->
                         <ng-container matColumnDef="ID">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                          <th class="mat-h2" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
                           <td mat-cell *matCellDef="let emp"> {{emp.ID}} </td>
                         </ng-container>
                       
-                        <!-- Name Column -->
+                        <!-- Date Column -->
                         <ng-container matColumnDef="Date">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
                           <td mat-cell *matCellDef="let emp"> {{emp.Date | date:'mediumDate'}} </td>
                         </ng-container>
                       
-                        <!-- Weight Column -->
+                        <!-- Check IN Column -->
                         <ng-container matColumnDef="Check In">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Check In </th>
-                          <td mat-cell *matCellDef="let emp"> {{emp.CheckIn }} </td>
+                          <td mat-cell *matCellDef="let emp"> {{emp.CheckIn  }} </td>
                         </ng-container>
 
-                        <!-- Weight Column -->
+                        <!-- Check Out Column -->
                         <ng-container matColumnDef="Check Out">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Check Out </th>
-                          <td mat-cell *matCellDef="let emp"> {{emp.CheckOut }} </td>
+                          <td mat-cell *matCellDef="let emp"> {{emp.CheckOut  }} </td>
                         </ng-container>
                       
-                        <!-- Symbol Column -->
+                        <!-- Status Column -->
                         <ng-container matColumnDef="Status">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                           <td mat-cell  *matCellDef="let emp"> {{emp.Status}} </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns; let emp" [ngClass]="{'make-green':emp.Status == 'Present','make-red':emp.Status == 'Leave'}"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns; let emp" [ngClass]="{'make-green':emp.Status == 'Present','make-red':emp.Status == 'Leave','make-yellow':emp.Status == 'Holiday'}"></tr>
 
                 </table>   
                 </div>

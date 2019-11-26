@@ -1,20 +1,12 @@
 .user-card{
   position: relative;
-  margin-left: 2.15em;
-  width: 100%;
-  background-color: white;
-  margin-top: 0.75em;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-}
-.btn-primary{
-  position: relative;
-  margin: 1em;
-  left:28%;
-}
-.btn-danger{
-  position: relative;
-  margin: 1em;
-  left:30%;
+    margin-left: 2.5%;
+    width: 100%;
+    background-color: var(--primary-color);
+    margin-top: 0.75em;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+    max-height: 800px;
+    color: var(--text-color);
 }
 .user-container {
 display: flex;
@@ -34,24 +26,14 @@ display: none;
 input.user-right-align {
 -moz-appearance: textfield;
 }
-.forgot{
-  position: relative;
-  left: 55%;
-  color: green;
-}
-.mat-checkbox{
-  position: relative;
-  left: 3%;
-}
 .card-container-center{
   position: relative;
   margin-left: auto;
   margin-right: auto;
 }
-
 td,tr,th{
   border:none;
 }
 td{
-   vertical-align: middle;
+  vertical-align: middle;
 }

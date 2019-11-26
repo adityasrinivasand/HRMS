@@ -30,7 +30,7 @@ namespace HRHUB.Controllers
                 else
                 {
                     string VerificationCode = Guid.NewGuid().ToString();
-                    var link = HttpContext.Current.Request.Url.AbsoluteUri + "/ForgotPassword/" + employee.UserName;
+                    var link = "http://localhost:4200/forgotPassword/" + employee.UserName;
                     VerificationLink.EmailGeneration(employee.Email_ID, VerificationCode, link, "ResetPassword");
                     return Ok("Reset Link has been sent to your mail id");
                 }

@@ -16,13 +16,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http'; 
+import { MatButtonModule} from '@angular/material';
+import { FieldErrorDisplayModule } from '../field-error-display/field-error-display.module';
 
-import { AuthService } from '../auth/auth.service';
-import { MatButtonModule } from '@angular/material';
-
-
-@NgModule({
-  imports: [
+@NgModule({ 
+  declarations: [UsersComponent],
+  imports: [  
     CommonModule,
     UsersRoutingModule,
     FlexLayoutModule,
@@ -38,9 +37,9 @@ import { MatButtonModule } from '@angular/material';
     MatNativeDateModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule
-
+    MatButtonModule,
+    ReactiveFormsModule,
+    FieldErrorDisplayModule
   ],
-  declarations: [UsersComponent]
 })
 export class UsersModule { }

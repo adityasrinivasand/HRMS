@@ -18,6 +18,7 @@ namespace HRHUB.Controllers
         // GET: api/Employees
         [HttpGet]
         [Route("api/GetEmployees")]
+       // [Authorize]
         public IHttpActionResult GetEmployees()
         {
             try

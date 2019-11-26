@@ -6,7 +6,7 @@ namespace HRHUB.Helper_Classes
 {
     public class DBOperations
     {
-        public static bool IsUsernameExist(string username)
+        public static bool IsUsernameExist(string username) //Check User Name exists in the DB
         {
             try
             {
@@ -22,7 +22,7 @@ namespace HRHUB.Helper_Classes
                 return false;
             }
         }
-        public static bool IsEmailExist(string EmailID)
+        public static bool IsEmailExist(string EmailID) //Check Email ID exists in the DB
         {
             try
             {
@@ -39,7 +39,7 @@ namespace HRHUB.Helper_Classes
             }
       
         }
-        public static int SaveToDB(Employee u)
+        public static int SaveToDB(Employee u) //Check Saving to DB exists in the DB
         {
             try
             {
@@ -57,7 +57,7 @@ namespace HRHUB.Helper_Classes
                 return -1;
             }
         }
-        public static string LoginAttempt(string username, string password,out UserInfo user)
+        public static string LoginAttempt(string username, string password,out UserInfo user) //Login function
         {
             try
             {
@@ -91,7 +91,7 @@ namespace HRHUB.Helper_Classes
                 return "Exception Caused";
             }     
         }   
-        public static Employee IsEmployeeExist(string username)
+        public static Employee IsEmployeeExist(string username) //Employee Exists in the DB.
         {
             try
             {
@@ -106,7 +106,7 @@ namespace HRHUB.Helper_Classes
                 return null;
             }
         }
-        public static string SaveChangedPassword(PasswordConfirmation password, string username)
+        public static string SaveChangedPassword(PasswordConfirmation password, string username) //Saving the Changed password in the db
         {
             try
             {
@@ -125,7 +125,7 @@ namespace HRHUB.Helper_Classes
             }
             
         }
-        public static string CheckLeaveexist(Leave leave)
+        public static string CheckLeaveexist(Leave leave) //Check whether leave exist, if yes the leave will be applied.
         {
             var leaveTaken = 0.0;
             try
@@ -134,13 +134,13 @@ namespace HRHUB.Helper_Classes
                 {
                     int a = 1;
                     var emp = db.Employees.Where(l => l.ID == leave.Employee_ID).FirstOrDefault();
-                    var result = from logger in db.Leave_Tracking
-                                 join employee in db.Employees on logger.Employee_ID equals employee.ID
+                    var result = from leaveTrack in db.Leave_Tracking
+                                 join employee in db.Employees on leaveTrack.Employee_ID equals employee.ID
                                  select new
                                  {
                                      username = employee.UserName,
-                                     leavetype = logger.Leave_Type_ID,
-                                     remaining = logger.RemainingDays,
+                                     leavetype = leaveTrack.Leave_Type_ID,
+                                     remaining = leaveTrack.RemainingDays,
                                      empid = employee.ID
 
                                  };
@@ -190,7 +190,7 @@ namespace HRHUB.Helper_Classes
             
             
         }
-        public static double BalanceDays(int id, int leaveTypeID)
+        public static double BalanceDays(int id, int leaveTypeID) //Checking the balance days
         {
             try
             {
@@ -228,7 +228,7 @@ namespace HRHUB.Helper_Classes
                 return -1;
             }
         }
-        public static int GetEmployeeID(string userName)
+        public static int GetEmployeeID(string userName) //Getting Employee id from the User Name
         {
             try
             {

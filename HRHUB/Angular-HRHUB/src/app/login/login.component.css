@@ -1,30 +1,15 @@
 .login-card{
-    position: relative;
-    margin: 0;
-    width: 25%;
-    background-color: white;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-    flex: 0.5;
-    display: block;
-    margin-left:auto;
-    margin-right:auto;
-    
-}
-.btn-primary{
-    position: relative;
-    margin: 1em;
-    left:28%;
-}
-.btn-danger{
-    position: relative;
-    margin: 1em;
-    left:30%;
+  position: relative;
+  width: 28%;
+  background-color: white;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+  display: block;  
+  margin-left: 28em;
 }
 .login-container {
   display: flex;
   flex-direction: column;
 }
-
 .login-container > * {
   width: 100%;
 }
@@ -42,18 +27,24 @@ input.login-right-align {
   -moz-appearance: textfield;
 }
 .forgot{
-    position: relative;
-    left: 55%;
-    color: green;
+  position: relative;
+  left: 35%;
+  color: green;
 }
 .mat-checkbox{
-    position: relative;
-    left: 3%;
+  position: relative;
+  left: 3%;
 }
 .card-container-center{
-    position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  margin-left: 6em;
 }
+.mat-form-field{
+  margin-left: 5em;
+}
+.mat-card-actions{
+  margin-left:7em;
+}
+
 
   

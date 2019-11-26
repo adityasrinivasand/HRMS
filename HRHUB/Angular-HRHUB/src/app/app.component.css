@@ -3,11 +3,14 @@
   min-height: 100%;
   flex-direction: column;
   flex: 1 1 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 .content {
   position: relative;
-  top: 4.5em ;
-}
+  margin-top: 5% ;
+  flex: 1;
+}/*
 .example-card {
   max-width: 400px;
   margin-left: 1.5em;
@@ -17,7 +20,4 @@
 .example-header-image {
   background-image: url('https://carlisletheacarlisletheatre.org/images/person-png-cartoon-7.jpg');
   background-size: cover;
-}
-.content{
-  flex: 1;
-}
+}*/

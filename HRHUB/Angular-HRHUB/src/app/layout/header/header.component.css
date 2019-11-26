@@ -1,13 +1,11 @@
 :host {
   padding: 1em;
 }
-
 .hrlogo{
   position: relative;
   height: 3.5em;
   float: left;
 }
-
 .mat-icon{
   font-size: 2.5em;
   margin-bottom: 0.5em;
@@ -15,4 +13,7 @@
 }
 .mat-icon-button{
   font-size: 1em;
+}
+h1{
+  color: white;
 }

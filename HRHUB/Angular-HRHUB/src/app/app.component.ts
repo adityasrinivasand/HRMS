@@ -25,9 +25,7 @@ export class AppComponent implements OnInit {
       }
     });
     const value: string = this.cookieService.get('Token');
-    console.log("hi",value);
     if(value != null){
-      console.log("heyyy");
       this.router.navigate['/contacts'];
     }else if(value == null){
       this.router.navigate['/login'];

@@ -11,9 +11,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatButtonModule, MatSlideToggleModule } from '@angular/material';
 import {A11yModule} from '@angular/cdk/a11y';
 import { WelcomecardComponent } from './welcomecard/welcomecard.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -33,7 +34,10 @@ import { WelcomecardComponent } from './welcomecard/welcomecard.component';
     MatInputModule,
     A11yModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSlideToggleModule,
+    FormsModule, 
+    ReactiveFormsModule
 
   ],
   exports: [

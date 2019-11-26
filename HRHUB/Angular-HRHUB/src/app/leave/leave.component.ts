@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Inject, Input} from '@angular/core';
 import { DataService } from '../data/data.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, NumberValueAccessor, FormControl } from '@angular/forms';
 import { Leave } from '../data/leave';
 import {ActivatedRoute} from '@angular/router';
-
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface LeaveType {
   key: string;
@@ -14,7 +15,6 @@ interface SessionType {
   key: string;
   value: number;
 }
-
 declare var require: any;
 
 @Component({
@@ -23,13 +23,12 @@ declare var require: any;
   styleUrls: ['./leave.component.css']
 })
 
-
 export class LeaveComponent implements OnInit {
-
+  errorMsgToDate:string;
+  errorMsgFromDate:string;
   leaveForm: FormGroup;
   leave: Leave = new Leave();
   options: FormGroup;
- 
   varFromDate: any = null;
   varToDate: any= null;
   varFromSession: any= null;
@@ -39,6 +38,7 @@ export class LeaveComponent implements OnInit {
   balance = 0;
   value = '';
   diff = 0;
+  currentDate = new Date();
   leaveTypelist: Array<LeaveType> = [
     { key: 'Sick Leave', value: 1 },
     { key: 'Casual Leave', value: 2 },
@@ -54,7 +54,7 @@ export class LeaveComponent implements OnInit {
 
 
   // tslint:disable-next-line:max-line-length
-  constructor(private dataservice: DataService, private httpService: HttpClient, private form: FormBuilder, private route: ActivatedRoute) {
+  constructor(private dataservice: DataService, private httpService: HttpClient, private form: FormBuilder, private route: ActivatedRoute,private _snackBar: MatSnackBar) {
     this.route.paramMap.subscribe( params => { this.empId = params.get('id');  });
     this.options = form.group({
       hideRequired: false,
@@ -75,6 +75,7 @@ this.leaveForm = this.form.group({
   days: {value: '0' , disabled: true}
 });
 
+
 this.leaveForm.get('leaveType').valueChanges.subscribe(
   value => { this.balanceDays(value);
 }
@@ -92,10 +93,47 @@ this.leaveForm.get('toSession').valueChanges.subscribe(
   value => { this.varToSession = value;});
 
 }
+isFieldValid(field: string) {
+  return !this.leaveForm.get(field).valid && (this.leaveForm.get(field).touched);
+}
+isFieldValidFromDate(field: string) {
+  if(this.leaveForm.get(field).valid){
+    if(this.leaveForm.get('leaveType').value.value == 1 ){
+      if(this.leaveForm.get(field).value > this.currentDate){
+        this.errorMsgFromDate="Sick Leave Can't be applied in advance";
+        return true;
+      }
+    }
+  }
+  else{
+    this.errorMsgFromDate="Please Enter From Date";
+    return !this.leaveForm.get(field).valid && (this.leaveForm.get(field).touched);
+  }  
+}
+isFieldValidToDate(field: string) {
+  if(this.leaveForm.get(field).valid){
+    if(this.leaveForm.get('fromDate').value > this.leaveForm.get(field).value ){
+      this.errorMsgToDate="To Date cannot be before From Date";
+      return true;
+    }
+  }
+  else{
+    this.errorMsgToDate="Please Enter To Date";
+    return !this.leaveForm.get(field).valid && (this.leaveForm.get(field).touched);
+  }  
+}
+
+displayFieldCss(field: string) {
+  return {  
+    'has-error': this.isFieldValid(field),
+    'has-feedback': this.isFieldValid(field)
+  };
+}
 
 
 balanceDays(value) {
   this.empId = localStorage.getItem('isUserName');
+  console.log('https://localhost:44357/api/leave/' + this.empId + '/' + value.value);
   this.httpService.get<any>('https://localhost:44357/api/leave/' + this.empId + '/' + value.value).subscribe(data => {
     this.leaveForm.patchValue({
       remaining: data,
@@ -105,24 +143,41 @@ balanceDays(value) {
 calculateDays() {
 console.log(this.leaveForm.get('toDate').value);
 }
-save() {
-
+onSubmit() {
+  if (this.leaveForm.valid) {
     this.updateLeaveValues();
     // tslint:disable-next-line:prefer-const
-
     this.dataservice.postLeaveForm(this.leave).subscribe (
-        result => console.log('success', result),
-        error => console.log('error', (error))
-      );
-
+        result => console.log('success', this.openSnackBar(result,'Close')),
+        error => console.log('error', this.openSnackBar(error,'Close'))
+  );
+  } else {
+    this.validateAllFormFields(this.leaveForm); //{7}
   }
+}
+validateAllFormFields(formGroup: FormGroup) {         //{1}
+  Object.keys(formGroup.controls).forEach(field => {  //{2}
+    const control = formGroup.get(field);             //{3}
+    if (control instanceof FormControl) {             //{4}
+      control.markAsTouched({ onlySelf: true });
+    } else if (control instanceof FormGroup) {        //{5}
+      this.validateAllFormFields(control);            //{6}
+    }
+  });
+}
+  openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {
+    duration: 2000,
+  });
+  this.reset();
+}
 
   updateBalance() {
     console.log('i have ');
     console.log(this.leaveForm.get('leaveType').value);
   }
   updateLeaveValues() {
-    this.leave.Employee_ID = +localStorage.getItem('isUserName');
+    this.leave.Employee_ID = 1;
     console.log(this.leave.Employee_ID);
     this.leave.Leave_Type_ID = this.leaveForm.get('leaveType').value.value;
     this.leave.Leave_StartDate = this.leaveForm.get('fromDate').value;
@@ -145,8 +200,6 @@ save() {
       holidays: [gandhiJayanthi, newYear,republicDay,tamilNewYear,mayDay,independanceDay,christmas],
       holidayFormat: 'DD-MM'
     });
-    console.log(this.moment('02-10-2019', 'DD-MM-YYYY').isBusinessDay() );
-
   }
 
   doMonitoring() {
@@ -158,7 +211,6 @@ save() {
     }, 1000);
   }
   daysCalculation(){
-   
     this.diff = this.moment(this.leaveForm.get('toDate').value, 'MM-DD-YYYY').businessDiff(this.moment(this.leaveForm.get('fromDate').value,'MM-DD-YYYY'));
     // var diff = this.moment('05-15-2017', 'MM-DD-YYYY').businessDiff(this.moment('05-08-2017','MM-DD-YYYY'));
     if(this.varFromSession == this.varToSession){
@@ -169,6 +221,10 @@ save() {
     this.leaveForm.patchValue({
       days: this.diff
     });
+  }
+
+  reset(){
+    this.leaveForm.reset();
   }
 
 }

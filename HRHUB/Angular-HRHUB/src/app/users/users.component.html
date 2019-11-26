@@ -4,7 +4,7 @@
     </mat-card-header>
     <div class="user-container">
               
-        <form #form="ngForm" ngNativeValidate (ngSubmit)="onSubmit(form)">
+        <form [formGroup]="userForm" autocomplete="off">
         <mat-card-content>
 
 <table class="table">
@@ -15,19 +15,21 @@
             <td>
                 <mat-form-field appearance="outline">
                     <mat-label>Employee Name</mat-label>
-                        <input matInput name="name" [(ngModel)]="user.Name" placeholder="Enter Employee Name" required [class.field-error]="form.submitted && user.Name.invalid">
+                        <input matInput placeholder="Enter Employee Name" required formControlName="Name" [ngClass]="displayFieldCss('Name')">
                         <mat-icon matSuffix>person</mat-icon>
                 </mat-form-field>
-                <div [hidden]="user.Name.valid || !form.submitted" class="alert alert-danger">Enter Employee Name</div>
+                <app-field-error-display [displayError]="isFieldValid('Name')"  errorMsg="Please Enter Employee Name">
+                </app-field-error-display>
             </td>
             <td>
                 <mat-form-field appearance="outline">
                     <mat-label>Employee DOB</mat-label>
-                    <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="user.DOB" placeholder="Enter Employee DOB" required [class.field-error]="form.submitted && user.DOB.invalid">
+                    <input matInput [matDatepicker]="picker" placeholder="Enter Employee DOB" required formControlName="DOB" [ngClass]="displayFieldCss('DOB')">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-                <div [hidden]="user.DOB.valid || !form.submitted" class="alert alert-danger">Enter Employee DOB</div>
+                <app-field-error-display [displayError]="isFieldValid('DOB')"  errorMsg="Please Enter Employee DOB">
+                </app-field-error-display>
             </td>
         </tr>
 
@@ -36,20 +38,22 @@
             <td>
                 <mat-form-field appearance="outline">
                     <mat-label>Employee Gender</mat-label>
-                    <mat-select name="Gender" [(ngModel)]="user.Gender" placeholder="Enter Employee DOB" required [class.field-error]="form.submitted && user.Gender.invalid">
+                    <mat-select placeholder="Enter Employee Gender" required formControlName="Gender" [ngClass]="displayFieldCss('Gender')">
                         <mat-option *ngFor="let gender of gender" [value]="gender.viewValue">{{gender.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <div [hidden]="user.Gender.valid || !form.submitted" class="alert alert-danger">Enter Employee Gender</div>
+                <app-field-error-display [displayError]="isFieldValid('Gender')"  errorMsg="Please Enter Employee Gender">
+                </app-field-error-display>
             </td>
             <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Blood Type</mat-label>
-                            <mat-select name="BloodType" [(ngModel)]="user.BloodType" placeholder="Enter Employee BloodType" required [class.field-error]="form.submitted && user.BloodType.invalid">
+                            <mat-select placeholder="Enter Employee Blood Type" required formControlName="BloodType" [ngClass]="displayFieldCss('BloodType')">
                                 <mat-option *ngFor="let bloods of bloods" [value]="bloods.viewValue">{{bloods.viewValue}}</mat-option>
                             </mat-select>
                     </mat-form-field>
-                    <div [hidden]="user.BloodType.valid || !form.submitted" class="alert alert-danger">Enter Employee BloodType</div>
+                    <app-field-error-display [displayError]="isFieldValid('BloodType')"  errorMsg="Please Enter Employee Blood Type">
+                    </app-field-error-display>
                 </td>
         </tr>
 
@@ -58,19 +62,21 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Marital Status</mat-label>
-                            <mat-select name="MaritalStatus" [(ngModel)]="user.MaritalStatus" placeholder="Enter Employee Marital Status" required [class.field-error]="form.submitted && user.MaritalStatus.invalid">
+                            <mat-select placeholder="Enter Employee Marital Status" required formControlName="MaritalStatus" [ngClass]="displayFieldCss('MaritalStatus')">
                                 <mat-option *ngFor="let marital of marital" [value]="marital.viewValue">{{marital.viewValue}}</mat-option>
                             </mat-select>
                     </mat-form-field>
-                    <div [hidden]="user.MaritalStatus.valid || !form.submitted" class="alert alert-danger">Enter Employee Marital Status</div>
+                    <app-field-error-display [displayError]="isFieldValid('MaritalStatus')"  errorMsg="Please Enter Employee Marital Status">
+                    </app-field-error-display>
                 </td>
                 <td>
                         <mat-form-field appearance="outline">
                             <mat-label>Employee Nationality:</mat-label>
-                                <input matInput name="Nationality" [(ngModel)]="user.Nationality" placeholder="Enter Employee Nationality" required [class.field-error]="form.submitted && user.Nationality.invalid">
+                                <input matInput placeholder="Enter Employee Nationality" required formControlName="Nationality" [ngClass]="displayFieldCss('Nationality')">
                                 <mat-icon matSuffix>flag</mat-icon>
                         </mat-form-field>
-                        <div [hidden]="user.Nationality.valid || !form.submitted" class="alert alert-danger">Enter Employee Nationality</div>
+                        <app-field-error-display [displayError]="isFieldValid('Nationality')"  errorMsg="Please Enter Employee Nationality">
+                        </app-field-error-display>
                 </td>
         </tr>
 
@@ -79,18 +85,21 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Phone Number:</mat-label>
-                                <input type="number" matInput name="PhoneNumber" [(ngModel)]="user.PhoneNumber" placeholder="Enter Employee PhoneNumber" required [class.field-error]="form.submitted && user.PhoneNumber.invalid">
+                                <input type="number" matInput placeholder="Enter Employee PhoneNumber" required formControlName="PhoneNumber" [ngClass]="displayFieldCss('PhoneNumber')">
                                 <mat-icon matSuffix>phone</mat-icon>
                     </mat-form-field>
-                    <div [hidden]="user.PhoneNumber.valid || !form.submitted" class="alert alert-danger">Enter Employee Phone Number</div>
+                    <app-field-error-display [displayError]="isFieldValid('PhoneNumber')"  errorMsg="Please Enter Employee PhoneNumber">
+                    </app-field-error-display>
                 </td>
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Email ID:</mat-label>
-                                <input type="email" matInput name="Email_ID" [(ngModel)]="user.Email_ID" placeholder="Enter Employee Email ID" required [class.field-error]="form.submitted && user.Email_ID.invalid">
+                                <input type="email" matInput placeholder="Enter Employee Email ID" required 
+                                formControlName="Email_ID" [ngClass]="displayFieldCss('Email_ID')">
                                 <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
-                    <div [hidden]="user.Email_ID.valid || !form.submitted" class="alert alert-danger">Enter Employee Email ID</div>
+                    <app-field-error-display [displayError]="isFieldValid('Email_ID')"  errorMsg="Please Enter Employee Email ID">
+                    </app-field-error-display>
                 </td>
         </tr>
 
@@ -99,19 +108,22 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee User Name</mat-label>
-                                <input type="email" matInput name="UserName" [(ngModel)]="user.UserName" placeholder="Enter Employee UserName " required [class.field-error]="form.submitted && user.UserName.invalid">
-                                <mat-icon matSuffix>email</mat-icon>
+                                <input type="text" matInput placeholder="Enter Employee UserName " required 
+                                formControlName="UserName" [ngClass]="displayFieldCss('UserName')">
+                                <mat-icon matSuffix>verified_user</mat-icon>
                     </mat-form-field>
-                    <div [hidden]="user.UserName.valid || !form.submitted" class="alert alert-danger">Enter Employee UserName</div>
+                    <app-field-error-display [displayError]="isFieldValid('UserName')"  errorMsg="Please Enter Employee UserName">
+                    </app-field-error-display>
                 </td>
                 <td>
                     <mat-form-field appearance="outline">
                     <mat-label>Employee DOJ</mat-label>
-                    <input matInput [matDatepicker]="picker2" name="DOJ" [(ngModel)]="user.DOJ" placeholder="Enter Employee DOJ" required [class.field-error]="form.submitted && user.DOJ.invalid">
+                    <input matInput [matDatepicker]="picker2" placeholder="Enter Employee DOJ" required formControlName="DOJ" [ngClass]="displayFieldCss('DOJ')">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
-                    <div [hidden]="user.DOJ.valid || !form.submitted" class="alert alert-danger">Enter Employee DOJ</div>
+                    <app-field-error-display [displayError]="isFieldValid('DOJ')"  errorMsg="Please Enter Employee DOJ">
+                    </app-field-error-display>
                 </td>
         </tr>
 
@@ -120,11 +132,12 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Department</mat-label>
-                            <mat-select name="Department" [(ngModel)]="user.Department" placeholder="Enter Employee Department" required [class.field-error]="form.submitted && user.Department.invalid">
+                            <mat-select placeholder="Enter Employee Department" required formControlName="Department" [ngClass]="displayFieldCss('Department')">
                                 <mat-option *ngFor="let department of department" [value]="department.viewValue">{{department.viewValue}}</mat-option>
                             </mat-select>
                     </mat-form-field>
-                    <div [hidden]="user.Department.valid || !form.submitted" class="alert alert-danger">Enter Employee Department</div>
+                    <app-field-error-display [displayError]="isFieldValid('Department')"  errorMsg="Please Enter Employee Department">
+                    </app-field-error-display>
                 </td>
                 <td>
                     <div class="form-group form-inline">
@@ -136,11 +149,9 @@
     </tbody>
 </table>
 
-
-                <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>
           <mat-card-actions>
-                <button mat-raised-button type="submit" color="primary">Register</button>
-                <button mat-raised-button type="cancel" color="accent">Cancel</button>
+                <button mat-raised-button type="submit" (click)="onSubmit()"  color="primary">Register</button>
+                <button mat-raised-button (click)="reset()" type="reset" color="accent">Cancel</button>
           </mat-card-actions>
         
     </mat-card-content>

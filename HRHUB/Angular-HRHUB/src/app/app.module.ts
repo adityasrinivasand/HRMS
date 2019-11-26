@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatFormField, MatFormFieldControl} from '@angular/material/form-field';
-import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatSlideToggleModule, MatSnackBar, MatSnackBarModule } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +31,10 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
 import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.module';
 import { CookieService } from 'ngx-cookie-service';
 import { SetpasswordComponent } from './setpassword/setpassword.component';
+import { SetpasswordRoutingModule } from './setpassword/setpassword-routing.module';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
+import { FieldErrorDisplayModule } from './field-error-display/field-error-display.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { SetpasswordComponent } from './setpassword/setpassword.component';
     ContactsComponent,
     TimesheetComponent,
     SetpasswordComponent,
+    ForgotpasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import { SetpasswordComponent } from './setpassword/setpassword.component';
     HttpClientModule,
     NgbModule,
     LeaveRoutingModule,
-
+    MatSlideToggleModule,
     MatCardModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -68,6 +73,10 @@ import { SetpasswordComponent } from './setpassword/setpassword.component';
     ContactsRoutingModule,
     MatTableModule,
     TimesheetRoutingModule,
+    SetpasswordRoutingModule,
+    ForgotpasswordRoutingModule,
+    MatSnackBarModule,
+    FieldErrorDisplayModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -81,7 +90,8 @@ import { SetpasswordComponent } from './setpassword/setpassword.component';
       provide: JWT_OPTIONS, useValue: JWT_OPTIONS 
     },
     JwtHelperService,
-    CookieService 
+    CookieService,
+    MatSnackBar 
     
   ]
 })

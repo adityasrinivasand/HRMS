@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     onHttpError(error: any) {
       console.log('error:', error);
       this.postError = true;
-      this.postErrorMessage = error.error.error;
+      this.postErrorMessage = error.error.Message;
       console.log(this.postErrorMessage);
     }
     onSubmit() {
@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/contacts']);
             this.cookieService.set( 'Token', result );
             this.cookieValue = this.cookieService.get('Token');
-            
-            
+ 
           },
           error=>this.onHttpError(error));
       } else {

@@ -1,22 +1,13 @@
 .attendance-card{
     position: relative;
-    margin-left: 2.15em;
+    margin-left: 2.5%;
     width: 100%;
-    background-color: white;
+    background-color: var(--primary-color);
     margin-top: 0.75em;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-    max-height: 1100px;
-  }
-  .btn-primary{
-    position: relative;
-    margin: 1em;
-    left:28%;
-  }
-  .btn-danger{
-    position: relative;
-    margin: 1em;
-    left:30%;
-  }
+    max-height: 800px;
+    color: var(--text-color);
+}
   .attendance-container {
   display: flex;
   flex-direction: column;
@@ -36,18 +27,18 @@
   -moz-appearance: textfield;
   }
 
-  .card-container-center{
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.card-container-center{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
   
-  table {
-    width: 100%;
-  }  
+table {
+  width: 100%;
+}  
 
 .example-container {
-  height: 725px;
+  max-height: 650px;
   overflow: auto;
 }
 .make-green {
@@ -55,4 +46,7 @@
 }
 .make-red{
   background-color: lightcoral;
+}
+.make-yellow{
+  background-color: yellowgreen;
 }

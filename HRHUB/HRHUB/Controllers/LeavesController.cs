@@ -46,6 +46,7 @@ namespace HRHUB.Controllers
         }
         [HttpGet]
         [Route("api/leave/{id}/{leaveType}")]
+       // [Authorize]
         public IHttpActionResult GetBalanceLeave(string id,int leaveType)
         {
             try
@@ -61,7 +62,6 @@ namespace HRHUB.Controllers
             }
             
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -13,28 +13,25 @@ import { Leave } from './leave';
 })
 export class DataService {
   baseUrl = environment.baseUrl;
+  empID: string;
   constructor(private http: HttpClient, ) { }
 
   public postLoginForm(login: Login): Observable<any> {
-    console.log('inside post loginform');
-    const body = `userName=${login.userName}&password=${login.password}&grant_type=${login.grantType}`;
-    console.log(body); 
     console.log(login);
-       return this.http.post('https://localhost:44357/token', login);
+    return this.http.post('https://localhost:44357/token', login);
 
      // return of(login);
   }
   public postRegisterForm(user: User): Observable<any> {
-    console.log('inside post registerform ');
     return this.http.post('https://localhost:44357/api/signup/addEmployee', user);
   }
 
   public postLeaveForm(leave: Leave): Observable<any> {
-    console.log('inside post leave form');
-    console.log(leave);
-    return this.http.post( this.baseUrl + 'api/leave/1', leave);
+    this.empID = localStorage.getItem('isUserName');
+    return this.http.post( this.baseUrl + 'api/leave/'+this.empID, leave);
   }
 
-  
-
+  public postForgotForm(userNAme:string): Observable<any> {
+    return this.http.post( this.baseUrl + 'api/forgot',userNAme);
+  }
 }
