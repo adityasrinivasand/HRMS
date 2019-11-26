@@ -24,7 +24,7 @@ export class ForgotpasswordComponent implements OnInit {
     this.dataservice.postForgotForm(this.forgotPasswordForm.get('userNAme').value).subscribe (
       result => console.log('success', result),
       error => console.log('error', error)
-);
+    );
     } else {
       this.validateAllFormFields(this.forgotPasswordForm); //{7}
     }
@@ -38,7 +38,7 @@ export class ForgotpasswordComponent implements OnInit {
       this.validateAllFormFields(control);            //{6}
     }
   });
-}
+  }
   isFieldValid(field: string) {
     return !this.forgotPasswordForm.get(field).valid && (this.forgotPasswordForm.get(field).touched);
   }

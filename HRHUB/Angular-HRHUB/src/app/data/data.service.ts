@@ -19,9 +19,8 @@ export class DataService {
   public postLoginForm(login: Login): Observable<any> {
     console.log(login);
     return this.http.post('https://localhost:44357/token', login);
-
-     // return of(login);
   }
+  
   public postRegisterForm(user: User): Observable<any> {
     return this.http.post('https://localhost:44357/api/signup/addEmployee', user);
   }

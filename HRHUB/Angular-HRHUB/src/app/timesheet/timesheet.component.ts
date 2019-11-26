@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material';
 import { Attendance } from '../data/attendance';
 
-
 @Component({
   selector: 'app-timesheet',
   templateUrl: './timesheet.component.html',
@@ -24,7 +23,5 @@ export class TimesheetComponent implements OnInit {
         console.log(err);  
       }  
     )
-
   }
-
 }

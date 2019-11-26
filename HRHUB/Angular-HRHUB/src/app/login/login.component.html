@@ -9,11 +9,9 @@
   <div class = "leave-container" >
     <form [formGroup]="loginForm" ngNativeValidate (ngSubmit)="onSubmit()">
       <mat-card-content>
-
         <table class="table">
           <tbody>
             <tr>
-
               <mat-form-field appearance="outline" [color]="warn" [ngClass]="{'has-error': ((loginForm.get('userName').touched || loginForm.get('userName').dirty) && loginForm.get('userName').errors)}">
                 <mat-label>User Name</mat-label>
                 <input matInput placeholder="Enter User Name" formControlName="userName">
@@ -24,7 +22,6 @@
                    User Name is required
                  </span>
               </span>
-
             </tr>
 
             <tr>
@@ -47,7 +44,6 @@
               <a class="forgot" [routerLink]="'/forgotPassword'">Forgot Password?</a>
             </tr>
           </tbody>
-
 
         </table>
         <div [hidden] ="!postError" class ="alert alert-danger"> {{postErrorMessage}}</div>

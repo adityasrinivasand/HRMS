@@ -6,19 +6,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Blood {
   value: string;
-  viewValue: string;
+  key: string;
 }
 export interface Marital {
   value: string;
-  viewValue: string;
+  key: string;
 }
 export interface Gender {
   value: string;
-  viewValue: string;
+  key: string;
 }
 export interface Department {
   value: string;
-  viewValue: string;
+  key: string;
 }
 @Component({
   selector: 'app-users',
@@ -28,33 +28,33 @@ export interface Department {
 export class UsersComponent implements OnInit {
 
   bloods: Blood[] = [
-    {value: 'A+ve', viewValue: 'A+ve'},
-    {value: 'A-ve', viewValue: 'A-ve'},
-    {value: 'B+ve', viewValue: 'B+ve'},
-    {value: 'B-ve', viewValue: 'B-ve'},
-    {value: 'O+ve', viewValue: 'O+ve'},
-    {value: 'O-ve', viewValue: 'O-ve'},
-    {value: 'AB+ve', viewValue: 'AB+ve'},
-    {value: 'AB-ve', viewValue: 'AB-ve'},
+    {key: 'A+ve', value: 'A+ve'},
+    {key: 'A-ve', value: 'A-ve'},
+    {key: 'B+ve', value: 'B+ve'},
+    {key: 'B-ve', value: 'B-ve'},
+    {key: 'O+ve', value: 'O+ve'},
+    {key: 'O-ve', value: 'O-ve'},
+    {key: 'AB+ve', value: 'AB+ve'},
+    {key: 'AB-ve', value: 'AB-ve'},
   ];
 
   marital: Marital[] = [
-    {value: 'Single', viewValue: 'Single'},
-    {value: 'Married', viewValue: 'Married'},
-    {value: 'Divocred', viewValue: 'Divocred'},
+    {key: 'Single', value: 'Single'},
+    {key: 'Married', value: 'Married'},
+    {key: 'Divocred', value: 'Divocred'},
   ];
 
   gender: Gender[] = [
-    {value: 'Male', viewValue: 'Male'},
-    {value: 'Female', viewValue: 'Female'},
-    {value: 'Others', viewValue: 'Others'},
+    {key: 'Male', value: 'Male'},
+    {key: 'Female', value: 'Female'},
+    {key: 'Others', value: 'Others'},
   ];
   department: Department[] = [
-    {value: 'BD', viewValue: 'Business Development'},
-    {value: 'BT', viewValue: 'Business Technology'},
-    {value: 'HR', viewValue: 'Human Resources'},
-    {value: 'QA', viewValue: 'Quality Assurance'},
-    {value: 'IT', viewValue: 'IT'},
+    {key: 'BD', value: 'Business Development'},
+    {key: 'BT', value: 'Business Technology'},
+    {key: 'HR', value: 'Human Resources'},
+    {key: 'QA', value: 'Quality Assurance'},
+    {key: 'IT', value: 'IT'},
   ];
   userClaims: any;
   userForm: FormGroup;
@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
       UserName: [null, Validators.required],
       DOJ: [null, Validators.required],
       PhoneNumber: [null, Validators.required],
-      Email_ID: ['', Validators.required,Validators.email],
+      Email_ID: ['', Validators.required],
       BloodType: ['', Validators.required],
       MaritalStatus: ['', Validators.required],
       Nationality: ['', Validators.required],
@@ -93,48 +93,48 @@ export class UsersComponent implements OnInit {
   onSubmit() {
     if (this.userForm.valid) {
       this.updateUserValues();
-      console.log(this.updateUserValues());
+      console.log(this.user);
       // tslint:disable-next-line:prefer-const
       this.dataservice.postRegisterForm(this.user).subscribe (
           result => console.log('success', this.openSnackBar(result,'Close')),
           error => console.log('error', this.openSnackBar(error,'Close'))
     );
     } else {
-      this.validateAllFormFields(this.userForm); //{7}
+      this.validateAllFormFields(this.userForm); 
     }
   }
-  validateAllFormFields(formGroup: FormGroup) {         //{1}
-  Object.keys(formGroup.controls).forEach(field => {  //{2}
-    const control = formGroup.get(field);             //{3}
-    if (control instanceof FormControl) {             //{4}
+  validateAllFormFields(formGroup: FormGroup) {         
+  Object.keys(formGroup.controls).forEach(field => {  
+    const control = formGroup.get(field);             
+    if (control instanceof FormControl) {             
       control.markAsTouched({ onlySelf: true });
-    } else if (control instanceof FormGroup) {        //{5}
-      this.validateAllFormFields(control);            //{6}
-    }
-  });
-}
-openSnackBar(message: string, action: string) {
-  this._snackBar.open(message, action, {
-    duration: 2000,
-  });
-  this.reset();
-}
-reset(){
-  this.userForm.reset();
-}
-updateUserValues() {
-  this.user.Name = this.userForm.get('Name').value;
-  this.user.DOB = this.userForm.get('DOB').value;
-  this.user.UserName = this.userForm.get('UserName').value;
-  this.user.DOJ = this.userForm.get('DOJ').value.value;
-  this.user.PhoneNumber = this.userForm.get('PhoneNumber').value.value;
-  this.user.Email_ID = this.userForm.get('Email_ID').value;
-  this.user.BloodType = this.userForm.get('BloodType').value;
-  this.user.MaritalStatus = this.userForm.get('MaritalStatus').value;
-  this.user.Nationality = this.userForm.get('Nationality').value;
-  this.user.Gender = this.userForm.get('Gender').value;
-  this.user.Department = this.userForm.get('Department').value;
-}
+      }else if (control instanceof FormGroup) {        
+      this.validateAllFormFields(control);           
+      }
+    });
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+    this.reset();
+  }
+  reset(){
+    this.userForm.reset();
+  }
+  updateUserValues() {
+    this.user.Name = this.userForm.get('Name').value;
+    this.user.DOB = this.userForm.get('DOB').value;
+    this.user.UserName = this.userForm.get('UserName').value;
+    this.user.DOJ = this.userForm.get('DOJ').value;
+    this.user.PhoneNumber = this.userForm.get('PhoneNumber').value;
+    this.user.Email_ID = this.userForm.get('Email_ID').value;
+    this.user.BloodType = this.userForm.get('BloodType').value.value;
+    this.user.MaritalStatus = this.userForm.get('MaritalStatus').value.value;
+    this.user.Nationality = this.userForm.get('Nationality').value;
+    this.user.Gender = this.userForm.get('Gender').value.value;
+    this.user.Department = this.userForm.get('Department').value.value;
+  }
 
 
 }

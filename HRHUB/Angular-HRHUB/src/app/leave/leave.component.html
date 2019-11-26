@@ -23,7 +23,7 @@
                            [hideRequiredMarker]="options.value.hideRequired"
                            [floatLabel]="options.value.floatLabel">
                          <mat-select required formControlName="leaveType" [ngClass]="displayFieldCss('leaveType')">
-                              <mat-option *ngFor="let state of leaveTypelist" [value]="state">{{ state.key }}</mat-option>
+                              <mat-option *ngFor="let leaveType of leaveTypelist" [value]="leaveType">{{ leaveType.key }}</mat-option>
                          </mat-select>
                          <mat-label>Leave Type</mat-label>
                          
@@ -53,8 +53,7 @@
                               <mat-form-field appearance="outline" [ngClass]="displayFieldCss('fromSession')" >
                                     <mat-label>From Session</mat-label>
                                     <mat-select formControlName="fromSession">
-                                      <mat-option *ngFor="let food of sessionlist" [value]="food.value">
-                                        {{food.key}}
+                                      <mat-option *ngFor="let session of sessionlist" [value]="session.value">{{session.key}}
                                       </mat-option>
                                     </mat-select>
                               </mat-form-field>
@@ -78,8 +77,7 @@
                                  <mat-form-field appearance="outline" [ngClass]="displayFieldCss('toSession')">
                                     <mat-label>To Session</mat-label>
                                     <mat-select formControlName="toSession">
-                                      <mat-option *ngFor="let food of sessionlist" [value]="food.value">
-                                        {{food.key}}
+                                      <mat-option *ngFor="let session of sessionlist" [value]="session.value">{{session.key}}
                                       </mat-option>
                                     </mat-select>
                               </mat-form-field>
@@ -123,7 +121,7 @@
                                  <mat-label>Apply To</mat-label>
                                        <input matInput placeholder="Apply To" formControlName="applyTo">
                                  </mat-form-field>
-                                 <app-field-error-display [displayError]="isFieldValid('applyTo')"  errorMsg="Please Select Apply To"></app-field-error-display>
+                                 <app-field-error-display [displayError]="isFieldValid('applyTo')"  errorMsg="Please Enter Apply To"></app-field-error-display>
                            </td>
                      </tr>
                </tbody>

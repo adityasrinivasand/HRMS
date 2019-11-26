@@ -1,42 +1,39 @@
 .attendance-card{
-    position: relative;
-    margin-left: 2.5%;
-    width: 100%;
-    background-color: var(--primary-color);
-    margin-top: 0.75em;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-    max-height: 800px;
-    color: var(--text-color);
+  position: relative;
+  margin-left: 2.5%;
+  width: 100%;
+  background-color: var(--primary-color);
+  margin-top: 0.75em;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+  max-height: 800px;
+  color: var(--text-color);    
 }
-  .attendance-container {
+.attendance-container {
   display: flex;
   flex-direction: column;
   padding: 1em;
-  }
-  .attendance-container > * {
+}
+.attendance-container > * {
   width: 100%;
-  }
-  .attendance-right-align {
-  text-align: right;
-  }
-  input.attendance-right-align::-webkit-outer-spin-button,
-  input.attendance-right-align::-webkit-inner-spin-button {
-  display: none;
-  }
-  input.attendance-right-align {
-  -moz-appearance: textfield;
-  }
-
+}
+.attendance-right-align {
+ text-align: right;
+}
+input.attendance-right-align::-webkit-outer-spin-button,
+input.attendance-right-align::-webkit-inner-spin-button {
+ display: none;
+}
+input.attendance-right-align {
+ -moz-appearance: textfield;
+}
 .card-container-center{
   position: relative;
   margin-left: auto;
   margin-right: auto;
-}
-  
+}  
 table {
   width: 100%;
 }  
-
 .example-container {
   max-height: 650px;
   overflow: auto;

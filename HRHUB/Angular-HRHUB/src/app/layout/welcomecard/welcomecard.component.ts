@@ -15,24 +15,14 @@ export class WelcomecardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.value = this.getGreetingTime(this.time);   
+    this.value = this.greetingText();
+    console.log(this.value);   
   }
-  getGreetingTime = (currentTime) => {
- 
-    const splitAfternoon = 12; // 24hr time to split the afternoon
-    const splitEvening = 17; // 24hr time to split the evening
-    const currentHour = moment(currentTime, "h:mm:ss A").format("HH:mm:ss");
-
-  
-    if (currentHour >= 'splitAfternoon' && currentHour <= 'splitEvening') {
-      // Between 12 PM and 5PM
-      return 'Good afternoon';
-    } else if (currentHour >= 'splitEvening') {
-      // Between 5PM and Midnight
-      return 'Good evening';
-    }
-    // Between dawn and noon
-    return 'Good morning';
+  greetingText = () => {
+    const now = moment()
+    const currentHour = now.hour()
+      if (currentHour >= 12 && currentHour <=17) return "Good Afternoon "
+      else if (currentHour >= 18) return "Good Evening "
+      else return "Good Morning "
   }
-
 }

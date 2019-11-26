@@ -39,7 +39,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Employee Gender</mat-label>
                     <mat-select placeholder="Enter Employee Gender" required formControlName="Gender" [ngClass]="displayFieldCss('Gender')">
-                        <mat-option *ngFor="let gender of gender" [value]="gender.viewValue">{{gender.viewValue}}</mat-option>
+                        <mat-option *ngFor="let gender of gender" [value]="gender">{{gender.key}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <app-field-error-display [displayError]="isFieldValid('Gender')"  errorMsg="Please Enter Employee Gender">
@@ -49,7 +49,7 @@
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Blood Type</mat-label>
                             <mat-select placeholder="Enter Employee Blood Type" required formControlName="BloodType" [ngClass]="displayFieldCss('BloodType')">
-                                <mat-option *ngFor="let bloods of bloods" [value]="bloods.viewValue">{{bloods.viewValue}}</mat-option>
+                                <mat-option *ngFor="let bloods of bloods" [value]="bloods">{{bloods.key}}</mat-option>
                             </mat-select>
                     </mat-form-field>
                     <app-field-error-display [displayError]="isFieldValid('BloodType')"  errorMsg="Please Enter Employee Blood Type">
@@ -63,7 +63,7 @@
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Marital Status</mat-label>
                             <mat-select placeholder="Enter Employee Marital Status" required formControlName="MaritalStatus" [ngClass]="displayFieldCss('MaritalStatus')">
-                                <mat-option *ngFor="let marital of marital" [value]="marital.viewValue">{{marital.viewValue}}</mat-option>
+                                <mat-option *ngFor="let marital of marital" [value]="marital">{{marital.key}}</mat-option>
                             </mat-select>
                     </mat-form-field>
                     <app-field-error-display [displayError]="isFieldValid('MaritalStatus')"  errorMsg="Please Enter Employee Marital Status">
@@ -133,7 +133,7 @@
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Department</mat-label>
                             <mat-select placeholder="Enter Employee Department" required formControlName="Department" [ngClass]="displayFieldCss('Department')">
-                                <mat-option *ngFor="let department of department" [value]="department.viewValue">{{department.viewValue}}</mat-option>
+                                <mat-option *ngFor="let department of department" [value]="department">{{department.key}}</mat-option>
                             </mat-select>
                     </mat-form-field>
                     <app-field-error-display [displayError]="isFieldValid('Department')"  errorMsg="Please Enter Employee Department">

@@ -1,9 +1,7 @@
-
 <app-header *ngIf="showHeader" fxLayout="column"></app-header>
 
 <div fxLayout="column" fxFlex="100">
   <app-navbar *ngIf="showNavbar" fxLayout="column" fxFlex="30px"></app-navbar>
-  
   <div class="content" fxLayout="row" >
       <div fxFlex="20" class="action-blurb"><app-welcomecard *ngIf = "showWelcomeCard" ></app-welcomecard> </div>
       <div fxFlex="76" class="action-blurb" fxFlexOffset=""><router-outlet></router-outlet></div>

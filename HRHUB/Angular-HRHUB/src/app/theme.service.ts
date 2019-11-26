@@ -17,11 +17,9 @@ export class ThemeService {
   toggleDark() {
     this.setTheme(darkTheme);
   }
-
   toggleLight() {
     this.setTheme(lightTheme);
   }
-
   private setTheme(theme: {}) {
     Object.keys(theme).forEach(k =>
       document.documentElement.style.setProperty(`--${k}`, theme[k])

@@ -16,10 +16,6 @@ import {A11yModule} from '@angular/cdk/a11y';
 import { WelcomecardComponent } from './welcomecard/welcomecard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
-
-
-
 @NgModule({
   imports: [
     CommonModule,

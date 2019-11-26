@@ -12,5 +12,4 @@ export class FieldErrorDisplayComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

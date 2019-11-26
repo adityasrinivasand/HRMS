@@ -23,10 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component' ;
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsRoutingModule } from './contacts/contacts-routing.module';
-import { TokenInterceptor } from './auth/token.interceptor';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { AuthService } from './auth/auth.service';
-import { JwtHelperService, JwtModule, JwtModuleOptions, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { TimesheetRoutingModule } from '../app/timesheet/timesheet-routing.module';
 import { CookieService } from 'ngx-cookie-service';
@@ -91,8 +90,7 @@ import { FieldErrorDisplayModule } from './field-error-display/field-error-displ
     },
     JwtHelperService,
     CookieService,
-    MatSnackBar 
-    
+    MatSnackBar     
   ]
 })
 export class AppModule { }
