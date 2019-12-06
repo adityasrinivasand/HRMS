@@ -3,25 +3,18 @@
   margin-left: 2.5%;
   width: 100%;
   background-color: var(--primary-color);
-  margin-top: 0.75em;
+  margin-top: 0em;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-  max-height: 800px;
+  max-height: 750px;
   color: var(--text-color);
-  }
-  .btn-primary{
-    position: relative;
-    margin: 1em;
-    left:28%;
-  }
-  .btn-danger{
-    position: relative;
-    margin: 1em;
-    left:30%;
   }
   .contacts-container {
   display: flex;
   flex-direction: column;
   padding: 1em;
+  max-height: 650px;
+  overflow: auto;
+  overflow-x: hidden;
   }
   .contacts-container > * {
   width: 100%;
@@ -46,9 +39,16 @@
   table {
     width: 100%;
   }  
-  .mat-row:nth-child(even){
-  background-color:ghostwhite;
+  td,th{
+    padding: 0.5em !important;
+    text-align: center !important;
+  }
+
+.mat-form-field{
+  left: 57.5em;
+  font-size: 0.75em;
 }
-.searchform{
-  flex:1;
+th{
+  font-weight: bold !important;
+  font-size: 1.1em !important;
 }

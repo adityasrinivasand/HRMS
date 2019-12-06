@@ -6,6 +6,8 @@ import { User } from './user';
 import { LeaveType } from './leaveType';
 import { environment } from 'src/environments/environment';
 import { Leave } from './leave';
+import { Password } from './password';
+import { UserName } from './username';
 
 
 @Injectable({
@@ -30,7 +32,12 @@ export class DataService {
     return this.http.post( this.baseUrl + 'api/leave/'+this.empID, leave);
   }
 
-  public postForgotForm(userNAme:string): Observable<any> {
-    return this.http.post( this.baseUrl + 'api/forgot',userNAme);
+  public postForgotForm(UserName: UserName): Observable<any> {
+    return this.http.post( this.baseUrl + 'api/forgot',UserName);
+  }
+  public postSetForm(password: Password,id: string): Observable<any> {
+    const x= id;
+    console.log(this.baseUrl + 'api/forgot/ForgotPassword/'+id);
+    return this.http.post( this.baseUrl + 'api/forgot/ForgotPassword/'+id,password);
   }
 }

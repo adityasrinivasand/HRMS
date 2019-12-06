@@ -34,6 +34,7 @@ import { SetpasswordRoutingModule } from './setpassword/setpassword-routing.modu
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ForgotpasswordRoutingModule } from './forgotpassword/forgotpassword-routing.module';
 import { FieldErrorDisplayModule } from './field-error-display/field-error-display.module';
+import { CanDeactivateGuard } from './auth/can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { FieldErrorDisplayModule } from './field-error-display/field-error-displ
     },
     JwtHelperService,
     CookieService,
+    CanDeactivateGuard,
     MatSnackBar     
   ]
 })

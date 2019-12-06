@@ -16,7 +16,7 @@ namespace HRHUB.Helper_Classes
                     return v == null ? false : true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogFile.WriteLog(ex);
                 return false;
@@ -32,12 +32,12 @@ namespace HRHUB.Helper_Classes
                     return v == null ? false : true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogFile.WriteLog(ex);
                 return false;
             }
-      
+
         }
         public static int SaveToDB(Employee u) //Check Saving to DB exists in the DB
         {
@@ -57,7 +57,7 @@ namespace HRHUB.Helper_Classes
                 return -1;
             }
         }
-        public static string LoginAttempt(string username, string password,out UserInfo user) //Login function
+        public static string LoginAttempt(string username, string password, out UserInfo user) //Login function
         {
             try
             {
@@ -89,8 +89,8 @@ namespace HRHUB.Helper_Classes
                 LogFile.WriteLog(ex);
                 user = null;
                 return "Exception Caused";
-            }     
-        }   
+            }
+        }
         public static Employee IsEmployeeExist(string username) //Employee Exists in the DB.
         {
             try
@@ -100,7 +100,7 @@ namespace HRHUB.Helper_Classes
                     return db.Employees.Where(l => l.UserName == username).FirstOrDefault();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogFile.WriteLog(ex);
                 return null;
@@ -123,7 +123,7 @@ namespace HRHUB.Helper_Classes
                 LogFile.WriteLog(ex);
                 return "Exception While trying to save in DB";
             }
-            
+
         }
         public static string CheckLeaveexist(Leave leave) //Check whether leave exist, if yes the leave will be applied.
         {
@@ -187,8 +187,8 @@ namespace HRHUB.Helper_Classes
                 LogFile.WriteLog(ex);
                 return "Exception Caused";
             }
-            
-            
+
+
         }
         public static double BalanceDays(int id, int leaveTypeID) //Checking the balance days
         {
@@ -243,7 +243,19 @@ namespace HRHUB.Helper_Classes
                 LogFile.WriteLog(ex);
                 return 0;
             }
-            
+
+        }
+        public static void UpdateUserinfo(int ID, string username)
+        {
+            using (HREntities db = new HREntities())
+            {
+                UserInfo user = new UserInfo();
+                user.Employee_ID = ID;
+                user.UserName = username;
+                user.Password = "Psiog@123";
+                db.UserInfoes.Add(user);
+                db.SaveChanges();
+            }
         }
     }
 }

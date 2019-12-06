@@ -28,7 +28,7 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-                <app-field-error-display [displayError]="isFieldValid('DOB')"  errorMsg="Please Enter Employee DOB">
+                <app-field-error-display [displayError]="isFieldValidDOB('DOB')"  errorMsg="{{errorMsgDOB}}">
                 </app-field-error-display>
             </td>
         </tr>
@@ -85,10 +85,10 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee Phone Number:</mat-label>
-                                <input type="number" matInput placeholder="Enter Employee PhoneNumber" required formControlName="PhoneNumber" [ngClass]="displayFieldCss('PhoneNumber')">
+                                <input type="number" matInput placeholder="Enter Employee PhoneNumber" maxlength="10" required formControlName="PhoneNumber" [ngClass]="displayFieldCss('PhoneNumber')" (keypress)=_keyPress($event)>
                                 <mat-icon matSuffix>phone</mat-icon>
                     </mat-form-field>
-                    <app-field-error-display [displayError]="isFieldValid('PhoneNumber')"  errorMsg="Please Enter Employee PhoneNumber">
+                    <app-field-error-display [displayError]="isFieldValid('PhoneNumber')"  errorMsg="Enter Proper Phone Number">
                     </app-field-error-display>
                 </td>
                 <td>
@@ -108,7 +108,7 @@
                 <td>
                     <mat-form-field appearance="outline">
                             <mat-label>Employee User Name</mat-label>
-                                <input type="text" matInput placeholder="Enter Employee UserName " required 
+                                <input type="text" matInput placeholder="Enter Employee UserName " required  pattern="P+[0-9]*"
                                 formControlName="UserName" [ngClass]="displayFieldCss('UserName')">
                                 <mat-icon matSuffix>verified_user</mat-icon>
                     </mat-form-field>
@@ -122,7 +122,7 @@
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
-                    <app-field-error-display [displayError]="isFieldValid('DOJ')"  errorMsg="Please Enter Employee DOJ">
+                    <app-field-error-display [displayError]="isFieldValidDOJ('DOJ')"  errorMsg="{{errorMsgDOJ}}">
                     </app-field-error-display>
                 </td>
         </tr>
@@ -151,7 +151,7 @@
 
           <mat-card-actions>
                 <button mat-raised-button type="submit" (click)="onSubmit()"  color="primary">Register</button>
-                <button mat-raised-button (click)="reset()" type="reset" color="accent">Cancel</button>
+                <button mat-raised-button (click)="reset()" type="reset" color="warn">Cancel</button>
           </mat-card-actions>
         
     </mat-card-content>

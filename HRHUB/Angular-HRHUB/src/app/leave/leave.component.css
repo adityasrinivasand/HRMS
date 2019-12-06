@@ -3,20 +3,10 @@
   margin-left: 2.5%;
   width: 100%;
   background-color: var(--primary-color);
-  margin-top: 0.75em;
+  margin-top: 0em;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-  max-height: 720px;
+  max-height: 850px;
   color: var(--text-color);
-}
-.btn-primary{
-  position: relative;
-  margin: 1em;
-  left:28%;
-}
-.btn-danger{
-  position: relative;
-  margin: 1em;
-  left:30%;
 }
 .leave-container {
 display: flex;
@@ -36,15 +26,6 @@ display: none;
 input.leave-right-align {
 -moz-appearance: textfield;
 }
-.forgot{
-  position: relative;
-  left: 55%;
-  color: green;
-}
-.mat-checkbox{
-  position: relative;
-  left: 3%;
-}
 .card-container-center{
   position: relative;
   margin-left: auto;
@@ -52,5 +33,9 @@ input.leave-right-align {
 }
 
 td,tr,th{
-  border:none;
+  border:none !important;
+}
+.mat-card-actions{
+  position: relative;
+  margin-left: 25em !important;
 }

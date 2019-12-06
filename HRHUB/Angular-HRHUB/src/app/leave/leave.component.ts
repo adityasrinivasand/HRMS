@@ -3,8 +3,9 @@ import { DataService } from '../data/data.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Leave } from '../data/leave';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 interface LeaveType {
   key: string;
@@ -47,9 +48,10 @@ export class LeaveComponent implements OnInit {
     { key: 'Session 1', value: 1 },
     { key: 'Session 2', value: 2 },
   ];
+  expire: Boolean;
   moment = require('moment-business-days');
   // tslint:disable-next-line:max-line-length
-  constructor(private dataservice: DataService, private httpService: HttpClient, private form: FormBuilder, private route: ActivatedRoute,private _snackBar: MatSnackBar) {
+  constructor(private dataservice: DataService, private httpService: HttpClient, private form: FormBuilder, private route: ActivatedRoute,private _snackBar: MatSnackBar,public jwtHelper: JwtHelperService,private router: Router ) {
     this.route.paramMap.subscribe( params => { this.empId = params.get('id');  });
     this.options = form.group({
       hideRequired: false,
@@ -57,6 +59,11 @@ export class LeaveComponent implements OnInit {
     });
   }
   ngOnInit() {
+    const token=localStorage.getItem('token');
+    this.expire = this.jwtHelper.isTokenExpired(token);
+    if(token==null || this.expire ){
+      this.router.navigate(['/login']);
+    }
   this.leaveForm = this.form.group({
     leaveType: ['', Validators.required],
     fromDate: [null, Validators.required],
@@ -85,7 +92,7 @@ export class LeaveComponent implements OnInit {
     value => { this.varToSession = value;});
 }
   isFieldValid(field: string) {
-    return !this.leaveForm.get(field).valid && (this.leaveForm.get(field).touched);
+    return !this.leaveForm.get(field).valid && (this.leaveForm.get(field).touched && !this.leaveForm.valid);
   }
   isFieldValidFromDate(field: string) {
     if(this.leaveForm.get(field).valid){
@@ -124,7 +131,6 @@ export class LeaveComponent implements OnInit {
 
   balanceDays(value) {
     this.empId = localStorage.getItem('isUserName');
-    console.log('https://localhost:44357/api/leave/' + this.empId + '/' + value.value);
     this.httpService.get<any>('https://localhost:44357/api/leave/' + this.empId + '/' + value.value).subscribe(data => {
       this.leaveForm.patchValue({
         remaining: data,
@@ -139,8 +145,8 @@ export class LeaveComponent implements OnInit {
       this.updateLeaveValues();
       // tslint:disable-next-line:prefer-const
       this.dataservice.postLeaveForm(this.leave).subscribe (
-          result => console.log('success', this.openSnackBar(result,'Close')),
-          error => console.log('error', this.openSnackBar(error,'Close'))
+          result =>  this.openSnackBar(result,'Close'),
+          error =>  this.openSnackBar(error.error.message,'Close')
     );
     } else {
       this.validateAllFormFields(this.leaveForm); 
@@ -159,8 +165,10 @@ export class LeaveComponent implements OnInit {
     openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right'
     });
-    this.reset();
+
   }
   updateLeaveValues() {
     this.leave.Employee_ID = 1;
@@ -207,6 +215,13 @@ export class LeaveComponent implements OnInit {
   reset(){
     this.leaveForm.reset();
   }
+  canDeactivate(){
+    if(!this.leaveForm.valid){
+      return window.confirm('Discard Changes?');
+    }
+    return true;
+  }
+
 
 }
 

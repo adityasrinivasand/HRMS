@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="CheckIn" Type="time" Precision="7" Nullable="false" />
-          <Property Name="CheckOut" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CheckIn" Type="datetime" />
+          <Property Name="CheckOut" Type="datetime" />
+          <Property Name="Status" Type="nvarchar(max)" />
           <Property Name="Employee_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Designation">
@@ -98,18 +98,6 @@
           <Property Name="isAdmin" Type="bit" />
           <Property Name="Captcha" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="Attendance_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Employee_Designation_Designation">
           <End Role="Designation" Type="Self.Designation" Multiplicity="1" />
           <End Role="Designation_History" Type="Self.Designation_History" Multiplicity="*" />
@@ -212,10 +200,6 @@
           <EntitySet Name="Leave_Tracking" EntityType="Self.Leave_Tracking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leave_Type" EntityType="Self.Leave_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Attendance_Employee" Association="Self.Attendance_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
           <AssociationSet Name="Employee_Designation_Designation" Association="Self.Employee_Designation_Designation">
             <End Role="Designation" EntitySet="Designation" />
             <End Role="Designation_History" EntitySet="Designation_History" />
@@ -268,7 +252,6 @@
           <Property Name="IsEmailVerified" Type="Boolean" />
           <Property Name="VerificationCode" Type="Guid" />
           <NavigationProperty Name="UserInfoes" Relationship="HRModel.UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
-          <NavigationProperty Name="Attendances" Relationship="HRModel.Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="Designation_History" Relationship="HRModel.Employee_Designation_Employee" FromRole="Employee" ToRole="Designation_History" />
           <NavigationProperty Name="Leaves" Relationship="HRModel.Leave_Employee" FromRole="Employee" ToRole="Leave" />
           <NavigationProperty Name="Leave_Tracking" Relationship="HRModel.Leave_Tracking_Employee" FromRole="Employee" ToRole="Leave_Tracking" />
@@ -279,11 +262,6 @@
           <AssociationSet Name="UserInfo_Employee" Association="HRModel.UserInfo_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
-          </AssociationSet>
-          <EntitySet Name="Attendances" EntityType="HRModel.Attendance" />
-          <AssociationSet Name="Attendance_Employee" Association="HRModel.Attendance_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
           <EntitySet Name="Designations" EntityType="HRModel.Designation" />
           <EntitySet Name="Designation_History" EntityType="HRModel.Designation_History" />
@@ -323,6 +301,7 @@
             <Parameter Name="DOJ" Mode="In" Type="DateTime" />
             <Parameter Name="empid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Attendances" EntityType="HRModel.Attendance" />
         </EntityContainer>
         <EntityType Name="UserInfo">
           <Key>
@@ -346,30 +325,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="UserInfo">
-              <PropertyRef Name="Employee_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CheckIn" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="CheckOut" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="HRModel.Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
-        </EntityType>
-        <Association Name="Attendance_Employee">
-          <End Type="HRModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="HRModel.Attendance" Role="Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Attendance">
               <PropertyRef Name="Employee_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -505,6 +460,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CheckIn" Type="DateTime" Precision="3" />
+          <Property Name="CheckOut" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -541,18 +507,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attendances">
-            <EntityTypeMapping TypeName="HRModel.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
-                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -614,6 +568,18 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddUserInfo" FunctionName="HRModel.Store.AddUserInfo" />
           <FunctionImportMapping FunctionImportName="LeaveEntryForNew" FunctionName="HRModel.Store.LeaveEntryForNew" />
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="HRModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

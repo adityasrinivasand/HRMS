@@ -3,7 +3,7 @@
     margin-left: 2.5%;
     width: 100%;
     background-color: var(--primary-color);
-    margin-top: 0.75em;
+    margin-top: 0em;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
     max-height: 800px;
     color: var(--text-color);
@@ -36,4 +36,11 @@ td,tr,th{
 }
 td{
   vertical-align: middle;
+}
+.mat-card-actions{
+  position: relative;
+  margin-left: 25em !important;
+}
+.placeholder{
+  color: var(--text-color);
 }

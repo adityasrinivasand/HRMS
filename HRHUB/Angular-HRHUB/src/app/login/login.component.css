@@ -1,48 +1,28 @@
-.login-card{
+.mat-card{
+  max-width: 300px;
   position: relative;
-  width: 28%;
-  background-color: white;
+  margin-left: 25%;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
-  display: block;  
-  margin-left: 28em;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
-.login-container {
-  display: flex;
-  flex-direction: column;
+.mat-card-title{
+  position: relative;
+  margin-left: 160%;
+  font-size: 1.5em;
 }
-.login-container > * {
-  width: 100%;
-}
-
-.login-right-align {
-  text-align: right;
-}
-
-input.login-right-align::-webkit-outer-spin-button,
-input.login-right-align::-webkit-inner-spin-button {
-  display: none;
-}
-
-input.login-right-align {
-  -moz-appearance: textfield;
+.mat-form-field {
+  position: relative;
+  margin-left: 7.5%;
 }
 .forgot{
   position: relative;
-  left: 35%;
-  color: green;
-}
-.mat-checkbox{
-  position: relative;
-  left: 3%;
-}
-.card-container-center{
-  position: relative;
-  margin-left: 6em;
-}
-.mat-form-field{
-  margin-left: 5em;
+  left: 15%;
+  color: blue;
+  font-size: 1em;
+  font-weight: bold;
 }
 .mat-card-actions{
-  margin-left:7em;
+  position: relative;
+  margin-left: 17.5%;
 }
-

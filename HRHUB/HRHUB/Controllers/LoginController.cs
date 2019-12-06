@@ -30,7 +30,8 @@ namespace HRHUB.Controllers
                 else
                 {
                     string VerificationCode = Guid.NewGuid().ToString();
-                    var link = "http://localhost:4200/forgotPassword/" + employee.UserName;
+                    var userName = Encode.Base64Encode(employee.UserName);
+                    var link = "http://localhost:4200/setpassword/" + HttpUtility.UrlEncode(userName);
                     VerificationLink.EmailGeneration(employee.Email_ID, VerificationCode, link, "ResetPassword");
                     return Ok("Reset Link has been sent to your mail id");
                 }
@@ -47,6 +48,7 @@ namespace HRHUB.Controllers
         {
             try
             {
+                id = Encode.Base64Decode(id);
                 string message = VerifyPasswords.Password(password);
                 if (message == "Successfull")
                 {

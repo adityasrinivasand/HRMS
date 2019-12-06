@@ -8,10 +8,12 @@
    <mat-card-header>
          <mat-card-title class="card-container-center">All Employees</mat-card-title>
          <div class="searchform">
+           
           <mat-form-field appearance="outline">
               <mat-label>Search</mat-label>
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for Employee" >
           </mat-form-field>
+        
           </div>
    </mat-card-header>
    <div class = "contacts-container" >
@@ -86,7 +88,7 @@
 
                         
                       
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 </table>   

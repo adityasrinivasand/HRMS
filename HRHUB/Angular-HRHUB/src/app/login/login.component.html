@@ -4,10 +4,10 @@
 
 <mat-card class="login-card">
   <mat-card-header>
-    <mat-card-title class="card-container-center">Login</mat-card-title>
+    <mat-card-title >Login</mat-card-title>
   </mat-card-header>
   <div class = "leave-container" >
-    <form [formGroup]="loginForm" ngNativeValidate (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" ngNativeValidate (ngSubmit)="onSubmit()" autocomplete="off">
       <mat-card-content>
         <table class="table">
           <tbody>
@@ -51,7 +51,7 @@
       </mat-card-content>
       <mat-card-actions>
           <button mat-raised-button type="submit" color="primary">Submit</button>
-          <button mat-raised-button type="cancel" color="accent">Cancel</button>
+          <button mat-raised-button type="cancel" color="warn">Cancel</button>
       </mat-card-actions>
     </form>
   </div>

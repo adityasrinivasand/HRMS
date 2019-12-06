@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../data/data.service';
+import { UserName } from '../data/username';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -10,20 +12,22 @@ import { DataService } from '../data/data.service';
 })
 export class ForgotpasswordComponent implements OnInit {
   forgotPasswordForm: any;
+  user: UserName = new UserName();
 
-  constructor(private form: FormBuilder,private http: HttpClient,private dataservice: DataService) { }
+  constructor(private form: FormBuilder,private http: HttpClient,private dataservice: DataService,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.forgotPasswordForm = this.form.group({
-      userNAme: ['', Validators.required,Validators.email],
+      userNAme: ['', Validators.required],
     });
   }
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
     console.log(this.forgotPasswordForm.value);
-    this.dataservice.postForgotForm(this.forgotPasswordForm.get('userNAme').value).subscribe (
-      result => console.log('success', result),
-      error => console.log('error', error)
+    this.user.UserName =this.forgotPasswordForm.get('userNAme').value;
+    this.dataservice.postForgotForm(this.user).subscribe (
+      result =>  this.openSnackBar(result,'Close'),
+        error =>  this.openSnackBar(error.error.message,'Close')
     );
     } else {
       this.validateAllFormFields(this.forgotPasswordForm); //{7}
@@ -47,6 +51,14 @@ export class ForgotpasswordComponent implements OnInit {
       'has-error': this.isFieldValid(field),
       'has-feedback': this.isFieldValid(field)
     };
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right'
+    });
+
   }
 
 }

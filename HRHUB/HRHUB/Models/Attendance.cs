@@ -16,11 +16,9 @@ namespace HRHUB.Models
     {
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
-        public System.TimeSpan CheckIn { get; set; }
-        public System.TimeSpan CheckOut { get; set; }
+        public Nullable<System.DateTime> CheckIn { get; set; }
+        public Nullable<System.DateTime> CheckOut { get; set; }
         public string Status { get; set; }
         public int Employee_ID { get; set; }
-    
-        public virtual Employee Employee { get; set; }
     }
 }

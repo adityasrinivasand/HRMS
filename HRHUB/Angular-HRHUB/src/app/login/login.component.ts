@@ -5,6 +5,7 @@ import { Login } from '../data/login';
 import { DataService } from '../data/data.service';
 import jwt_decode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -15,13 +16,18 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
   hide = true;
   cookieValue = 'UNKNOWN';
-  constructor(private router: Router, private dataservice: DataService, private form: FormBuilder, private cookieService: CookieService) { }
-
+  constructor(private router: Router, private dataservice: DataService, private form: FormBuilder, private cookieService: CookieService,public jwtHelper: JwtHelperService) { }
+  expire: Boolean;
   loginForm: FormGroup;
   employeeLogin: Login = new Login();
   postError = false;
   postErrorMessage = '';
   ngOnInit() {
+    const token=localStorage.getItem('token');
+    this.expire = this.jwtHelper.isTokenExpired(token);
+    if(token!=null && !this.expire ){
+      this.router.navigate(['/contacts']);
+    }
     this.loginForm = this.form.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]

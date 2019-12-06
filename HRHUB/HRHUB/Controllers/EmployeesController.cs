@@ -81,20 +81,22 @@ namespace HRHUB.Controllers
                 }
                 if (DBOperations.IsUsernameExist(employee.UserName))
                 {
-                    return Conflict();
+                    return BadRequest("Username Already Exists");
                 }
                 if (DBOperations.IsEmailExist(employee.Email_ID))
                 {
-                    return Conflict();
+                    return BadRequest("Email ID Already Exists");
                 }
                 employee.IsEmailVerified = false;
 
                 string VerificationCode = Guid.NewGuid().ToString();
-                var link = HttpContext.Current.Request.Url.AbsoluteUri + "/VerifyAccount/" + employee.UserName;
+                var userName = Encode.Base64Encode(employee.UserName);
+                var link = "http://localhost:4200/setpassword/"+ HttpUtility.UrlEncode(userName);
                 VerificationLink.EmailGeneration(employee.Email_ID, VerificationCode, link);
 
                 db.Employees.Add(employee);
                 db.SaveChanges();
+                DBOperations.UpdateUserinfo(employee.ID, employee.UserName);
                 CallStoredProc.RunLeaveEntryForNew(employee);
                 return Ok("Successfully Added");
             }
@@ -110,6 +112,7 @@ namespace HRHUB.Controllers
         {
             try
             {
+                id = Encode.Base64Decode(id);
                 string message = VerifyPasswords.Password(password);
                 if (message == "Successfull")
                 {

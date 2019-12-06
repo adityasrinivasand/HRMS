@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule, MatFormField } from '@angular/material';
+import { MatTableModule, MatFormField, MatInputModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,9 @@ import { MatTableModule, MatFormField } from '@angular/material';
   imports: [
     CommonModule,
     MatTableModule,
-    MatFormField
+    MatFormField,
+    FormsModule,
+    MatInputModule
   ]
 })
 export class ContactsModule { }

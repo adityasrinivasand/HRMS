@@ -7,7 +7,7 @@
 }
 :root {
     --primary-color: #fff; 
-    --background-color: gray; 
+    --background-color: lightgray; 
     --text-color: #2d2d2d; 
 }
 html, body { margin: 0; height: 100%; }
@@ -28,6 +28,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-label{
     color: var(--text-color) !important;
+
 }
 .mat-form-field-underline{
     background-color: var(--background-color) !important;
@@ -36,6 +37,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: var(--text-color) !important;
  background-color: var(--background-color) !important;
 }
-.matInput {
+
+::placeholder{
     color: var(--text-color) !important;
 }
+.textarea{
+    color: var(--text-color) !important;
+}
+.mat-select-value,input.mat-input-element,textarea.mat-input-element{
+    color: var(--text-color) !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-flex{
+    color: var(--text-color) !important;
+}/*
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: var(--text-color) !important;
+}*/

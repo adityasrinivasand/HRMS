@@ -18,7 +18,6 @@ namespace HRHUB.Models
         public Employee()
         {
             this.UserInfoes = new HashSet<UserInfo>();
-            this.Attendances = new HashSet<Attendance>();
             this.Designation_History = new HashSet<Designation_History>();
             this.Leaves = new HashSet<Leave>();
             this.Leave_Tracking = new HashSet<Leave_Tracking>();
@@ -41,8 +40,6 @@ namespace HRHUB.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInfo> UserInfoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Designation_History> Designation_History { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

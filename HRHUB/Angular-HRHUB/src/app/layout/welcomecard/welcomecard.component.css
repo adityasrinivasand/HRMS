@@ -1,6 +1,5 @@
 :host {
     display: flex;
-
     flex: 0.2;
 }
 .content {
@@ -11,7 +10,7 @@
     position: sticky;
     max-width: 300px;
     margin-left: 1.5em;
-    margin-top: 0.75em;
+    margin-top: 0em;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
     max-height: 600px;
     background-color: var(--primary-color);
@@ -21,9 +20,14 @@
     background-image: url('https://carlisletheacarlisletheatre.org/images/person-png-cartoon-7.jpg');
     background-size: cover;
 }
-.button{
-    justify-content: center;
+.mat-raised-button{
+    position: relative;
+    left: 25%;
+    
 }
 .personimage{
     width: 75%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -5,7 +5,7 @@ import { SetpasswordComponent } from './setpassword.component';
 
 const routes: Routes = [
   {
-    path: 'setpassword',
+    path: 'setpassword/:id',
     component: SetpasswordComponent,
     data: { showHeader: true, showNavbar: false, showWelcomeCard: false }
   }

@@ -31,7 +31,7 @@ namespace HRHUB.Helper_Classes
                 }
                 else if (leave.From_Session != leave.To_Session)
                 {
-                    leaveTaken = noOfDays;
+                    leaveTaken = noOfDays + 1;
                 }
             }
             return leaveTaken;

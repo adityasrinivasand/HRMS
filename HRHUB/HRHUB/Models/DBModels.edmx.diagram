@@ -8,8 +8,6 @@
         <EntityTypeShape EntityType="HRModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRModel.UserInfo" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="HRModel.UserInfo_Employee" />
-        <EntityTypeShape EntityType="HRModel.Attendance" Width="1.5" PointX="3" PointY="5.625" />
-        <AssociationConnector Association="HRModel.Attendance_Employee" />
         <EntityTypeShape EntityType="HRModel.Designation" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="HRModel.Designation_History" Width="1.5" PointX="7.625" PointY="1.75" />
         <AssociationConnector Association="HRModel.Employee_Designation_Designation" />
@@ -21,6 +19,7 @@
         <EntityTypeShape EntityType="HRModel.Leave_Type" Width="1.5" PointX="5.375" PointY="4.875" />
         <AssociationConnector Association="HRModel.Leave_Leave_Type" />
         <AssociationConnector Association="HRModel.Leave_Tracking_Leave_Type" />
+        <EntityTypeShape EntityType="HRModel.Attendance" Width="1.5" PointX="2.625" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -41,7 +41,7 @@ namespace HRHUB.Authenticate
 
         #region Public Methods
 
-        public bool IsTokenValid(string token)
+        public  bool IsTokenValid(string token)
         {
             if (string.IsNullOrEmpty(token))
                 throw new ArgumentException("Given token is null or empty.");

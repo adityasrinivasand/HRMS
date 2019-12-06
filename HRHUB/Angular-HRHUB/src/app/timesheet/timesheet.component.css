@@ -3,7 +3,7 @@
   margin-left: 2.5%;
   width: 100%;
   background-color: var(--primary-color);
-  margin-top: 0.75em;
+  margin-top: 0em;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
   max-height: 800px;
   color: var(--text-color);    
@@ -44,6 +44,10 @@ table {
 .make-red{
   background-color: lightcoral;
 }
-.make-yellow{
-  background-color: yellowgreen;
+.make-grey{
+  background-color:lightgrey;
+}
+th{
+  font-weight: bold !important;
+  font-size: 1.1em !important;
 }

@@ -248,6 +248,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeavesController.cs" />
+    <Compile Include="Controllers\Leave_TrackingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Helper Classes\CallStoredProc.cs" />
     <Compile Include="Helper Classes\DaysCalculation.cs" />
     <Compile Include="Helper Classes\DBOperations.cs" />
+    <Compile Include="Helper Classes\Encoding.cs" />
     <Compile Include="Helper Classes\ForgotPassword.cs" />
     <Compile Include="Helper Classes\LogFile.cs" />
     <Compile Include="Helper Classes\VerifyPasswords.cs" />
@@ -303,7 +305,6 @@
     </Compile>
     <Compile Include="Utilites\AccountModel.cs" />
     <Compile Include="Utilites\FetchFromHeader.cs" />
-    <Compile Include="Utilites\JWTAuthenticationFilter.cs" />
     <Compile Include="Utilites\Login.cs" />
     <Compile Include="Utilites\PasswordConfirmation.cs" />
     <Compile Include="Helper Classes\PWHashing.cs" />
